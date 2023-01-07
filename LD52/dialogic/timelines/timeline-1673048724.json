@@ -1,0 +1,67 @@
+{
+	"events": [
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 2,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1673048679.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1673048679.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "New harverster operator recruit reporting in!"
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 2,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1673048624.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1673048624.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Perfect, go harvest the cattle"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 1
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1673048724.json",
+		"name": "Intro01"
+	}
+}

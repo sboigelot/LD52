@@ -1,0 +1,112 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://scenes/test/TestFSM.gd" type="Script" id=1]
+[ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=2]
+[ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=3]
+[ext_resource path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" type="Script" id=4]
+[ext_resource path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" type="Script" id=5]
+[ext_resource path="res://addons/imjp94.yafsm/src/states/State.gd" type="Script" id=6]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 148, 40 )
+}
+name = "Entry"
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 368, 40 )
+}
+name = "Idle"
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 348, 220 )
+}
+name = "Hunt"
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 584, 71 )
+}
+name = "SearchTarget"
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 4 )
+from = "Entry"
+to = "Idle"
+conditions = {
+}
+priority = 0
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 4 )
+from = "Idle"
+to = "SearchTarget"
+conditions = {
+}
+priority = 0
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 5 )
+name = "taget_found"
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 4 )
+from = "SearchTarget"
+to = "Hunt"
+conditions = {
+"taget_found": SubResource( 7 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+name = "target_dead"
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 4 )
+from = "Hunt"
+to = "SearchTarget"
+conditions = {
+"target_dead": SubResource( 10 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 3 )
+name = ""
+states = {
+"Entry": SubResource( 1 ),
+"Hunt": SubResource( 3 ),
+"Idle": SubResource( 2 ),
+"SearchTarget": SubResource( 4 )
+}
+transitions = {
+"Entry": {
+"Idle": SubResource( 5 )
+},
+"Hunt": {
+"SearchTarget": SubResource( 11 )
+},
+"Idle": {
+"SearchTarget": SubResource( 6 )
+},
+"SearchTarget": {
+"Hunt": SubResource( 8 )
+}
+}
+
+[node name="TestFSM" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="StateMachinePlayer" type="Node" parent="."]
+script = ExtResource( 2 )
+state_machine = SubResource( 9 )
+
+[connection signal="transited" from="StateMachinePlayer" to="." method="_on_StateMachinePlayer_transited"]
+[connection signal="updated" from="StateMachinePlayer" to="." method="_on_StateMachinePlayer_updated"]
