@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/anima/core/tween.gd"
 }, {
+"base": "Node2D",
+"class": "Arc2D",
+"language": "GDScript",
+"path": "res://addons/primitives2d/arc2d.gd"
+}, {
 "base": "Reference",
 "class": "Array2D",
 "language": "GDScript",
@@ -69,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-next/nodes/callback_delegator.gd"
 }, {
+"base": "Node2D",
+"class": "Circle2D",
+"language": "GDScript",
+"path": "res://addons/primitives2d/circle2d.gd"
+}, {
 "base": "Reference",
 "class": "ClassType",
 "language": "GDScript",
@@ -103,6 +113,11 @@ _global_script_classes=[ {
 "class": "ControllerTextureRect",
 "language": "GDScript",
 "path": "res://addons/controller_icons/objects/TextureRect.gd"
+}, {
+"base": "Node",
+"class": "CountryData",
+"language": "GDScript",
+"path": "res://data/CountryData.gd"
 }, {
 "base": "TabContainer",
 "class": "Cycle",
@@ -184,6 +199,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-next/global/file_system_link.gd"
 }, {
+"base": "Node",
+"class": "GameData",
+"language": "GDScript",
+"path": "res://data/GameData.gd"
+}, {
 "base": "CollisionShape2D",
 "class": "Geometry2D",
 "language": "GDScript",
@@ -219,6 +239,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-next/nodes/message_dispatcher_wrapper.gd"
 }, {
+"base": "Polygon2D",
+"class": "OutlinedPolygon2D",
+"language": "GDScript",
+"path": "res://components/OutlinedPolygon2D.gd"
+}, {
 "base": "Resource",
 "class": "PhysicsLayers",
 "language": "GDScript",
@@ -238,6 +263,11 @@ _global_script_classes=[ {
 "class": "PropertyInfoFactory",
 "language": "GDScript",
 "path": "res://addons/godot-next/references/property_info_factory.gd"
+}, {
+"base": "Node2D",
+"class": "Rectangle2D",
+"language": "GDScript",
+"path": "res://addons/primitives2d/rectangle2d.gd"
 }, {
 "base": "ResourceCollection",
 "class": "ResourceArray",
@@ -298,6 +328,16 @@ _global_script_classes=[ {
 "class": "VectorDisplay3D",
 "language": "GDScript",
 "path": "res://addons/godot-next/3d/vector_display_3d.gd"
+}, {
+"base": "Node",
+"class": "WorldData",
+"language": "GDScript",
+"path": "res://data/WorldData.gd"
+}, {
+"base": "Node2D",
+"class": "WorldMapCountry",
+"language": "GDScript",
+"path": "res://scenes/WorldMapCountry.gd"
 } ]
 _global_script_class_icons={
 "AnimaEasing": "",
@@ -305,6 +345,7 @@ _global_script_class_icons={
 "AnimaNodesProperties": "",
 "AnimaStrings": "",
 "AnimaTween": "",
+"Arc2D": "",
 "Array2D": "",
 "ArrayMap": "",
 "Behavior": "",
@@ -312,6 +353,7 @@ _global_script_class_icons={
 "Bitset": "",
 "CSVFile": "",
 "CallbackDelegator": "",
+"Circle2D": "",
 "ClassType": "",
 "ControllerButton": "",
 "ControllerMapper": "",
@@ -319,6 +361,7 @@ _global_script_class_icons={
 "ControllerSprite": "",
 "ControllerSprite3D": "",
 "ControllerTextureRect": "",
+"CountryData": "",
 "Cycle": "res://addons/godot-next/icons/icon_cycle.svg",
 "DTS": "",
 "DebugLabel": "",
@@ -335,6 +378,7 @@ _global_script_class_icons={
 "EditorTools": "",
 "FileSearch": "",
 "FileSystemLink": "",
+"GameData": "",
 "Geometry2D": "res://addons/godot-next/icons/icon_geometry_2d.svg",
 "HistoryRow": "",
 "Icons": "",
@@ -342,10 +386,12 @@ _global_script_class_icons={
 "InspectorControls": "",
 "MessageDispatcher": "",
 "MessageDispatcherWrapper": "",
+"OutlinedPolygon2D": "",
 "PhysicsLayers": "",
 "ProjectTools": "",
 "PropertyInfo": "",
 "PropertyInfoFactory": "",
+"Rectangle2D": "",
 "ResourceArray": "",
 "ResourceCollection": "",
 "ResourceSet": "",
@@ -357,7 +403,9 @@ _global_script_class_icons={
 "VBoxItemList": "res://addons/godot-next/icons/icon_v_box_item_list.svg",
 "Variant": "",
 "VectorDisplay2D": "",
-"VectorDisplay3D": ""
+"VectorDisplay3D": "",
+"WorldData": "",
+"WorldMapCountry": ""
 }
 
 [addons]
@@ -367,6 +415,7 @@ node_library/enable_screen_transition=true
 [application]
 
 config/name="LD52"
+run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -374,6 +423,7 @@ config/icon="res://icon.png"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 Anima="*res://addons/anima/core/anima.gd"
 ScreenTransition="*res://addons/node_library/scenes/ScreenTransition.tscn"
+Game="*res://Game.tscn"
 
 [display]
 
@@ -386,7 +436,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/AsepriteWizard/plugin.cfg", "res://addons/anima/plugin.cfg", "res://addons/center_pivot_offset/plugin.cfg", "res://addons/controller_icons/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/godot-next/plugin.cfg", "res://addons/google_fonts/plugin.cfg", "res://addons/imjp94.yafsm/plugin.cfg", "res://addons/jamcountdown/plugin.cfg", "res://addons/node_library/plugin.cfg", "res://addons/retile/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/AsepriteWizard/plugin.cfg", "res://addons/anima/plugin.cfg", "res://addons/center_pivot_offset/plugin.cfg", "res://addons/controller_icons/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/godot-next/plugin.cfg", "res://addons/google_fonts/plugin.cfg", "res://addons/imjp94.yafsm/plugin.cfg", "res://addons/jamcountdown/plugin.cfg", "res://addons/node_library/plugin.cfg", "res://addons/primitives2d/plugin.cfg", "res://addons/retile/plugin.cfg", "res://addons/water2d/plugin.cfg" )
 
 [input]
 

@@ -13,11 +13,7 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://addons/dialogic/Example Assets/portraits/df-2.png"
-		},
-		{
-			"name": "df-2",
-			"path": "res://addons/dialogic/Example Assets/portraits/df-2.png"
+			"path": "res://assets/portrais/zorg2.png"
 		}
 	],
 	"scale": 100,

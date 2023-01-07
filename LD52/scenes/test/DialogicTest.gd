@@ -1,16 +1,8 @@
-extends Node2D
+extends Control
 
+export(NodePath) var dialog_canvas_layer_np
+onready var dialog_canvas_layer = get_node(dialog_canvas_layer_np) as CanvasLayer
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_Button_pressed():
+	var dialog = Dialogic.start("Intro01")
+	dialog_canvas_layer.add_child(dialog)

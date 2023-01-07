@@ -11,10 +11,10 @@ anchor_bottom = 1.0
 
 [node name="BackButton" type="Button" parent="MarginContainer"]
 unique_name_in_owner = true
-margin_left = 491.0
-margin_top = 290.0
-margin_right = 533.0
-margin_bottom = 310.0
+margin_left = 939.0
+margin_top = 530.0
+margin_right = 981.0
+margin_bottom = 550.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Back"

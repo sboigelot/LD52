@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/Mothership.gd" type="Script" id=1]
+[ext_resource path="res://components/MainHUD.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/worldmap/world0.png" type="Texture" id=3]
+[ext_resource path="res://assets/mothership/mothership3.png" type="Texture" id=4]
+[ext_resource path="res://fonts/ld52/ld52_def_xsmall.tres" type="DynamicFont" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="Mothership" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="UI" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="Background" type="MarginContainer" parent="UI"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/Background"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Background"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+expand = true
+
+[node name="SpeedBar" type="MarginContainer" parent="UI"]
+margin_left = 1800.0
+margin_right = 1920.0
+margin_bottom = 94.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_constants/margin_top = 44
+
+[node name="SpeedBar" type="PanelContainer" parent="UI/SpeedBar"]
+margin_top = 44.0
+margin_right = 120.0
+margin_bottom = 94.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+custom_styles/panel = SubResource( 2 )
+
+[node name="MaginContainer" type="MarginContainer" parent="UI/SpeedBar/SpeedBar"]
+margin_right = 120.0
+margin_bottom = 50.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="UI/SpeedBar/SpeedBar/MaginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 110.0
+margin_bottom = 40.0
+custom_constants/separation = 10
+
+[node name="BackButton" type="Button" parent="UI/SpeedBar/SpeedBar/MaginContainer/HBox"]
+margin_right = 100.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+custom_fonts/font = ExtResource( 6 )
+text = "Back"
+
+[node name="MainHUD" parent="UI" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( -1179, 435 )
+title = "Mothership"
+show_mother_ship_text = false
+
+[connection signal="pressed" from="UI/SpeedBar/SpeedBar/MaginContainer/HBox/BackButton" to="." method="_on_BackButton_pressed"]

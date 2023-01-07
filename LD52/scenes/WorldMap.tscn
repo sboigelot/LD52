@@ -1,0 +1,311 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scenes/WorldMap.gd" type="Script" id=1]
+[ext_resource path="res://components/WorldMapCountry.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/worldmap/world0.png" type="Texture" id=3]
+[ext_resource path="res://fonts/ld52/ld52_def_normal.tres" type="DynamicFont" id=4]
+[ext_resource path="res://fonts/ld52/ld52_def_small.tres" type="DynamicFont" id=5]
+[ext_resource path="res://scenes/CountryPanel.gd" type="Script" id=6]
+[ext_resource path="res://components/MainHUD.tscn" type="PackedScene" id=7]
+[ext_resource path="res://fonts/ld52/ld52_def_xsmall.tres" type="DynamicFont" id=11]
+[ext_resource path="res://assets/mothership/mothership3.png" type="Texture" id=12]
+[ext_resource path="res://scenes/MothershipArea2D.gd" type="Script" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[node name="WorldView" type="Node2D"]
+script = ExtResource( 1 )
+dialog_canvas_layer_np = NodePath("DialogCanvasLayer")
+countries_np = NodePath("Countries")
+
+[node name="UI" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+
+[node name="Background" type="MarginContainer" parent="UI"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/Background"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+expand = true
+
+[node name="MainHUD" parent="UI" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+
+[node name="SpeedBar" type="MarginContainer" parent="UI"]
+margin_left = 1690.0
+margin_right = 1920.0
+margin_bottom = 94.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_constants/margin_top = 44
+
+[node name="SpeedBar" type="PanelContainer" parent="UI/SpeedBar"]
+margin_top = 44.0
+margin_right = 230.0
+margin_bottom = 94.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+custom_styles/panel = SubResource( 3 )
+
+[node name="MaginContainer" type="MarginContainer" parent="UI/SpeedBar/SpeedBar"]
+margin_right = 230.0
+margin_bottom = 50.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="UI/SpeedBar/SpeedBar/MaginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 220.0
+margin_bottom = 40.0
+custom_constants/separation = 10
+
+[node name="Button" type="Button" parent="UI/SpeedBar/SpeedBar/MaginContainer/HBox"]
+margin_right = 100.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+custom_fonts/font = ExtResource( 11 )
+text = "Play"
+
+[node name="Button2" type="Button" parent="UI/SpeedBar/SpeedBar/MaginContainer/HBox"]
+margin_left = 110.0
+margin_right = 210.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+custom_fonts/font = ExtResource( 11 )
+text = "Pause"
+
+[node name="CountryPanelMargin" type="MarginContainer" parent="UI"]
+margin_left = 1482.0
+margin_top = 726.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+custom_constants/margin_right = 4
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 20
+
+[node name="CountryPanel" type="PanelContainer" parent="UI/CountryPanelMargin"]
+unique_name_in_owner = true
+margin_right = 434.0
+margin_bottom = 334.0
+size_flags_horizontal = 10
+size_flags_vertical = 10
+script = ExtResource( 6 )
+country_name_label_np = NodePath("MaginContainer/VBox/VBoxContainer/CountryNameLabel")
+init_pop_label_np = NodePath("MaginContainer/VBox/GridContainer/InitialPopCountLabel")
+remain_pop_label_np = NodePath("MaginContainer/VBox/GridContainer/RemainingPopulationCountLabel")
+secu_lvl_label_np = NodePath("MaginContainer/VBox/GridContainer/SecurityLevelLabel")
+panic_lvl_label_np = NodePath("MaginContainer/VBox/GridContainer/PanicLevelLabel")
+
+[node name="MaginContainer" type="MarginContainer" parent="UI/CountryPanelMargin/CountryPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 427.0
+margin_bottom = 327.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 410.0
+margin_bottom = 310.0
+rect_min_size = Vector2( 400, 0 )
+custom_constants/separation = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox"]
+margin_right = 400.0
+margin_bottom = 43.0
+
+[node name="CountryNameLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 4 )
+text = "Country Name"
+align = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/VBoxContainer"]
+margin_top = 43.0
+margin_right = 400.0
+margin_bottom = 43.0
+
+[node name="GridContainer" type="GridContainer" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox"]
+margin_top = 83.0
+margin_right = 400.0
+margin_bottom = 215.0
+columns = 2
+
+[node name="InitialPopLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_right = 267.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "Initial Population"
+
+[node name="InitialPopCountLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_left = 271.0
+margin_right = 400.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "10 Mil"
+align = 1
+
+[node name="RemainingPopulationLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_top = 34.0
+margin_right = 267.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "Remaing Population"
+
+[node name="RemainingPopulationCountLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_left = 271.0
+margin_top = 34.0
+margin_right = 400.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "10 Mil"
+align = 1
+
+[node name="PanicLevelLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_top = 68.0
+margin_right = 267.0
+margin_bottom = 98.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "Panic Level"
+
+[node name="PanicLevelCountLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_left = 271.0
+margin_top = 68.0
+margin_right = 400.0
+margin_bottom = 98.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "0"
+align = 1
+
+[node name="SecurityLevelLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_top = 102.0
+margin_right = 267.0
+margin_bottom = 132.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "Security Level"
+
+[node name="SecurityLevelCountLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_left = 271.0
+margin_top = 102.0
+margin_right = 400.0
+margin_bottom = 132.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "0"
+align = 1
+
+[node name="HarvestButton" type="Button" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox"]
+margin_top = 255.0
+margin_right = 400.0
+margin_bottom = 300.0
+custom_fonts/font = ExtResource( 4 )
+text = "Harvest Cattle"
+
+[node name="DialogCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DrawingCountryPolygon2D" type="Polygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( 468, 345, 435, 368, 422, 373, 405, 356, 380, 351, 356, 353, 366, 336, 365, 318, 384, 300, 404, 270, 411, 257, 430, 248, 437, 240, 456, 226, 513, 206, 539, 193, 548, 183, 550, 163, 573, 145, 601, 129, 642, 124, 660, 120, 670, 109, 685, 104, 673, 85, 656, 74, 608, 55, 609, 60, 591, 68, 592, 56, 582, 49, 572, 58, 528, 78, 529, 85, 521, 101, 494, 121, 487, 123, 461, 106, 456, 93, 433, 74, 419, 65, 396, 53, 381, 49, 356, 61, 335, 67, 321, 72, 298, 87, 284, 103, 263, 114, 281, 133, 308, 152, 328, 178, 338, 193, 323, 210, 294, 214, 268, 224, 254, 241, 242, 258, 255, 263, 232, 281, 204, 285, 168, 290, 133, 307, 108, 319, 94, 332, 80, 360, 111, 446, 115, 450, 142, 459, 174, 448, 220, 422, 272, 419, 278, 428, 227, 480, 215, 490, 176, 518, 88, 529, 63, 537, 44, 566, 42, 590, 47, 599, 77, 615, 107, 594, 101, 556, 89, 529, 176, 519, 176, 525, 191, 541, 226, 560, 248, 565, 285, 553, 312, 565, 371, 567, 387, 590, 398, 617, 366, 669, 317, 709, 295, 755, 288, 776, 259, 859, 235, 860, 201, 871, 175, 885, 175, 934, 212, 933, 237, 915, 255, 901, 265, 881, 270, 865, 260, 858, 289, 776, 299, 791, 341, 819, 419, 819, 497, 880, 519, 931, 535, 961, 606, 949, 632, 915, 649, 881, 663, 835, 664, 827, 722, 812, 751, 796, 772, 780, 799, 776, 833, 765, 864, 734, 881, 717, 876, 682, 872, 657, 834, 656, 799, 658, 766, 658, 749, 651, 732, 641, 740, 658, 746, 668, 750, 697, 721, 729, 627, 754, 556, 729, 525, 693, 511, 618, 531, 535, 542, 475, 522, 419, 483, 371 )
+
+[node name="Countries" type="Node2D" parent="."]
+
+[node name="Belgium" parent="Countries" instance=ExtResource( 2 )]
+display_name = "Belgium"
+polygon = PoolVector2Array( 1049, 342, 1063, 370, 1065, 386, 1060, 402, 1059, 430, 1059, 440, 1099, 470, 1142, 460, 1154, 422, 1183, 404, 1217, 380, 1247, 362, 1298, 334, 1353, 296, 1332, 243, 1392, 200, 1347, 145, 1328, 152, 1257, 144, 1247, 153, 1239, 149, 1210, 98, 1203, 107, 1183, 68, 1149, 97, 1138, 125, 1175, 151, 1127, 182, 1089, 195, 1064, 189, 1044, 171, 1034, 201, 1014, 218 )
+default_color = Color( 1, 1, 1, 0 )
+defeated_color = Color( 1, 0, 0, 0.458824 )
+mouse_over_color = Color( 0.678431, 0.847059, 0.901961, 0.411765 )
+mouse_click_color = Color( 0, 1, 1, 0.596078 )
+
+[node name="Turkey" parent="Countries" instance=ExtResource( 2 )]
+display_name = "Turkey"
+polygon = PoolVector2Array( 1048, 343, 1001, 364, 962, 399, 945, 413, 896, 469, 863, 454, 857, 446, 856, 455, 824, 536, 793, 573, 673, 592, 673, 601, 728, 638, 745, 667, 749, 696, 722, 728, 628, 753, 557, 728, 525, 694, 512, 619, 532, 536, 543, 476, 523, 418, 485, 372, 468, 342, 490, 336, 517, 266, 545, 217, 574, 236, 617, 234, 624, 250, 648, 248, 698, 192, 778, 180, 870, 144, 940, 197, 957, 221, 1013, 219 )
+default_color = Color( 1, 1, 1, 0 )
+defeated_color = Color( 1, 0, 0, 0.458824 )
+mouse_over_color = Color( 0.678431, 0.847059, 0.901961, 0.411765 )
+mouse_click_color = Color( 0, 1, 1, 0.596078 )
+
+[node name="Greece" parent="Countries" instance=ExtResource( 2 )]
+display_name = "Greece"
+polygon = PoolVector2Array( 1232, 497, 1169, 521, 1117, 553, 1052, 557, 991, 653, 1024, 718, 1037, 771, 1042, 827, 1049, 852, 1050, 903, 1061, 950, 1078, 988, 1092, 1016, 1146, 1017, 1179, 967, 1203, 917, 1236, 839, 1219, 743, 1230, 714, 1234, 688, 1232, 652, 1238, 642, 1309, 640, 1378, 656, 1455, 693, 1482, 708, 1513, 713, 1539, 707, 1544, 700, 1547, 663, 1547, 641, 1541, 630, 1491, 627, 1472, 622, 1430, 571, 1401, 548, 1361, 529, 1397, 522, 1422, 505, 1442, 478, 1437, 449, 1417, 417, 1373, 386, 1352, 377, 1309, 385, 1297, 392, 1280, 395, 1275, 415, 1254, 435, 1242, 456, 1224, 471 )
+default_color = Color( 1, 1, 1, 0 )
+defeated_color = Color( 1, 0, 0, 0.458824 )
+mouse_over_color = Color( 0.678431, 0.847059, 0.901961, 0.411765 )
+mouse_click_color = Color( 0, 1, 1, 0.596078 )
+
+[node name="UK" parent="Countries" instance=ExtResource( 2 )]
+display_name = "United Kingdoms"
+polygon = PoolVector2Array( 1373, 384, 1418, 417, 1438, 450, 1443, 477, 1464, 476, 1494, 466, 1507, 484, 1544, 518, 1571, 532, 1610, 529, 1646, 533, 1681, 539, 1716, 561, 1760, 583, 1806, 603, 1849, 616, 1878, 618, 1912, 614, 1920, 608, 1920, 542, 1892, 525, 1856, 528, 1821, 507, 1804, 485, 1773, 417, 1773, 408, 1782, 400, 1817, 394, 1831, 389, 1843, 379, 1853, 350, 1868, 328, 1883, 299, 1885, 285, 1880, 273, 1861, 252, 1845, 242, 1835, 220, 1827, 213, 1823, 214, 1809, 187, 1776, 166, 1772, 160, 1772, 147, 1761, 119, 1748, 131, 1722, 148, 1698, 140, 1675, 144, 1666, 156, 1644, 161, 1615, 159, 1587, 167, 1568, 156, 1547, 142, 1543, 156, 1532, 175, 1513, 187, 1499, 210, 1483, 234, 1482, 250, 1488, 259, 1465, 286, 1439, 327, 1410, 350, 1392, 366 )
+default_color = Color( 1, 1, 1, 0 )
+defeated_color = Color( 1, 0, 0, 0.458824 )
+mouse_over_color = Color( 0.678431, 0.847059, 0.901961, 0.411765 )
+mouse_click_color = Color( 0, 1, 1, 0.596078 )
+
+[node name="USA" parent="Countries" instance=ExtResource( 2 )]
+display_name = "United States"
+polygon = PoolVector2Array( 468, 345, 435, 368, 422, 373, 405, 356, 380, 351, 356, 353, 366, 336, 365, 318, 384, 300, 404, 270, 411, 257, 430, 248, 437, 240, 456, 226, 513, 206, 539, 193, 548, 183, 550, 163, 573, 145, 601, 129, 642, 124, 660, 120, 670, 109, 685, 104, 673, 85, 656, 74, 608, 55, 609, 60, 591, 68, 592, 56, 582, 49, 572, 58, 528, 78, 529, 85, 521, 101, 494, 121, 487, 123, 461, 106, 456, 93, 433, 74, 419, 65, 396, 53, 381, 49, 356, 61, 335, 67, 321, 72, 298, 87, 284, 103, 263, 114, 281, 133, 308, 152, 328, 178, 338, 193, 323, 210, 294, 214, 268, 224, 254, 241, 242, 258, 255, 263, 232, 281, 204, 285, 168, 290, 133, 307, 108, 319, 94, 332, 80, 360, 111, 446, 115, 450, 142, 459, 174, 448, 220, 422, 272, 419, 278, 428, 227, 480, 215, 490, 176, 518, 88, 529, 63, 537, 44, 566, 42, 590, 47, 599, 77, 615, 107, 594, 101, 556, 89, 529, 176, 519, 176, 525, 191, 541, 226, 560, 248, 565, 285, 553, 312, 565, 371, 567, 387, 590, 398, 617, 366, 669, 317, 709, 295, 755, 288, 776, 259, 859, 235, 860, 201, 871, 175, 885, 175, 934, 212, 933, 237, 915, 255, 901, 265, 881, 270, 865, 260, 858, 289, 776, 299, 791, 341, 819, 419, 819, 497, 880, 519, 931, 535, 961, 606, 949, 632, 915, 649, 881, 663, 835, 664, 827, 722, 812, 751, 796, 772, 780, 799, 776, 833, 765, 864, 734, 881, 717, 876, 682, 872, 657, 834, 656, 799, 658, 766, 658, 749, 651, 732, 641, 740, 658, 746, 668, 750, 697, 721, 729, 627, 754, 556, 729, 525, 693, 511, 618, 531, 535, 542, 475, 522, 419, 483, 371 )
+default_color = Color( 1, 1, 1, 0 )
+defeated_color = Color( 1, 0, 0, 0.458824 )
+mouse_over_color = Color( 0.678431, 0.847059, 0.901961, 0.411765 )
+mouse_click_color = Color( 0, 1, 1, 0.596078 )
+
+[node name="MothershipArea2D" type="Area2D" parent="."]
+script = ExtResource( 13 )
+mouse_over_color = Color( 1, 0.792157, 0.992157, 1 )
+mouse_click_color = Color( 0.937255, 0.45098, 0.976471, 1 )
+
+[node name="Sprite" type="Sprite" parent="MothershipArea2D"]
+position = Vector2( 334, 931 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 12 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MothershipArea2D"]
+position = Vector2( 334, 931 )
+scale = Vector2( 0.75, 0.75 )
+polygon = PoolVector2Array( -279, -211.8, -279, -210.2, -257.5, -199, -253.9, -199, -218, -193.7, -218, -191.9, -200.3, -177, -195.8, -177, -180.6, -174, -166.3, -174, -109, -183.7, -82.8, -207, -77.9, -207, -62, -204.7, -62, -202.8, -32, -173.8, -32, -170.4, -27.3, -148, -24.8, -148, 60, -130.6, 60, -129.4, 111.4, -110, 116.2, -110, 159, -100.6, 159, -99.3, 300, -37.3, 300, -35.7, 307.9, -27, 309.4, -27, 348, -10.3, 348, -9.10001, 391.6, 19, 393.5, 19, 438, 40.8, 438, 42, 453, 54, 453, 56.7, 461.4, 82, 462.1, 82, 484, 116.4, 484, 120, 485.3, 129, 483.7, 129, 481.7, 142, 480.2, 142, 477.2, 148, 475.7, 148, 449.7, 168, 444.4, 168, 414.4, 180, 396.4, 180, 287.2, 204, 273.7, 204, 103, 159.5, 103, 158.5, 33, 137.5, 33, 136.4, -53, 103.4, -53, 102.2, -110.5, 72, -113.7, 72, -322.7, 137, -348, 137, -348, 135.3, -377, 122.3, -377, 121, -390, 112, -390, 109.3, -395, 93.3, -395, 78.6, -391.3, 70, -390.1, 70, -380.1, 53, -378.8, 53, -371.8, 46, -369.4, 46, -278.8, 11.4, -386.5, -41, -390, -41, -409, -41.9, -427.7, -35, -438.3, -35, -458, -40.5, -458, -42.1, -482, -68.2, -482, -72, -487.3, -111, -485, -111, -478, -120, -475.4, -120, -458.3, -126, -436.2, -126, -356.6, -134.4, -404, -156.7, -404, -158.3, -418, -176.3, -418, -179, -421.6, -193, -419, -193, -414, -200, -411.5, -200, -403.5, -204, -399.2, -204, -369, -207.8, -357.6, -216, -354.2, -216, -347, -216.8, -347, -218.2 )
+
+[connection signal="pressed" from="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/HarvestButton" to="UI/CountryPanelMargin/CountryPanel" method="_on_HarvestButton_pressed"]
+[connection signal="input_event" from="MothershipArea2D" to="MothershipArea2D" method="_on_MothershipArea2D_input_event"]
+[connection signal="mouse_clicked" from="MothershipArea2D" to="." method="_on_MothershipArea2D_mouse_clicked"]
+[connection signal="mouse_entered" from="MothershipArea2D" to="MothershipArea2D" method="_on_MothershipArea2D_mouse_entered"]
+[connection signal="mouse_exited" from="MothershipArea2D" to="MothershipArea2D" method="_on_MothershipArea2D_mouse_exited"]

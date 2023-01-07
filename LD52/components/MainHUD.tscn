@@ -1,0 +1,488 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://addons/water2d/Water2D.gd" type="Script" id=1]
+[ext_resource path="res://addons/water2d/icon.png" type="Texture" id=2]
+[ext_resource path="res://addons/water2d/water2D_material.tres" type="Material" id=3]
+[ext_resource path="res://addons/controller_icons/assets/key/0.png" type="Texture" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
+[ext_resource path="res://fonts/ld52/ld52_def_normal.tres" type="DynamicFont" id=6]
+[ext_resource path="res://fonts/ld52/ld52_def_xsmall.tres" type="DynamicFont" id=7]
+[ext_resource path="res://fonts/ld52/ld52_def_small.tres" type="DynamicFont" id=8]
+[ext_resource path="res://components/MainHUD.gd" type="Script" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.482353, 0, 0.6, 1 )
+border_width_bottom = 5
+border_color = Color( 0.666667, 0.666667, 0.666667, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.482353, 0, 0.6, 1 )
+border_width_top = 5
+border_color = Color( 0.666667, 0.666667, 0.666667, 1 )
+
+[node name="MainHUD" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 9 )
+
+[node name="TopBar" type="PanelContainer" parent="."]
+margin_right = 3840.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+custom_styles/panel = SubResource( 2 )
+
+[node name="MaginContainer" type="MarginContainer" parent="TopBar"]
+margin_right = 3840.0
+margin_bottom = 39.0
+
+[node name="HBox" type="HBoxContainer" parent="TopBar/MaginContainer"]
+margin_right = 3840.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 400, 0 )
+custom_constants/separation = 10
+
+[node name="WorldMapLabel" type="Label" parent="TopBar/MaginContainer/HBox"]
+margin_right = 182.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 6 )
+text = "World Map"
+align = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TopBar/MaginContainer/HBox"]
+margin_left = 192.0
+margin_right = 2681.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HarvestPanelContainer" type="PanelContainer" parent="TopBar/MaginContainer/HBox"]
+margin_left = 2691.0
+margin_right = 3065.0
+margin_bottom = 39.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="TopBar/MaginContainer/HBox/HarvestPanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 367.0
+margin_bottom = 32.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopBar/MaginContainer/HBox/HarvestPanelContainer/MarginContainer"]
+margin_right = 360.0
+margin_bottom = 25.0
+
+[node name="Sprite" type="TextureRect" parent="TopBar/MaginContainer/HBox/HarvestPanelContainer/MarginContainer/HBoxContainer"]
+margin_right = 25.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 25, 25 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 1
+
+[node name="CattleLabel" type="Label" parent="TopBar/MaginContainer/HBox/HarvestPanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 29.0
+margin_top = 1.0
+margin_right = 87.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 7 )
+text = "Cattle"
+
+[node name="CattleCountLabel" type="Label" parent="TopBar/MaginContainer/HBox/HarvestPanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 91.0
+margin_top = 1.0
+margin_right = 156.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 7 )
+text = "00001"
+
+[node name="ProgressBar" type="ProgressBar" parent="TopBar/MaginContainer/HBox/HarvestPanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 160.0
+margin_right = 360.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+value = 80.0
+percent_visible = false
+
+[node name="JuicePanelContainer" type="PanelContainer" parent="TopBar/MaginContainer/HBox"]
+margin_left = 3075.0
+margin_right = 3241.0
+margin_bottom = 39.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="TopBar/MaginContainer/HBox/JuicePanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 159.0
+margin_bottom = 32.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopBar/MaginContainer/HBox/JuicePanelContainer/MarginContainer"]
+margin_right = 152.0
+margin_bottom = 25.0
+
+[node name="MarginContainer" type="MarginContainer" parent="TopBar/MaginContainer/HBox/JuicePanelContainer/MarginContainer/HBoxContainer"]
+margin_right = 25.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 25, 25 )
+
+[node name="Sprite" type="Sprite" parent="TopBar/MaginContainer/HBox/JuicePanelContainer/MarginContainer/HBoxContainer/MarginContainer"]
+material = ExtResource( 3 )
+position = Vector2( 13, 12 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+water_level = 3.0
+water_color = Color( 0.584314, 0.0941176, 0.0941176, 0.74902 )
+surface_width = 4.0
+surface_color = Color( 0.498039, 0.0392157, 0.0392157, 0 )
+
+[node name="DayLabel" type="Label" parent="TopBar/MaginContainer/HBox/JuicePanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 29.0
+margin_top = 1.0
+margin_right = 83.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 7 )
+text = "Juice"
+
+[node name="DayCountLabel" type="Label" parent="TopBar/MaginContainer/HBox/JuicePanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 87.0
+margin_top = 1.0
+margin_right = 152.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 7 )
+text = "00001"
+
+[node name="DatePanelContainer" type="PanelContainer" parent="TopBar/MaginContainer/HBox"]
+margin_left = 3251.0
+margin_right = 3605.0
+margin_bottom = 39.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="TopBar/MaginContainer/HBox/DatePanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 347.0
+margin_bottom = 32.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopBar/MaginContainer/HBox/DatePanelContainer/MarginContainer"]
+margin_right = 340.0
+margin_bottom = 25.0
+
+[node name="Sprite" type="TextureRect" parent="TopBar/MaginContainer/HBox/DatePanelContainer/MarginContainer/HBoxContainer"]
+margin_right = 25.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 25, 25 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 1
+
+[node name="DayLabel" type="Label" parent="TopBar/MaginContainer/HBox/DatePanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 29.0
+margin_top = 1.0
+margin_right = 67.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 7 )
+text = "Day"
+
+[node name="DayCountLabel" type="Label" parent="TopBar/MaginContainer/HBox/DatePanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 71.0
+margin_top = 1.0
+margin_right = 136.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 7 )
+text = "00001"
+
+[node name="ProgressBar" type="ProgressBar" parent="TopBar/MaginContainer/HBox/DatePanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 140.0
+margin_right = 340.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+percent_visible = false
+
+[node name="TaxPanelContainer" type="PanelContainer" parent="TopBar/MaginContainer/HBox"]
+margin_left = 3615.0
+margin_right = 3840.0
+margin_bottom = 39.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="TopBar/MaginContainer/HBox/TaxPanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 218.0
+margin_bottom = 32.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopBar/MaginContainer/HBox/TaxPanelContainer/MarginContainer"]
+margin_right = 211.0
+margin_bottom = 25.0
+
+[node name="TaxLabel" type="Label" parent="TopBar/MaginContainer/HBox/TaxPanelContainer/MarginContainer/HBoxContainer"]
+margin_top = 1.0
+margin_right = 142.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 7 )
+text = "End of day tax"
+
+[node name="TaxCountLabel" type="Label" parent="TopBar/MaginContainer/HBox/TaxPanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 146.0
+margin_top = 1.0
+margin_right = 211.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 7 )
+text = "00001"
+
+[node name="BottomBar" type="PanelContainer" parent="."]
+margin_top = 2091.0
+margin_right = 3840.0
+margin_bottom = 2160.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+custom_styles/panel = SubResource( 4 )
+
+[node name="MaginContainer" type="MarginContainer" parent="BottomBar"]
+margin_top = 5.0
+margin_right = 3840.0
+margin_bottom = 69.0
+
+[node name="HBox" type="HBoxContainer" parent="BottomBar/MaginContainer"]
+margin_right = 3840.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 400, 0 )
+custom_constants/separation = 10
+
+[node name="MarginContainer2" type="MarginContainer" parent="BottomBar/MaginContainer/HBox"]
+margin_right = 150.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_vertical = 3
+
+[node name="WorldMapLabel" type="Label" parent="BottomBar/MaginContainer/HBox"]
+margin_left = 160.0
+margin_top = 12.0
+margin_right = 354.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 6 )
+text = "MotherShip"
+align = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="BottomBar/MaginContainer/HBox"]
+margin_left = 364.0
+margin_right = 1839.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="UnitInventory" type="HBoxContainer" parent="BottomBar/MaginContainer/HBox"]
+margin_left = 1849.0
+margin_right = 2354.0
+margin_bottom = 64.0
+custom_constants/separation = 5
+
+[node name="UnitItemSlot1" type="MarginContainer" parent="BottomBar/MaginContainer/HBox/UnitInventory"]
+margin_right = 80.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 80, 64 )
+
+[node name="Node2D" type="Node2D" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot1"]
+
+[node name="TextureRect" type="Button" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot1/Node2D"]
+margin_top = -20.0
+margin_right = 80.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 80, 80 )
+rect_pivot_offset = Vector2( 40, 80 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource( 5 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot1"]
+margin_right = 80.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 8 )
+text = "x3"
+align = 2
+valign = 2
+
+[node name="UnitItemSlot2" type="MarginContainer" parent="BottomBar/MaginContainer/HBox/UnitInventory"]
+margin_left = 85.0
+margin_right = 165.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 80, 64 )
+
+[node name="Node2D" type="Node2D" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot2"]
+
+[node name="TextureRect" type="Button" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot2/Node2D"]
+margin_top = -20.0
+margin_right = 80.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 80, 80 )
+rect_pivot_offset = Vector2( 40, 80 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource( 5 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot2"]
+margin_right = 80.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 8 )
+text = "x3"
+align = 2
+valign = 2
+
+[node name="UnitItemSlot3" type="MarginContainer" parent="BottomBar/MaginContainer/HBox/UnitInventory"]
+margin_left = 170.0
+margin_right = 250.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 80, 64 )
+
+[node name="Node2D" type="Node2D" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot3"]
+
+[node name="TextureRect" type="Button" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot3/Node2D"]
+margin_top = -20.0
+margin_right = 80.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 80, 80 )
+rect_pivot_offset = Vector2( 40, 80 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource( 5 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot3"]
+margin_right = 80.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 8 )
+text = "x3"
+align = 2
+valign = 2
+
+[node name="UnitItemSlot4" type="MarginContainer" parent="BottomBar/MaginContainer/HBox/UnitInventory"]
+margin_left = 255.0
+margin_right = 335.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 80, 64 )
+
+[node name="Node2D" type="Node2D" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot4"]
+
+[node name="TextureRect" type="Button" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot4/Node2D"]
+margin_top = -20.0
+margin_right = 80.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 80, 80 )
+rect_pivot_offset = Vector2( 40, 80 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource( 5 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot4"]
+margin_right = 80.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 8 )
+text = "x3"
+align = 2
+valign = 2
+
+[node name="UnitItemSlot5" type="MarginContainer" parent="BottomBar/MaginContainer/HBox/UnitInventory"]
+margin_left = 340.0
+margin_right = 420.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 80, 64 )
+
+[node name="Node2D" type="Node2D" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot5"]
+
+[node name="TextureRect" type="Button" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot5/Node2D"]
+margin_top = -20.0
+margin_right = 80.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 80, 80 )
+rect_pivot_offset = Vector2( 40, 80 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource( 5 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot5"]
+margin_right = 80.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 8 )
+text = "x3"
+align = 2
+valign = 2
+
+[node name="UnitItemSlot6" type="MarginContainer" parent="BottomBar/MaginContainer/HBox/UnitInventory"]
+margin_left = 425.0
+margin_right = 505.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 80, 64 )
+
+[node name="Node2D" type="Node2D" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot6"]
+
+[node name="TextureRect" type="Button" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot6/Node2D"]
+margin_top = -20.0
+margin_right = 80.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 80, 80 )
+rect_pivot_offset = Vector2( 40, 80 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource( 5 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot6"]
+margin_right = 80.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 8 )
+text = "x3"
+align = 2
+valign = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="BottomBar/MaginContainer/HBox"]
+margin_left = 2364.0
+margin_right = 3840.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3

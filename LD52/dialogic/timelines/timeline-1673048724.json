@@ -1,7 +1,7 @@
 {
 	"events": [
 		{
-			"animation": "1-fade_in.gd",
+			"animation": "slide_in_left.gd",
 			"animation_length": 2,
 			"animation_wait": true,
 			"change_mirror_portrait": false,
@@ -25,10 +25,10 @@
 			"character": "character-1673048679.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "New harverster operator recruit reporting in!"
+			"text": "New harvest operator recruit reporting for duty!"
 		},
 		{
-			"animation": "slide_in_right.gd",
+			"animation": "2-fade_in_up.gd",
 			"animation_length": 2,
 			"animation_wait": true,
 			"change_mirror_portrait": false,
@@ -52,11 +52,74 @@
 			"character": "character-1673048624.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Perfect, go harvest the cattle"
+			"text": "You are right in time youngling! Our cattle breeding ground number 72 has just reached maturity!"
+		},
+		{
+			"character": "character-1673048624.json",
+			"event_id": "dialogic_010",
+			"options": [
+
+			],
+			"portrait": "",
+			"question": "You will proove your worth by harvesting this planet.."
+		},
+		{
+			"choice": "How should I proceed sir?",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"emit_signal": "blink_belgium",
+			"event_id": "dialogic_040"
+		},
+		{
+			"character": "character-1673048624.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Start by havesing a small country. I would suggest Belgium."
+		},
+		{
+			"character": "character-1673048624.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Harvesting a country will allow us to produce cattle juice to feed our population back home.\nYou can use some of your cattle juice to breed a bigger army.\nHowever every day you will have to send me a large amount of juice."
+		},
+		{
+			"choice": "Yes sir! Rigth away! (skip tutorial)",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1673048624.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I will be monitoring you. Go on youngling, and do your best!"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"character": "character-1673048624.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Remember, if you do not have enough juice at the end of the day, I will find a way to replace you."
 		},
 		{
 			"event_id": "dialogic_022",
 			"transition_duration": 1
+		},
+		{
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_012",
+			"value": ""
+		},
+		{
+			"event_id": "dialogic_013"
 		}
 	],
 	"metadata": {

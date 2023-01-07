@@ -34,25 +34,7 @@ func on_random_timer_pressed():
 
 
 func on_screen_transition_pressed():
-	var colors = [
-		Color.black,
-		Color.blueviolet,
-		Color.goldenrod,
-		Color.aliceblue,
-		Color.sienna
-	]
-
-	var textures = [
-		load("res://addons/node_library/assets/transition-texture.png"),
-		load("res://addons/node_library/assets/screen-transition-alternate.png"),
-		load("res://addons/node_library/assets/screen-transition-alternate2.png")
-	]
-
-	var color_index = randi() % colors.size()
-	var texture_index = randi() % textures.size()
-	ScreenTransition.set_transition_color(colors[color_index])
-	ScreenTransition.set_transition_texture(textures[texture_index])
-	ScreenTransition.transition_to_scene("res://TestSceneTransition.tscn")
+	$Game.transition()
 
 
 func on_shaky_camera_2d_pressed():

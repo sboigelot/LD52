@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/WorldMapCountry.gd" type="Script" id=1]
+[ext_resource path="res://components/OutlinedPolygon2D.gd" type="Script" id=2]
+
+[node name="WorldMapCountry" type="Node2D"]
+script = ExtResource( 1 )
+polygon = PoolVector2Array( 0, 0, -19, 24, 3, 77, 82, 99, 100, 119, 140, 122, 120, 72, 126, 19 )
+polygon2d_np = NodePath("Polygon2D")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 1, 1, 1, 0 )
+polygon = PoolVector2Array( 0, 0, -19, 24, 3, 77, 82, 99, 100, 119, 140, 122, 120, 72, 126, 19 )
+script = ExtResource( 2 )
+Width = 4.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( 0, 0, -19, 24, 3, 77, 82, 99, 100, 119, 140, 122, 120, 72, 126, 19 )
+
+[connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]

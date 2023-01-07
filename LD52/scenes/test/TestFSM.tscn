@@ -14,19 +14,19 @@ __meta__ = {
 }
 name = "Entry"
 
-[sub_resource type="Resource" id=2]
-script = ExtResource( 6 )
-__meta__ = {
-"graph_offset": Vector2( 368, 40 )
-}
-name = "Idle"
-
 [sub_resource type="Resource" id=3]
 script = ExtResource( 6 )
 __meta__ = {
 "graph_offset": Vector2( 348, 220 )
 }
 name = "Hunt"
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 6 )
+__meta__ = {
+"graph_offset": Vector2( 368, 40 )
+}
+name = "Idle"
 
 [sub_resource type="Resource" id=4]
 script = ExtResource( 6 )
@@ -40,6 +40,19 @@ script = ExtResource( 4 )
 from = "Entry"
 to = "Idle"
 conditions = {
+}
+priority = 0
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+name = "target_dead"
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 4 )
+from = "Hunt"
+to = "SearchTarget"
+conditions = {
+"target_dead": SubResource( 10 )
 }
 priority = 0
 
@@ -61,19 +74,6 @@ from = "SearchTarget"
 to = "Hunt"
 conditions = {
 "taget_found": SubResource( 7 )
-}
-priority = 0
-
-[sub_resource type="Resource" id=10]
-script = ExtResource( 5 )
-name = "target_dead"
-
-[sub_resource type="Resource" id=11]
-script = ExtResource( 4 )
-from = "Hunt"
-to = "SearchTarget"
-conditions = {
-"target_dead": SubResource( 10 )
 }
 priority = 0
 
