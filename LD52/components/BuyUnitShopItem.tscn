@@ -1,0 +1,171 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://fonts/ld52/ld52_def_xxsmall.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/ld52/ld52_def_small.tres" type="DynamicFont" id=2]
+[ext_resource path="res://fonts/ld52/ld52_def_normal.tres" type="DynamicFont" id=3]
+[ext_resource path="res://components/BuyUnitShopItem.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.576471, 0, 0, 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Popup"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -50 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 1, 0.227451, 1 ), Color( 0, 1, 0.227451, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 1, 0.227451, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[node name="BuyUnitShopItem" type="MarginContainer"]
+margin_right = 211.0
+margin_bottom = 68.0
+script = ExtResource( 4 )
+
+[node name="BuyButton" type="Button" parent="."]
+margin_right = 211.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 0, 64 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/disabled = SubResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 211.0
+margin_bottom = 68.0
+mouse_filter = 2
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 209.0
+margin_bottom = 66.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+size_flags_vertical = 3
+expand = true
+stretch_mode = 1
+
+[node name="AmoutLabel" type="Label" parent="MarginContainer/HBoxContainer/TextureRect"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 2 )
+text = "x0"
+align = 2
+valign = 2
+
+[node name="CostLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+margin_left = 68.0
+margin_top = 17.0
+margin_right = 85.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 2 )
+text = "0"
+
+[node name="CattleJuiceLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+margin_left = 89.0
+margin_top = 24.0
+margin_right = 167.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 1 )
+text = "Cattle Juice"
+valign = 2
+
+[node name="FloatingLabel" type="Node2D" parent="."]
+visible = false
+position = Vector2( 37, -8 )
+
+[node name="Label" type="Label" parent="FloatingLabel"]
+margin_right = 134.0
+margin_bottom = 39.0
+rect_pivot_offset = Vector2( 67, 19.5 )
+custom_colors/font_color = Color( 0, 1, 0.227451, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Ordered"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FloatingLabel"]
+anims/Popup = SubResource( 3 )
+anims/RESET = SubResource( 4 )
+
+[connection signal="pressed" from="BuyButton" to="." method="_on_BuyButton_pressed"]

@@ -154,6 +154,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-next/gui/debug_label.gd"
 }, {
+"base": "Node2D",
+"class": "Delivery",
+"language": "GDScript",
+"path": "res://actors/Deliveriy/Delivery.gd"
+}, {
+"base": "Node",
+"class": "DeliveryData",
+"language": "GDScript",
+"path": "res://data/DeliveryData.gd"
+}, {
 "base": "Node",
 "class": "Dialogic",
 "language": "GDScript",
@@ -409,6 +419,8 @@ _global_script_class_icons={
 "Cycle": "res://addons/godot-next/icons/icon_cycle.svg",
 "DTS": "",
 "DebugLabel": "",
+"Delivery": "",
+"DeliveryData": "",
 "Dialogic": "",
 "DialogicAnimaPropertiesHelper": "",
 "DialogicAnimaResources": "",

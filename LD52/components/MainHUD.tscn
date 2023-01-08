@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://addons/water2d/Water2D.gd" type="Script" id=1]
 [ext_resource path="res://addons/water2d/icon.png" type="Texture" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://fonts/ld52/ld52_def_xsmall.tres" type="DynamicFont" id=7]
 [ext_resource path="res://assets/Units/AlienIcon.tres" type="Texture" id=8]
 [ext_resource path="res://components/MainHUD.gd" type="Script" id=9]
-[ext_resource path="res://actors/Unit/Unit.tscn" type="PackedScene" id=10]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -17,6 +16,22 @@
 bg_color = Color( 0.482353, 0, 0.6, 1 )
 border_width_bottom = 5
 border_color = Color( 0.666667, 0.666667, 0.666667, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.494118, 0.12549, 0.133333, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.12549, 0.352941, 0.494118, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.8, 0.8, 0.8, 0 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.482353, 0, 0.6, 1 )
@@ -59,14 +74,14 @@ align = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="TopBar/MaginContainer/HBox"]
 margin_left = 192.0
-margin_right = 2681.0
+margin_right = 2666.0
 margin_bottom = 39.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HarvestPanelContainer" type="PanelContainer" parent="TopBar/MaginContainer/HBox"]
-margin_left = 2691.0
-margin_right = 3065.0
+margin_left = 2676.0
+margin_right = 3050.0
 margin_bottom = 39.0
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -114,12 +129,13 @@ margin_bottom = 25.0
 rect_min_size = Vector2( 200, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_styles/fg = SubResource( 5 )
 value = 80.0
 percent_visible = false
 
 [node name="JuicePanelContainer" type="PanelContainer" parent="TopBar/MaginContainer/HBox"]
-margin_left = 3075.0
-margin_right = 3241.0
+margin_left = 3060.0
+margin_right = 3226.0
 margin_bottom = 39.0
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -150,7 +166,7 @@ water_color = Color( 0.584314, 0.0941176, 0.0941176, 0.74902 )
 surface_width = 4.0
 surface_color = Color( 0.498039, 0.0392157, 0.0392157, 0 )
 
-[node name="DayLabel" type="Label" parent="TopBar/MaginContainer/HBox/JuicePanelContainer/MarginContainer/HBoxContainer"]
+[node name="JuiceLabel" type="Label" parent="TopBar/MaginContainer/HBox/JuicePanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 29.0
 margin_top = 1.0
 margin_right = 83.0
@@ -158,7 +174,7 @@ margin_bottom = 23.0
 custom_fonts/font = ExtResource( 7 )
 text = "Juice"
 
-[node name="DayCountLabel" type="Label" parent="TopBar/MaginContainer/HBox/JuicePanelContainer/MarginContainer/HBoxContainer"]
+[node name="JuiceCountLabel" type="Label" parent="TopBar/MaginContainer/HBox/JuicePanelContainer/MarginContainer/HBoxContainer"]
 margin_left = 87.0
 margin_top = 1.0
 margin_right = 152.0
@@ -167,8 +183,8 @@ custom_fonts/font = ExtResource( 7 )
 text = "00001"
 
 [node name="DatePanelContainer" type="PanelContainer" parent="TopBar/MaginContainer/HBox"]
-margin_left = 3251.0
-margin_right = 3605.0
+margin_left = 3236.0
+margin_right = 3590.0
 margin_bottom = 39.0
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -216,10 +232,12 @@ margin_bottom = 25.0
 rect_min_size = Vector2( 200, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_styles/fg = SubResource( 6 )
+value = 50.0
 percent_visible = false
 
 [node name="TaxPanelContainer" type="PanelContainer" parent="TopBar/MaginContainer/HBox"]
-margin_left = 3615.0
+margin_left = 3600.0
 margin_right = 3840.0
 margin_bottom = 39.0
 size_flags_horizontal = 0
@@ -228,24 +246,24 @@ size_flags_vertical = 3
 [node name="MarginContainer" type="MarginContainer" parent="TopBar/MaginContainer/HBox/TaxPanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 218.0
+margin_right = 233.0
 margin_bottom = 32.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TopBar/MaginContainer/HBox/TaxPanelContainer/MarginContainer"]
-margin_right = 211.0
+margin_right = 226.0
 margin_bottom = 25.0
 
 [node name="TaxLabel" type="Label" parent="TopBar/MaginContainer/HBox/TaxPanelContainer/MarginContainer/HBoxContainer"]
 margin_top = 1.0
-margin_right = 142.0
+margin_right = 157.0
 margin_bottom = 23.0
 custom_fonts/font = ExtResource( 7 )
-text = "End of day tax"
+text = "End of week tax"
 
 [node name="TaxCountLabel" type="Label" parent="TopBar/MaginContainer/HBox/TaxPanelContainer/MarginContainer/HBoxContainer"]
-margin_left = 146.0
+margin_left = 161.0
 margin_top = 1.0
-margin_right = 211.0
+margin_right = 226.0
 margin_bottom = 23.0
 custom_fonts/font = ExtResource( 7 )
 text = "00001"
@@ -298,7 +316,6 @@ margin_bottom = 64.0
 custom_constants/separation = 5
 
 [node name="UnitItemSlot" parent="BottomBar/MaginContainer/HBox/UnitInventory" instance=ExtResource( 5 )]
-spawned_unit = ExtResource( 10 )
 texture = ExtResource( 8 )
 
 [node name="MarginContainer3" type="MarginContainer" parent="BottomBar/MaginContainer/HBox"]

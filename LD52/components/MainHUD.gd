@@ -11,7 +11,8 @@ func _ready():
 	$TopBar/MaginContainer/HBox/WorldMapLabel.text = title
 	$BottomBar/MaginContainer/HBox/MarginContainer2.visible = show_mother_ship_text
 	$BottomBar/MaginContainer/HBox/WorldMapLabel.visible = show_mother_ship_text
-	update_unit_slots()
+	update_unit_slots()	
+	update_cattle_count()
 	
 func update_unit_slots():
 	var unit_slot_placeholder = $BottomBar/MaginContainer/HBox/UnitInventory
@@ -23,12 +24,22 @@ func update_unit_slots():
 	
 	for unit_type in unit_types:
 		var unit_item_slot = unit_slot_scene.instance() as UnitItemSlot
-		unit_item_slot.spawned_unit = unit_type.unit_scene
+		unit_item_slot.unit_type = unit_type
 		unit_item_slot.texture = unit_type.button_texture
 		unit_item_slot.amount = unit_type.amount_in_barrack
 		unit_item_slot.connect("pressed", self, "_on_UnitItemSlot_pressed")
 		unit_slot_placeholder.add_child(unit_item_slot)
-		
+
+func update_cattle_count():
+	var initial_cattle_sum = Game.data.get_initial_cattle_sum()
+	var current_cattle_sum = Game.data.get_current_cattle_sum()
+
+	var cattle_count_label = $TopBar/MaginContainer/HBox/HarvestPanelContainer/MarginContainer/HBoxContainer/CattleCountLabel
+	cattle_count_label.text = "%d.000.000" % current_cattle_sum
+	var cattle_progress = $TopBar/MaginContainer/HBox/HarvestPanelContainer/MarginContainer/HBoxContainer/ProgressBar
+	cattle_progress.max_value = initial_cattle_sum
+	cattle_progress.value = current_cattle_sum
+	
 func _on_UnitItemSlot_pressed(unit_slot):
 	if not unit_slot_clickable:
 		return
@@ -48,5 +59,15 @@ func update_ui():
 		
 	var data = Game.data as GameData
 	
-	var juice_count_label = $TopBar/MaginContainer/HBox/JuicePanelContainer/MarginContainer/HBoxContainer/DayCountLabel
+	var juice_count_label = $TopBar/MaginContainer/HBox/JuicePanelContainer/MarginContainer/HBoxContainer/JuiceCountLabel
 	juice_count_label.text = "%05d" % data.cattle_juice
+
+	var day_label = $TopBar/MaginContainer/HBox/DatePanelContainer/MarginContainer/HBoxContainer/DayCountLabel
+	day_label.text = "%05d" % data.day	
+	
+	var day_progress = $TopBar/MaginContainer/HBox/DatePanelContainer/MarginContainer/HBoxContainer/ProgressBar
+	day_progress.max_value = data.day_duration
+	day_progress.value = data.time_of_day
+
+	var tax_label = $TopBar/MaginContainer/HBox/TaxPanelContainer/MarginContainer/HBoxContainer/TaxCountLabel
+	tax_label.text = "%05d" % Game.data.get_week_tax()

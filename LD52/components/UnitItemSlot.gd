@@ -7,7 +7,7 @@ signal pressed(unit_slot)
 
 export var amount: int setget set_amount
 
-export(PackedScene) var spawned_unit
+var unit_type
 export(Texture) var texture setget set_texture
 
 func set_texture(value):

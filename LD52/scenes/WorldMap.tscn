@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/WorldMap.gd" type="Script" id=1]
 [ext_resource path="res://components/WorldMapCountry.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://fonts/ld52/ld52_def_small.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/CountryPanel.gd" type="Script" id=6]
 [ext_resource path="res://components/MainHUD.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/worldmap/dayshadow.png" type="Texture" id=8]
+[ext_resource path="res://actors/Deliveriy/Delivery.tscn" type="PackedScene" id=9]
 [ext_resource path="res://fonts/ld52/ld52_def_xsmall.tres" type="DynamicFont" id=11]
 [ext_resource path="res://assets/mothership/mothership3.png" type="Texture" id=12]
 [ext_resource path="res://scenes/MothershipArea2D.gd" type="Script" id=13]
@@ -15,10 +17,29 @@
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
+[sub_resource type="Animation" id=4]
+resource_name = "Hover"
+length = 20.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 6.2, 9.6, 11.1, 16, 20 ),
+"transitions": PoolRealArray( 1, -2, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 10 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -3 ), Vector2( 0, -3 ) ]
+}
+
 [node name="WorldView" type="Node2D"]
 script = ExtResource( 1 )
+delivery_scene = ExtResource( 9 )
 dialog_canvas_layer_np = NodePath("DialogCanvasLayer")
 countries_np = NodePath("Countries")
+dayshadow_np = NodePath("BackgroundUI/Background/DayShadow")
 
 [node name="BackgroundUI" type="PanelContainer" parent="."]
 anchor_right = 1.0
@@ -33,7 +54,7 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="BackgroundUI/Background"]
+[node name="Map" type="TextureRect" parent="BackgroundUI/Background"]
 margin_right = 1920.0
 margin_bottom = 1080.0
 mouse_filter = 2
@@ -41,6 +62,17 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 3 )
 expand = true
+
+[node name="DayShadow" type="Node2D" parent="BackgroundUI/Background"]
+
+[node name="Dayshadow" type="Sprite" parent="BackgroundUI/Background/DayShadow"]
+texture = ExtResource( 8 )
+centered = false
+
+[node name="Dayshadow2" type="Sprite" parent="BackgroundUI/Background/DayShadow"]
+texture = ExtResource( 8 )
+centered = false
+offset = Vector2( -1920, 0 )
 
 [node name="DialogCanvasLayer" type="CanvasLayer" parent="."]
 
@@ -89,6 +121,14 @@ default_color = Color( 1, 1, 1, 0 )
 defeated_color = Color( 1, 0, 0, 0.458824 )
 mouse_over_color = Color( 0.678431, 0.847059, 0.901961, 0.411765 )
 mouse_click_color = Color( 0, 1, 1, 0.596078 )
+
+[node name="Deliveries" type="Node2D" parent="."]
+
+[node name="DeliverySpawnPosition2D" type="Position2D" parent="."]
+position = Vector2( 1975, 215 )
+
+[node name="DeliveryDestinationPosition2D" type="Position2D" parent="."]
+position = Vector2( 297, 893 )
 
 [node name="ForegroundUI" type="PanelContainer" parent="."]
 anchor_right = 1.0
@@ -170,8 +210,8 @@ script = ExtResource( 6 )
 country_name_label_np = NodePath("MaginContainer/VBox/VBoxContainer/CountryNameLabel")
 init_pop_label_np = NodePath("MaginContainer/VBox/GridContainer/InitialPopCountLabel")
 remain_pop_label_np = NodePath("MaginContainer/VBox/GridContainer/RemainingPopulationCountLabel")
-secu_lvl_label_np = NodePath("MaginContainer/VBox/GridContainer/SecurityLevelLabel")
-panic_lvl_label_np = NodePath("MaginContainer/VBox/GridContainer/PanicLevelLabel")
+secu_lvl_label_np = NodePath("MaginContainer/VBox/GridContainer/SecurityLevelCountLabel")
+panic_lvl_label_np = NodePath("MaginContainer/VBox/GridContainer/PanicLevelCountLabel")
 
 [node name="MaginContainer" type="MarginContainer" parent="ForegroundUI/CountryPanelMargin/CountryPanel"]
 margin_left = 7.0
@@ -312,6 +352,9 @@ texture = ExtResource( 12 )
 position = Vector2( 334, 931 )
 scale = Vector2( 0.75, 0.75 )
 polygon = PoolVector2Array( -279, -211.8, -279, -210.2, -257.5, -199, -253.9, -199, -218, -193.7, -218, -191.9, -200.3, -177, -195.8, -177, -180.6, -174, -166.3, -174, -109, -183.7, -82.8, -207, -77.9, -207, -62, -204.7, -62, -202.8, -32, -173.8, -32, -170.4, -27.3, -148, -24.8, -148, 60, -130.6, 60, -129.4, 111.4, -110, 116.2, -110, 159, -100.6, 159, -99.3, 300, -37.3, 300, -35.7, 307.9, -27, 309.4, -27, 348, -10.3, 348, -9.10001, 391.6, 19, 393.5, 19, 438, 40.8, 438, 42, 453, 54, 453, 56.7, 461.4, 82, 462.1, 82, 484, 116.4, 484, 120, 485.3, 129, 483.7, 129, 481.7, 142, 480.2, 142, 477.2, 148, 475.7, 148, 449.7, 168, 444.4, 168, 414.4, 180, 396.4, 180, 287.2, 204, 273.7, 204, 103, 159.5, 103, 158.5, 33, 137.5, 33, 136.4, -53, 103.4, -53, 102.2, -110.5, 72, -113.7, 72, -322.7, 137, -348, 137, -348, 135.3, -377, 122.3, -377, 121, -390, 112, -390, 109.3, -395, 93.3, -395, 78.6, -391.3, 70, -390.1, 70, -380.1, 53, -378.8, 53, -371.8, 46, -369.4, 46, -278.8, 11.4, -386.5, -41, -390, -41, -409, -41.9, -427.7, -35, -438.3, -35, -458, -40.5, -458, -42.1, -482, -68.2, -482, -72, -487.3, -111, -485, -111, -478, -120, -475.4, -120, -458.3, -126, -436.2, -126, -356.6, -134.4, -404, -156.7, -404, -158.3, -418, -176.3, -418, -179, -421.6, -193, -419, -193, -414, -200, -411.5, -200, -403.5, -204, -399.2, -204, -369, -207.8, -357.6, -216, -354.2, -216, -347, -216.8, -347, -218.2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MothershipArea2D"]
+anims/Hover = SubResource( 4 )
 
 [connection signal="pressed" from="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/HarvestButton" to="ForegroundUI/CountryPanelMargin/CountryPanel" method="_on_HarvestButton_pressed"]
 [connection signal="input_event" from="MothershipArea2D" to="MothershipArea2D" method="_on_MothershipArea2D_input_event"]

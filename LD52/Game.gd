@@ -19,14 +19,15 @@ func transition_to_scene(scene_path):
 		Color.black,
 		Color.blueviolet,
 		Color.goldenrod,
-		Color.aliceblue,
+		Color.purple,
 		Color.sienna
 	]
 
 	var textures = [
 		load("res://addons/node_library/assets/transition-texture.png"),
 		load("res://addons/node_library/assets/screen-transition-alternate.png"),
-		load("res://addons/node_library/assets/screen-transition-alternate2.png")
+		load("res://addons/node_library/assets/screen-transition-alternate2.png"),
+#		load("res://addons/node_library/assets/screen-transition-alternate3.png")
 	]
 
 	var color_index = randi() % colors.size()

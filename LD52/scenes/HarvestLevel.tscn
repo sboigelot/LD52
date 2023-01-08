@@ -1,12 +1,9 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/HarvestLevel.gd" type="Script" id=1]
-[ext_resource path="res://actors/Cattle/Cattle.tscn" type="PackedScene" id=2]
-[ext_resource path="res://data/ActorData.gd" type="Script" id=3]
+[ext_resource path="res://assets/worldmap/hilltree.png" type="Texture" id=2]
 [ext_resource path="res://components/MouseBoundSprite.tscn" type="PackedScene" id=4]
 [ext_resource path="res://components/MainHUD.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/mothership/mothership3.png" type="Texture" id=6]
-[ext_resource path="res://assets/worldmap/world0.png" type="Texture" id=7]
 [ext_resource path="res://icon.png" type="Texture" id=8]
 [ext_resource path="res://actors/Juice/Juice.tscn" type="PackedScene" id=9]
 [ext_resource path="res://fonts/ld52/ld52_def_xsmall.tres" type="DynamicFont" id=10]
@@ -16,106 +13,6 @@
 [sub_resource type="StyleBoxEmpty" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=9]
-
-[sub_resource type="Resource" id=3]
-script = ExtResource( 3 )
-max_health = 5
-health = 5.0
-health_regen_per_second = 0.0
-max_stamina = 2.0
-stamina_regen_per_second = 0.2
-stamina = 2.0
-super_stamina_cost = 0.8
-boost_stamina_cost_per_second = 1.0
-boost_speed_multiplier = 2
-speed = 50
-can_move = true
-auto_boost = false
-auto_boost_threshold = 0.0
-move_threshold = 20.0
-attack_range = 60.0
-suffer_knockback_on_attacks = false
-take_damage_sfx_name = "hit"
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 3 )
-max_health = 5
-health = 5.0
-health_regen_per_second = 0.0
-max_stamina = 2.0
-stamina_regen_per_second = 0.2
-stamina = 2.0
-super_stamina_cost = 0.8
-boost_stamina_cost_per_second = 1.0
-boost_speed_multiplier = 2
-speed = 50
-can_move = true
-auto_boost = false
-auto_boost_threshold = 0.0
-move_threshold = 20.0
-attack_range = 60.0
-suffer_knockback_on_attacks = false
-take_damage_sfx_name = "hit"
-
-[sub_resource type="Resource" id=5]
-script = ExtResource( 3 )
-max_health = 5
-health = 5.0
-health_regen_per_second = 0.0
-max_stamina = 2.0
-stamina_regen_per_second = 0.2
-stamina = 2.0
-super_stamina_cost = 0.8
-boost_stamina_cost_per_second = 1.0
-boost_speed_multiplier = 2
-speed = 50
-can_move = true
-auto_boost = false
-auto_boost_threshold = 0.0
-move_threshold = 20.0
-attack_range = 60.0
-suffer_knockback_on_attacks = false
-take_damage_sfx_name = "hit"
-
-[sub_resource type="Resource" id=6]
-script = ExtResource( 3 )
-max_health = 5
-health = 5.0
-health_regen_per_second = 0.0
-max_stamina = 2.0
-stamina_regen_per_second = 0.2
-stamina = 2.0
-super_stamina_cost = 0.8
-boost_stamina_cost_per_second = 1.0
-boost_speed_multiplier = 2
-speed = 50
-can_move = true
-auto_boost = false
-auto_boost_threshold = 0.0
-move_threshold = 20.0
-attack_range = 60.0
-suffer_knockback_on_attacks = false
-take_damage_sfx_name = "hit"
-
-[sub_resource type="Resource" id=7]
-script = ExtResource( 3 )
-max_health = 5
-health = 5.0
-health_regen_per_second = 0.0
-max_stamina = 2.0
-stamina_regen_per_second = 0.2
-stamina = 2.0
-super_stamina_cost = 0.8
-boost_stamina_cost_per_second = 1.0
-boost_speed_multiplier = 2
-speed = 50
-can_move = true
-auto_boost = false
-auto_boost_threshold = 0.0
-move_threshold = 20.0
-attack_range = 60.0
-suffer_knockback_on_attacks = false
-take_damage_sfx_name = "hit"
 
 [node name="HarvestLevel" type="Control"]
 anchor_right = 1.0
@@ -136,7 +33,6 @@ size_flags_vertical = 3
 custom_styles/panel = SubResource( 8 )
 
 [node name="Background" type="MarginContainer" parent="UI"]
-visible = false
 margin_right = 1920.0
 margin_bottom = 1080.0
 mouse_filter = 2
@@ -147,16 +43,7 @@ margin_bottom = 1080.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 7 )
-expand = true
-
-[node name="TextureRect2" type="TextureRect" parent="UI/Background"]
-margin_right = 1920.0
-margin_bottom = 1080.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 6 )
+texture = ExtResource( 2 )
 expand = true
 
 [node name="MainHUD" parent="UI" instance=ExtResource( 5 )]
@@ -166,80 +53,62 @@ rect_pivot_offset = Vector2( -1179, 435 )
 title = "Belgium"
 show_mother_ship_text = false
 
-[node name="SpeedBar" type="MarginContainer" parent="UI"]
-margin_left = 1784.0
-margin_right = 1920.0
-margin_bottom = 100.0
-size_flags_horizontal = 8
+[node name="MenuBar" type="MarginContainer" parent="UI"]
+margin_left = 899.0
+margin_right = 1020.0
+margin_bottom = 162.0
+size_flags_horizontal = 4
 size_flags_vertical = 0
 custom_constants/margin_top = 44
 
-[node name="SpeedBar" type="PanelContainer" parent="UI/SpeedBar"]
+[node name="MenuBar" type="PanelContainer" parent="UI/MenuBar"]
 margin_top = 44.0
-margin_right = 136.0
-margin_bottom = 100.0
+margin_right = 121.0
+margin_bottom = 162.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
 custom_styles/panel = SubResource( 9 )
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/SpeedBar/SpeedBar"]
-margin_right = 136.0
-margin_bottom = 56.0
+[node name="PanelContainer" type="PanelContainer" parent="UI/MenuBar/MenuBar"]
+margin_right = 121.0
+margin_bottom = 118.0
 
-[node name="MaginContainer" type="MarginContainer" parent="UI/SpeedBar/SpeedBar/PanelContainer"]
+[node name="MaginContainer" type="MarginContainer" parent="UI/MenuBar/MenuBar/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 129.0
-margin_bottom = 49.0
+margin_right = 114.0
+margin_bottom = 111.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
-[node name="HBox" type="HBoxContainer" parent="UI/SpeedBar/SpeedBar/PanelContainer/MaginContainer"]
+[node name="HBox" type="VBoxContainer" parent="UI/MenuBar/MenuBar/PanelContainer/MaginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 112.0
-margin_bottom = 32.0
-custom_constants/separation = 10
+margin_right = 97.0
+margin_bottom = 94.0
 
-[node name="TimeLeftLabel" type="Label" parent="UI/SpeedBar/SpeedBar/PanelContainer/MaginContainer/HBox"]
-margin_right = 92.0
+[node name="TimeLeftLabel" type="Label" parent="UI/MenuBar/MenuBar/PanelContainer/MaginContainer/HBox"]
+margin_right = 87.0
 margin_bottom = 22.0
 custom_fonts/font = ExtResource( 10 )
-text = "Time left:"
+text = "Time left"
+align = 1
 
-[node name="TimeLeftCountLabel" type="Label" parent="UI/SpeedBar/SpeedBar/PanelContainer/MaginContainer/HBox"]
-margin_left = 102.0
-margin_top = 4.0
-margin_right = 102.0
-margin_bottom = 18.0
+[node name="TimeLeftCountLabel" type="Label" parent="UI/MenuBar/MenuBar/PanelContainer/MaginContainer/HBox"]
+margin_top = 26.0
+margin_right = 87.0
+margin_bottom = 84.0
+custom_fonts/font = ExtResource( 11 )
+text = "60"
+align = 1
 
 [node name="MouseBoundSprite" parent="." instance=ExtResource( 4 )]
 texture = ExtResource( 8 )
 
 [node name="Cattles" type="Node2D" parent="."]
 pause_mode = 1
-
-[node name="Cattle" parent="Cattles" instance=ExtResource( 2 )]
-position = Vector2( 678, 361 )
-data = SubResource( 3 )
-
-[node name="Cattle2" parent="Cattles" instance=ExtResource( 2 )]
-position = Vector2( 1304, 225 )
-data = SubResource( 4 )
-
-[node name="Cattle3" parent="Cattles" instance=ExtResource( 2 )]
-position = Vector2( 1095, 839 )
-data = SubResource( 5 )
-
-[node name="Cattle4" parent="Cattles" instance=ExtResource( 2 )]
-position = Vector2( 1009, 355 )
-data = SubResource( 6 )
-
-[node name="Cattle5" parent="Cattles" instance=ExtResource( 2 )]
-position = Vector2( 544, 873 )
-data = SubResource( 7 )
 
 [node name="Units" type="Node2D" parent="."]
 

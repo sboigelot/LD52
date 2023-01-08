@@ -33,6 +33,25 @@ func _ready():
 	
 	selected_country = Game.data.selected_country as CountryData
 	mission_time_left = selected_country.mission_time
+	spawn_cattles()
+
+func spawn_cattles():	
+	var count = min(selected_country.max_cattle_per_harvest, selected_country.remaining_population)
+	
+	var spawn_margin = 150
+	for i in count:
+		var cattle = selected_country.cattle_scene.instance()
+		cattle.position = Vector2(
+			(randi() % int(rect_size.x - spawn_margin)) + spawn_margin,
+			(randi() % int(rect_size.y - spawn_margin)) + spawn_margin
+		)
+		cattle.data = ActorData.new()
+		cattle.connect("died", self, "on_cattle_died")
+		cattles.add_child(cattle)
+
+func on_cattle_died(cattle):
+	selected_country.remaining_population -= 1
+	$UI/MainHUD.update_cattle_count()
 
 func _on_MainHUD_unit_slot_pressed(unit_slot):
 	selected_unit_slot = unit_slot
@@ -50,7 +69,8 @@ func _input(event):
 			mouse_bound_sprite.visible = false
 
 func spawn_unit(unit_slot):
-	var unit_scene = unit_slot.spawned_unit	
+	var unit_scene = unit_slot.unit_type.unit_scene
+	unit_slot.unit_type.amount_in_barrack -= 1
 	var unit = unit_scene.instance()
 	unit.position = get_global_mouse_position()
 	unit.data = ActorData.new()
@@ -60,12 +80,12 @@ func spawn_unit(unit_slot):
 
 func _process(delta):
 	if harvest_completed_panel.visible:
+		end_harvest_timer -= delta
 		if end_harvest_timer <= 0:
 			if not transition_started:
 				transition_started = true
 				Game.transition_to_scene("res://scenes/WorldMap.tscn")
 		else:
-			end_harvest_timer -= delta
 			harvest_completed_count_label.text = str(round(end_harvest_timer))
 		return
 		
@@ -81,12 +101,14 @@ func _process(delta):
 	update_ui()
 	
 func update_ui():
-	var timer_label = $UI/SpeedBar/SpeedBar/PanelContainer/MaginContainer/HBox/TimeLeftCountLabel
+	var timer_label = $UI/MenuBar/MenuBar/PanelContainer/MaginContainer/HBox/TimeLeftCountLabel
 	timer_label.text = str(round(mission_time_left))
 
 func end_of_harvest():
 	harvest_completed_panel.visible = true
-
+	
+	selected_country.panic_level += 1
+	
 	for cattle in cattles.get_children():
 		cattle.paused = true
 		

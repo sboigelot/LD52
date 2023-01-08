@@ -1,23 +1,28 @@
 {
 	"glossary": [
 		{
-			"extra": "Genome Patent #13594561e5",
-			"id": "1673049294-970",
-			"name": "cattle",
-			"text": "Homo sapien sapien, once juice, a perfect breakfast full of protein, vitamin an mineral",
-			"title": "Cattle",
-			"type": 1
-		},
-		{
 			"extra": "The juice also give us our lovely chitin color",
 			"id": "1673071390-600",
 			"name": "juice",
 			"text": "By metodicaly pressing a cattle between two plate linked by a screw, our cooks can extra every single drop of liquid they produced during their short lifespan.\n\nThe juice is extermely rich in protein, vitamins and many minerals needed to sustain our life",
 			"title": "Cattle Juice",
 			"type": 1
+		},
+		{
+			"extra": "Genome Patent #13594561e5",
+			"id": "1673049294-970",
+			"name": "cattle",
+			"text": "Homo sapien sapien, once juice, a perfect breakfast full of protein, vitamin an mineral",
+			"title": "Cattle",
+			"type": 1
 		}
 	],
 	"variables": [
-
+		{
+			"id": "1673148447-648",
+			"name": "weektax",
+			"type": 0,
+			"value": "0"
+		}
 	]
 }

@@ -17,8 +17,8 @@ onready var boost_particule = get_node_or_null(np_boost_particule) as Particles2
 export(NodePath) var fsm_np
 onready var fsm = get_node(fsm_np) as StateMachinePlayer
 
-signal took_damage
-signal died
+signal took_damage(actor)
+signal died(actor)
 
 var knockback:Vector2
 var knockback_timer:float
@@ -120,7 +120,8 @@ func flip_and_animate(direction):
 	
 	if animated_sprite != null:
 		animated_sprite.flip_h = direction.x < 0
-	
+		animated_sprite.animation = "Walk"
+		
 	if move_animation_player != null and not move_animation_player.is_playing():
 		move_animation_player.play("Walk")
 
