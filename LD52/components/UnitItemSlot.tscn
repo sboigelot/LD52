@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://fonts/ld52/ld52_def_small.tres" type="DynamicFont" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://components/UnitItemSlot.gd" type="Script" id=3]
+
+[node name="UnitItemSlot" type="MarginContainer"]
+margin_right = 80.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 80, 64 )
+script = ExtResource( 3 )
+amount = 2
+texture = ExtResource( 2 )
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Button" type="Button" parent="Node2D"]
+margin_top = -20.0
+margin_right = 80.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 80, 80 )
+rect_pivot_offset = Vector2( 40, 80 )
+focus_mode = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource( 2 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="."]
+margin_right = 80.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+text = "x2"
+align = 2
+valign = 2
+
+[connection signal="pressed" from="Node2D/Button" to="." method="_on_Button_pressed"]

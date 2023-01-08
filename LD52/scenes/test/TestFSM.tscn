@@ -66,14 +66,14 @@ priority = 0
 
 [sub_resource type="Resource" id=7]
 script = ExtResource( 5 )
-name = "taget_found"
+name = "target_found"
 
 [sub_resource type="Resource" id=8]
 script = ExtResource( 4 )
 from = "SearchTarget"
 to = "Hunt"
 conditions = {
-"taget_found": SubResource( 7 )
+"target_found": SubResource( 7 )
 }
 priority = 0
 

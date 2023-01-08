@@ -20,7 +20,7 @@ script = ExtResource( 1 )
 dialog_canvas_layer_np = NodePath("DialogCanvasLayer")
 countries_np = NodePath("Countries")
 
-[node name="UI" type="PanelContainer" parent="."]
+[node name="BackgroundUI" type="PanelContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 1920.0
@@ -28,12 +28,12 @@ margin_bottom = 1080.0
 mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 
-[node name="Background" type="MarginContainer" parent="UI"]
+[node name="Background" type="MarginContainer" parent="BackgroundUI"]
 margin_right = 1920.0
 margin_bottom = 1080.0
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="UI/Background"]
+[node name="TextureRect" type="TextureRect" parent="BackgroundUI/Background"]
 margin_right = 1920.0
 margin_bottom = 1080.0
 mouse_filter = 2
@@ -41,205 +41,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 3 )
 expand = true
-
-[node name="MainHUD" parent="UI" instance=ExtResource( 7 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-
-[node name="SpeedBar" type="MarginContainer" parent="UI"]
-margin_left = 1690.0
-margin_right = 1920.0
-margin_bottom = 94.0
-size_flags_horizontal = 8
-size_flags_vertical = 0
-custom_constants/margin_top = 44
-
-[node name="SpeedBar" type="PanelContainer" parent="UI/SpeedBar"]
-margin_top = 44.0
-margin_right = 230.0
-margin_bottom = 94.0
-size_flags_horizontal = 3
-size_flags_vertical = 2
-custom_styles/panel = SubResource( 3 )
-
-[node name="MaginContainer" type="MarginContainer" parent="UI/SpeedBar/SpeedBar"]
-margin_right = 230.0
-margin_bottom = 50.0
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
-
-[node name="HBox" type="HBoxContainer" parent="UI/SpeedBar/SpeedBar/MaginContainer"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 220.0
-margin_bottom = 40.0
-custom_constants/separation = 10
-
-[node name="Button" type="Button" parent="UI/SpeedBar/SpeedBar/MaginContainer/HBox"]
-margin_right = 100.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 100, 30 )
-custom_fonts/font = ExtResource( 11 )
-text = "Play"
-
-[node name="Button2" type="Button" parent="UI/SpeedBar/SpeedBar/MaginContainer/HBox"]
-margin_left = 110.0
-margin_right = 210.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 100, 30 )
-custom_fonts/font = ExtResource( 11 )
-text = "Pause"
-
-[node name="CountryPanelMargin" type="MarginContainer" parent="UI"]
-margin_left = 1482.0
-margin_top = 726.0
-margin_right = 1920.0
-margin_bottom = 1080.0
-size_flags_horizontal = 8
-size_flags_vertical = 8
-custom_constants/margin_right = 4
-custom_constants/margin_left = 0
-custom_constants/margin_bottom = 20
-
-[node name="CountryPanel" type="PanelContainer" parent="UI/CountryPanelMargin"]
-unique_name_in_owner = true
-margin_right = 434.0
-margin_bottom = 334.0
-size_flags_horizontal = 10
-size_flags_vertical = 10
-script = ExtResource( 6 )
-country_name_label_np = NodePath("MaginContainer/VBox/VBoxContainer/CountryNameLabel")
-init_pop_label_np = NodePath("MaginContainer/VBox/GridContainer/InitialPopCountLabel")
-remain_pop_label_np = NodePath("MaginContainer/VBox/GridContainer/RemainingPopulationCountLabel")
-secu_lvl_label_np = NodePath("MaginContainer/VBox/GridContainer/SecurityLevelLabel")
-panic_lvl_label_np = NodePath("MaginContainer/VBox/GridContainer/PanicLevelLabel")
-
-[node name="MaginContainer" type="MarginContainer" parent="UI/CountryPanelMargin/CountryPanel"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 427.0
-margin_bottom = 327.0
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
-
-[node name="VBox" type="VBoxContainer" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 410.0
-margin_bottom = 310.0
-rect_min_size = Vector2( 400, 0 )
-custom_constants/separation = 40
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox"]
-margin_right = 400.0
-margin_bottom = 43.0
-
-[node name="CountryNameLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/VBoxContainer"]
-margin_right = 400.0
-margin_bottom = 39.0
-custom_fonts/font = ExtResource( 4 )
-text = "Country Name"
-align = 1
-
-[node name="ColorRect" type="ColorRect" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/VBoxContainer"]
-margin_top = 43.0
-margin_right = 400.0
-margin_bottom = 43.0
-
-[node name="GridContainer" type="GridContainer" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox"]
-margin_top = 83.0
-margin_right = 400.0
-margin_bottom = 215.0
-columns = 2
-
-[node name="InitialPopLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
-margin_right = 267.0
-margin_bottom = 30.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 5 )
-text = "Initial Population"
-
-[node name="InitialPopCountLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
-margin_left = 271.0
-margin_right = 400.0
-margin_bottom = 30.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 5 )
-text = "10 Mil"
-align = 1
-
-[node name="RemainingPopulationLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
-margin_top = 34.0
-margin_right = 267.0
-margin_bottom = 64.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 5 )
-text = "Remaing Population"
-
-[node name="RemainingPopulationCountLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
-margin_left = 271.0
-margin_top = 34.0
-margin_right = 400.0
-margin_bottom = 64.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 5 )
-text = "10 Mil"
-align = 1
-
-[node name="PanicLevelLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
-margin_top = 68.0
-margin_right = 267.0
-margin_bottom = 98.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 5 )
-text = "Panic Level"
-
-[node name="PanicLevelCountLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
-margin_left = 271.0
-margin_top = 68.0
-margin_right = 400.0
-margin_bottom = 98.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 5 )
-text = "0"
-align = 1
-
-[node name="SecurityLevelLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
-margin_top = 102.0
-margin_right = 267.0
-margin_bottom = 132.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 5 )
-text = "Security Level"
-
-[node name="SecurityLevelCountLabel" type="Label" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
-margin_left = 271.0
-margin_top = 102.0
-margin_right = 400.0
-margin_bottom = 132.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 5 )
-text = "0"
-align = 1
-
-[node name="HarvestButton" type="Button" parent="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox"]
-margin_top = 255.0
-margin_right = 400.0
-margin_bottom = 300.0
-custom_fonts/font = ExtResource( 4 )
-text = "Harvest Cattle"
 
 [node name="DialogCanvasLayer" type="CanvasLayer" parent="."]
 
@@ -289,6 +90,214 @@ defeated_color = Color( 1, 0, 0, 0.458824 )
 mouse_over_color = Color( 0.678431, 0.847059, 0.901961, 0.411765 )
 mouse_click_color = Color( 0, 1, 1, 0.596078 )
 
+[node name="ForegroundUI" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+
+[node name="MainHUD" parent="ForegroundUI" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+unit_slot_clickable = false
+
+[node name="SpeedBar" type="MarginContainer" parent="ForegroundUI"]
+margin_left = 1690.0
+margin_right = 1920.0
+margin_bottom = 94.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_constants/margin_top = 44
+
+[node name="SpeedBar" type="PanelContainer" parent="ForegroundUI/SpeedBar"]
+margin_top = 44.0
+margin_right = 230.0
+margin_bottom = 94.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+custom_styles/panel = SubResource( 3 )
+
+[node name="MaginContainer" type="MarginContainer" parent="ForegroundUI/SpeedBar/SpeedBar"]
+margin_right = 230.0
+margin_bottom = 50.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="ForegroundUI/SpeedBar/SpeedBar/MaginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 220.0
+margin_bottom = 40.0
+custom_constants/separation = 10
+
+[node name="Button" type="Button" parent="ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox"]
+margin_right = 100.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+custom_fonts/font = ExtResource( 11 )
+text = "Play"
+
+[node name="Button2" type="Button" parent="ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox"]
+margin_left = 110.0
+margin_right = 210.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 30 )
+custom_fonts/font = ExtResource( 11 )
+text = "Pause"
+
+[node name="CountryPanelMargin" type="MarginContainer" parent="ForegroundUI"]
+margin_left = 1482.0
+margin_top = 726.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+custom_constants/margin_right = 4
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 20
+
+[node name="CountryPanel" type="PanelContainer" parent="ForegroundUI/CountryPanelMargin"]
+unique_name_in_owner = true
+margin_right = 434.0
+margin_bottom = 334.0
+size_flags_horizontal = 10
+size_flags_vertical = 10
+script = ExtResource( 6 )
+country_name_label_np = NodePath("MaginContainer/VBox/VBoxContainer/CountryNameLabel")
+init_pop_label_np = NodePath("MaginContainer/VBox/GridContainer/InitialPopCountLabel")
+remain_pop_label_np = NodePath("MaginContainer/VBox/GridContainer/RemainingPopulationCountLabel")
+secu_lvl_label_np = NodePath("MaginContainer/VBox/GridContainer/SecurityLevelLabel")
+panic_lvl_label_np = NodePath("MaginContainer/VBox/GridContainer/PanicLevelLabel")
+
+[node name="MaginContainer" type="MarginContainer" parent="ForegroundUI/CountryPanelMargin/CountryPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 427.0
+margin_bottom = 327.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 410.0
+margin_bottom = 310.0
+rect_min_size = Vector2( 400, 0 )
+custom_constants/separation = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox"]
+margin_right = 400.0
+margin_bottom = 43.0
+
+[node name="CountryNameLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 4 )
+text = "Country Name"
+align = 1
+
+[node name="ColorRect" type="ColorRect" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/VBoxContainer"]
+margin_top = 43.0
+margin_right = 400.0
+margin_bottom = 43.0
+
+[node name="GridContainer" type="GridContainer" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox"]
+margin_top = 83.0
+margin_right = 400.0
+margin_bottom = 215.0
+columns = 2
+
+[node name="InitialPopLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_right = 267.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "Initial Population"
+
+[node name="InitialPopCountLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_left = 271.0
+margin_right = 400.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "10 Mil"
+align = 1
+
+[node name="RemainingPopulationLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_top = 34.0
+margin_right = 267.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "Remaing Population"
+
+[node name="RemainingPopulationCountLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_left = 271.0
+margin_top = 34.0
+margin_right = 400.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "10 Mil"
+align = 1
+
+[node name="PanicLevelLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_top = 68.0
+margin_right = 267.0
+margin_bottom = 98.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "Panic Level"
+
+[node name="PanicLevelCountLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_left = 271.0
+margin_top = 68.0
+margin_right = 400.0
+margin_bottom = 98.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "0"
+align = 1
+
+[node name="SecurityLevelLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_top = 102.0
+margin_right = 267.0
+margin_bottom = 132.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "Security Level"
+
+[node name="SecurityLevelCountLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_left = 271.0
+margin_top = 102.0
+margin_right = 400.0
+margin_bottom = 132.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+text = "0"
+align = 1
+
+[node name="HarvestButton" type="Button" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox"]
+margin_top = 255.0
+margin_right = 400.0
+margin_bottom = 300.0
+custom_fonts/font = ExtResource( 4 )
+text = "Harvest Cattle"
+
 [node name="MothershipArea2D" type="Area2D" parent="."]
 script = ExtResource( 13 )
 mouse_over_color = Color( 1, 0.792157, 0.992157, 1 )
@@ -304,7 +313,7 @@ position = Vector2( 334, 931 )
 scale = Vector2( 0.75, 0.75 )
 polygon = PoolVector2Array( -279, -211.8, -279, -210.2, -257.5, -199, -253.9, -199, -218, -193.7, -218, -191.9, -200.3, -177, -195.8, -177, -180.6, -174, -166.3, -174, -109, -183.7, -82.8, -207, -77.9, -207, -62, -204.7, -62, -202.8, -32, -173.8, -32, -170.4, -27.3, -148, -24.8, -148, 60, -130.6, 60, -129.4, 111.4, -110, 116.2, -110, 159, -100.6, 159, -99.3, 300, -37.3, 300, -35.7, 307.9, -27, 309.4, -27, 348, -10.3, 348, -9.10001, 391.6, 19, 393.5, 19, 438, 40.8, 438, 42, 453, 54, 453, 56.7, 461.4, 82, 462.1, 82, 484, 116.4, 484, 120, 485.3, 129, 483.7, 129, 481.7, 142, 480.2, 142, 477.2, 148, 475.7, 148, 449.7, 168, 444.4, 168, 414.4, 180, 396.4, 180, 287.2, 204, 273.7, 204, 103, 159.5, 103, 158.5, 33, 137.5, 33, 136.4, -53, 103.4, -53, 102.2, -110.5, 72, -113.7, 72, -322.7, 137, -348, 137, -348, 135.3, -377, 122.3, -377, 121, -390, 112, -390, 109.3, -395, 93.3, -395, 78.6, -391.3, 70, -390.1, 70, -380.1, 53, -378.8, 53, -371.8, 46, -369.4, 46, -278.8, 11.4, -386.5, -41, -390, -41, -409, -41.9, -427.7, -35, -438.3, -35, -458, -40.5, -458, -42.1, -482, -68.2, -482, -72, -487.3, -111, -485, -111, -478, -120, -475.4, -120, -458.3, -126, -436.2, -126, -356.6, -134.4, -404, -156.7, -404, -158.3, -418, -176.3, -418, -179, -421.6, -193, -419, -193, -414, -200, -411.5, -200, -403.5, -204, -399.2, -204, -369, -207.8, -357.6, -216, -354.2, -216, -347, -216.8, -347, -218.2 )
 
-[connection signal="pressed" from="UI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/HarvestButton" to="UI/CountryPanelMargin/CountryPanel" method="_on_HarvestButton_pressed"]
+[connection signal="pressed" from="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/HarvestButton" to="ForegroundUI/CountryPanelMargin/CountryPanel" method="_on_HarvestButton_pressed"]
 [connection signal="input_event" from="MothershipArea2D" to="MothershipArea2D" method="_on_MothershipArea2D_input_event"]
 [connection signal="mouse_clicked" from="MothershipArea2D" to="." method="_on_MothershipArea2D_mouse_clicked"]
 [connection signal="mouse_entered" from="MothershipArea2D" to="MothershipArea2D" method="_on_MothershipArea2D_mouse_entered"]

@@ -1,0 +1,248 @@
+[gd_scene load_steps=36 format=2]
+
+[ext_resource path="res://assets/Cattle/cow.png" type="Texture" id=1]
+[ext_resource path="res://actors/Cattle/Cattle.gd" type="Script" id=2]
+[ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=3]
+[ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=4]
+[ext_resource path="res://addons/imjp94.yafsm/src/states/State.gd" type="Script" id=5]
+[ext_resource path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" type="Script" id=6]
+[ext_resource path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" type="Script" id=7]
+[ext_resource path="res://addons/imjp94.yafsm/src/conditions/BooleanCondition.gd" type="Script" id=8]
+[ext_resource path="res://actors/Juice/Juice.tscn" type="PackedScene" id=9]
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 168, -20 )
+}
+name = "Entry"
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 568, 160 )
+}
+name = "Flee"
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 348, -20 )
+}
+name = "Idle"
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 367, 0 )
+}
+name = "ChooseDestination"
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 188, 0 )
+}
+name = "Entry"
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 367.5, 160 )
+}
+name = "WalkToDestination"
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 7 )
+name = "destination_picked"
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 6 )
+from = "ChooseDestination"
+to = "WalkToDestination"
+conditions = {
+"destination_picked": SubResource( 17 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 6 )
+from = "Entry"
+to = "ChooseDestination"
+conditions = {
+}
+priority = 0
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 7 )
+name = "destination_reached"
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 6 )
+from = "WalkToDestination"
+to = "ChooseDestination"
+conditions = {
+"destination_reached": SubResource( 19 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 4 )
+__meta__ = {
+"graph_offset": Vector2( 563.5, -20 )
+}
+name = "Wander"
+states = {
+"ChooseDestination": SubResource( 14 ),
+"Entry": SubResource( 13 ),
+"WalkToDestination": SubResource( 15 )
+}
+transitions = {
+"ChooseDestination": {
+"WalkToDestination": SubResource( 18 )
+},
+"Entry": {
+"ChooseDestination": SubResource( 16 )
+},
+"WalkToDestination": {
+"ChooseDestination": SubResource( 20 )
+}
+}
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 6 )
+from = "Entry"
+to = "Idle"
+conditions = {
+}
+priority = 0
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 8 )
+name = "alien_nearby"
+comparation = 0
+value = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 6 )
+from = "Flee"
+to = "Idle"
+conditions = {
+"alien_nearby": SubResource( 11 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 7 )
+name = "idle_over"
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 6 )
+from = "Idle"
+to = "Wander"
+conditions = {
+"idle_over": SubResource( 22 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 8 )
+name = "alien_nearby"
+comparation = 0
+value = false
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 6 )
+from = "Wander"
+to = "Flee"
+conditions = {
+"alien_nearby": SubResource( 23 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 4 )
+name = ""
+states = {
+"Entry": SubResource( 2 ),
+"Flee": SubResource( 5 ),
+"Idle": SubResource( 3 ),
+"Wander": SubResource( 21 )
+}
+transitions = {
+"Entry": {
+"Idle": SubResource( 6 )
+},
+"Flee": {
+"Idle": SubResource( 12 )
+},
+"Idle": {
+"Wander": SubResource( 8 )
+},
+"Wander": {
+"Flee": SubResource( 10 )
+}
+}
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=29]
+animations = [ {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 28 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="CattleGeoffrey" type="KinematicBody2D"]
+collision_layer = 2
+script = ExtResource( 2 )
+np_animated_sprite = NodePath("AnimatedSprite")
+fsm_np = NodePath("StateMachinePlayer")
+juice_scene = ExtResource( 9 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+
+[node name="StateMachinePlayer" type="Node" parent="."]
+script = ExtResource( 3 )
+state_machine = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
+frames = SubResource( 29 )
+animation = "Walk"
+frame = 3
+playing = true
+
+[connection signal="transited" from="StateMachinePlayer" to="." method="_on_StateMachinePlayer_transited"]
+[connection signal="updated" from="StateMachinePlayer" to="." method="_on_StateMachinePlayer_updated"]

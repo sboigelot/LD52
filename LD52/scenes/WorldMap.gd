@@ -48,6 +48,7 @@ func blink_country(display_name, color, times, delay):
 			return
 
 func on_country_mouse_clicked(country):
+	Game.data.selected_country = country
 	get_node("%CountryPanel").update_ui(country)
 
 func _process(delta):

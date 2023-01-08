@@ -1,0 +1,8 @@
+
+
+
+
+
+
+
+#	setting sound slider

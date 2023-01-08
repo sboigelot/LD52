@@ -90,5 +90,6 @@ anchor_bottom = 0.0
 rect_pivot_offset = Vector2( -1179, 435 )
 title = "Mothership"
 show_mother_ship_text = false
+unit_slot_clickable = false
 
 [connection signal="pressed" from="UI/SpeedBar/SpeedBar/MaginContainer/HBox/BackButton" to="." method="_on_BackButton_pressed"]

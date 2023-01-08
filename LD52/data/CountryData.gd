@@ -8,3 +8,4 @@ export var remaining_population: int
 export var security_level: int
 export var panic_level: int
 
+export var mission_time: float

@@ -9,7 +9,6 @@ polygon = PoolVector2Array( 0, 0, -19, 24, 3, 77, 82, 99, 100, 119, 140, 122, 12
 polygon2d_np = NodePath("Polygon2D")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color( 1, 1, 1, 0 )
 polygon = PoolVector2Array( 0, 0, -19, 24, 3, 77, 82, 99, 100, 119, 140, 122, 120, 72, 126, 19 )
 script = ExtResource( 2 )
 Width = 4.0

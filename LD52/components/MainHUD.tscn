@@ -1,14 +1,15 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://addons/water2d/Water2D.gd" type="Script" id=1]
 [ext_resource path="res://addons/water2d/icon.png" type="Texture" id=2]
 [ext_resource path="res://addons/water2d/water2D_material.tres" type="Material" id=3]
 [ext_resource path="res://addons/controller_icons/assets/key/0.png" type="Texture" id=4]
-[ext_resource path="res://icon.png" type="Texture" id=5]
+[ext_resource path="res://components/UnitItemSlot.tscn" type="PackedScene" id=5]
 [ext_resource path="res://fonts/ld52/ld52_def_normal.tres" type="DynamicFont" id=6]
 [ext_resource path="res://fonts/ld52/ld52_def_xsmall.tres" type="DynamicFont" id=7]
-[ext_resource path="res://fonts/ld52/ld52_def_small.tres" type="DynamicFont" id=8]
+[ext_resource path="res://assets/Units/AlienIcon.tres" type="Texture" id=8]
 [ext_resource path="res://components/MainHUD.gd" type="Script" id=9]
+[ext_resource path="res://actors/Unit/Unit.tscn" type="PackedScene" id=10]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -30,6 +31,7 @@ margin_bottom = 1080.0
 mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 9 )
+unit_slot_scene = ExtResource( 5 )
 
 [node name="TopBar" type="PanelContainer" parent="."]
 margin_right = 3840.0
@@ -284,205 +286,26 @@ align = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="BottomBar/MaginContainer/HBox"]
 margin_left = 364.0
-margin_right = 1839.0
+margin_right = 2052.0
 margin_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="UnitInventory" type="HBoxContainer" parent="BottomBar/MaginContainer/HBox"]
-margin_left = 1849.0
-margin_right = 2354.0
+margin_left = 2062.0
+margin_right = 2142.0
 margin_bottom = 64.0
 custom_constants/separation = 5
 
-[node name="UnitItemSlot1" type="MarginContainer" parent="BottomBar/MaginContainer/HBox/UnitInventory"]
-margin_right = 80.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 80, 64 )
-
-[node name="Node2D" type="Node2D" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot1"]
-
-[node name="TextureRect" type="Button" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot1/Node2D"]
-margin_top = -20.0
-margin_right = 80.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 80, 80 )
-rect_pivot_offset = Vector2( 40, 80 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-icon = ExtResource( 5 )
-flat = true
-icon_align = 1
-expand_icon = true
-
-[node name="Label" type="Label" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot1"]
-margin_right = 80.0
-margin_bottom = 64.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 8 )
-text = "x3"
-align = 2
-valign = 2
-
-[node name="UnitItemSlot2" type="MarginContainer" parent="BottomBar/MaginContainer/HBox/UnitInventory"]
-margin_left = 85.0
-margin_right = 165.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 80, 64 )
-
-[node name="Node2D" type="Node2D" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot2"]
-
-[node name="TextureRect" type="Button" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot2/Node2D"]
-margin_top = -20.0
-margin_right = 80.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 80, 80 )
-rect_pivot_offset = Vector2( 40, 80 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-icon = ExtResource( 5 )
-flat = true
-icon_align = 1
-expand_icon = true
-
-[node name="Label" type="Label" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot2"]
-margin_right = 80.0
-margin_bottom = 64.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 8 )
-text = "x3"
-align = 2
-valign = 2
-
-[node name="UnitItemSlot3" type="MarginContainer" parent="BottomBar/MaginContainer/HBox/UnitInventory"]
-margin_left = 170.0
-margin_right = 250.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 80, 64 )
-
-[node name="Node2D" type="Node2D" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot3"]
-
-[node name="TextureRect" type="Button" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot3/Node2D"]
-margin_top = -20.0
-margin_right = 80.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 80, 80 )
-rect_pivot_offset = Vector2( 40, 80 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-icon = ExtResource( 5 )
-flat = true
-icon_align = 1
-expand_icon = true
-
-[node name="Label" type="Label" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot3"]
-margin_right = 80.0
-margin_bottom = 64.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 8 )
-text = "x3"
-align = 2
-valign = 2
-
-[node name="UnitItemSlot4" type="MarginContainer" parent="BottomBar/MaginContainer/HBox/UnitInventory"]
-margin_left = 255.0
-margin_right = 335.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 80, 64 )
-
-[node name="Node2D" type="Node2D" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot4"]
-
-[node name="TextureRect" type="Button" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot4/Node2D"]
-margin_top = -20.0
-margin_right = 80.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 80, 80 )
-rect_pivot_offset = Vector2( 40, 80 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-icon = ExtResource( 5 )
-flat = true
-icon_align = 1
-expand_icon = true
-
-[node name="Label" type="Label" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot4"]
-margin_right = 80.0
-margin_bottom = 64.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 8 )
-text = "x3"
-align = 2
-valign = 2
-
-[node name="UnitItemSlot5" type="MarginContainer" parent="BottomBar/MaginContainer/HBox/UnitInventory"]
-margin_left = 340.0
-margin_right = 420.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 80, 64 )
-
-[node name="Node2D" type="Node2D" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot5"]
-
-[node name="TextureRect" type="Button" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot5/Node2D"]
-margin_top = -20.0
-margin_right = 80.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 80, 80 )
-rect_pivot_offset = Vector2( 40, 80 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-icon = ExtResource( 5 )
-flat = true
-icon_align = 1
-expand_icon = true
-
-[node name="Label" type="Label" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot5"]
-margin_right = 80.0
-margin_bottom = 64.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 8 )
-text = "x3"
-align = 2
-valign = 2
-
-[node name="UnitItemSlot6" type="MarginContainer" parent="BottomBar/MaginContainer/HBox/UnitInventory"]
-margin_left = 425.0
-margin_right = 505.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 80, 64 )
-
-[node name="Node2D" type="Node2D" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot6"]
-
-[node name="TextureRect" type="Button" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot6/Node2D"]
-margin_top = -20.0
-margin_right = 80.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 80, 80 )
-rect_pivot_offset = Vector2( 40, 80 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-icon = ExtResource( 5 )
-flat = true
-icon_align = 1
-expand_icon = true
-
-[node name="Label" type="Label" parent="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot6"]
-margin_right = 80.0
-margin_bottom = 64.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 8 )
-text = "x3"
-align = 2
-valign = 2
+[node name="UnitItemSlot" parent="BottomBar/MaginContainer/HBox/UnitInventory" instance=ExtResource( 5 )]
+spawned_unit = ExtResource( 10 )
+texture = ExtResource( 8 )
 
 [node name="MarginContainer3" type="MarginContainer" parent="BottomBar/MaginContainer/HBox"]
-margin_left = 2364.0
+margin_left = 2152.0
 margin_right = 3840.0
 margin_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[connection signal="pressed" from="BottomBar/MaginContainer/HBox/UnitInventory/UnitItemSlot" to="." method="_on_UnitItemSlot_pressed"]

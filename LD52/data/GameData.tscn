@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://data/GameData.gd" type="Script" id=1]
 [ext_resource path="res://data/WorldData.gd" type="Script" id=2]
 [ext_resource path="res://data/CountryData.gd" type="Script" id=3]
+[ext_resource path="res://data/ArmyData.gd" type="Script" id=4]
+[ext_resource path="res://data/UnitTypeData.gd" type="Script" id=5]
+[ext_resource path="res://actors/Unit/Unit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://icon.png" type="Texture" id=7]
+[ext_resource path="res://assets/Units/AlienIcon.tres" type="Texture" id=8]
 
 [node name="GameData" type="Node"]
 script = ExtResource( 1 )
@@ -15,6 +20,7 @@ script = ExtResource( 3 )
 display_name = "Belgium"
 initial_population = 10
 remaining_population = 10
+mission_time = 60.0
 
 [node name="Turkey" type="Node" parent="WorldData"]
 script = ExtResource( 3 )
@@ -22,6 +28,7 @@ display_name = "Turkey"
 initial_population = 25
 remaining_population = 25
 security_level = 1
+mission_time = 60.0
 
 [node name="Greece" type="Node" parent="WorldData"]
 script = ExtResource( 3 )
@@ -29,6 +36,7 @@ display_name = "Greece"
 initial_population = 10
 remaining_population = 10
 security_level = 1
+mission_time = 60.0
 
 [node name="UK" type="Node" parent="WorldData"]
 script = ExtResource( 3 )
@@ -36,6 +44,7 @@ display_name = "United Kingdoms"
 initial_population = 25
 remaining_population = 25
 security_level = 2
+mission_time = 60.0
 
 [node name="USA" type="Node" parent="WorldData"]
 script = ExtResource( 3 )
@@ -43,3 +52,21 @@ display_name = "United States"
 initial_population = 40
 remaining_population = 40
 security_level = 3
+mission_time = 60.0
+
+[node name="ArmyData" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="Alien" type="Node" parent="ArmyData"]
+script = ExtResource( 5 )
+unit_name = "Alien"
+unit_scene = ExtResource( 6 )
+button_texture = ExtResource( 8 )
+amount_in_barrack = 3
+
+[node name="Alien2" type="Node" parent="ArmyData"]
+script = ExtResource( 5 )
+unit_name = "Alien2"
+unit_scene = ExtResource( 6 )
+button_texture = ExtResource( 7 )
+amount_in_barrack = 2

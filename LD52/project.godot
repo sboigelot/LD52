@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Actor",
+"language": "GDScript",
+"path": "res://actors/Actor.gd"
+}, {
+"base": "Resource",
+"class": "ActorData",
+"language": "GDScript",
+"path": "res://data/ActorData.gd"
+}, {
 "base": "Reference",
 "class": "AnimaEasing",
 "language": "GDScript",
@@ -38,6 +48,11 @@ _global_script_classes=[ {
 "class": "Arc2D",
 "language": "GDScript",
 "path": "res://addons/primitives2d/arc2d.gd"
+}, {
+"base": "Node",
+"class": "ArmyData",
+"language": "GDScript",
+"path": "res://data/ArmyData.gd"
 }, {
 "base": "Reference",
 "class": "Array2D",
@@ -73,6 +88,11 @@ _global_script_classes=[ {
 "class": "CallbackDelegator",
 "language": "GDScript",
 "path": "res://addons/godot-next/nodes/callback_delegator.gd"
+}, {
+"base": "Actor",
+"class": "Cattle",
+"language": "GDScript",
+"path": "res://actors/Cattle/Cattle.gd"
 }, {
 "base": "Node2D",
 "class": "Circle2D",
@@ -289,6 +309,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-next/global/singletons.gd"
 }, {
+"base": "",
+"class": "StateMachinePlayer",
+"language": "GDScript",
+"path": "res://addons/imjp94.yafsm/src/StateMachinePlayer.gd"
+}, {
 "base": "Line2D",
 "class": "Trail2D",
 "language": "GDScript",
@@ -308,6 +333,21 @@ _global_script_classes=[ {
 "class": "Tweener",
 "language": "GDScript",
 "path": "res://addons/godot-next/references/tween_sequence/tweener.gd"
+}, {
+"base": "Actor",
+"class": "Unit",
+"language": "GDScript",
+"path": "res://actors/Unit/Unit.gd"
+}, {
+"base": "MarginContainer",
+"class": "UnitItemSlot",
+"language": "GDScript",
+"path": "res://components/UnitItemSlot.gd"
+}, {
+"base": "Node",
+"class": "UnitTypeData",
+"language": "GDScript",
+"path": "res://data/UnitTypeData.gd"
 }, {
 "base": "VBoxContainer",
 "class": "VBoxItemList",
@@ -340,12 +380,15 @@ _global_script_classes=[ {
 "path": "res://scenes/WorldMapCountry.gd"
 } ]
 _global_script_class_icons={
+"Actor": "",
+"ActorData": "",
 "AnimaEasing": "",
 "AnimaNode": "",
 "AnimaNodesProperties": "",
 "AnimaStrings": "",
 "AnimaTween": "",
 "Arc2D": "",
+"ArmyData": "",
 "Array2D": "",
 "ArrayMap": "",
 "Behavior": "",
@@ -353,6 +396,7 @@ _global_script_class_icons={
 "Bitset": "",
 "CSVFile": "",
 "CallbackDelegator": "",
+"Cattle": "",
 "Circle2D": "",
 "ClassType": "",
 "ControllerButton": "",
@@ -396,10 +440,14 @@ _global_script_class_icons={
 "ResourceCollection": "",
 "ResourceSet": "",
 "Singletons": "",
+"StateMachinePlayer": "",
 "Trail2D": "res://addons/godot-next/icons/icon_trail_2d.svg",
 "Trail3D": "res://addons/godot-next/icons/icon_trail_3d.svg",
 "TweenSequence": "",
 "Tweener": "",
+"Unit": "",
+"UnitItemSlot": "",
+"UnitTypeData": "",
 "VBoxItemList": "res://addons/godot-next/icons/icon_v_box_item_list.svg",
 "Variant": "",
 "VectorDisplay2D": "",
@@ -449,6 +497,12 @@ dialogic_default_action={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="StaticWorld"
+2d_physics/layer_2="Cattle"
+2d_physics/layer_3="Unit"
 
 [physics]
 
