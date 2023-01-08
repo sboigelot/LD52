@@ -100,9 +100,12 @@ func show_dialog(dialog_name, once_only:bool):
 	Game.data.day_paused = true
 	var dialog = Dialogic.start(dialog_name)
 #	dialog.connect("dialogic_signal", self, "on_dialogic_signal")
-#	dialog.connect("timeline_end", self, "on_dialogic_timeline_end")
+	dialog.connect("timeline_end", self, "on_dialogic_timeline_end")
 	dialog_canvas_layer.add_child(dialog)
 
+func on_dialogic_timeline_end(timeline):
+	Game.data.day_paused = false	
+	
 func on_cattle_died(cattle):
 	if cattle.is_security:
 		return

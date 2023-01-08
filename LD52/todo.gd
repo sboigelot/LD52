@@ -5,6 +5,7 @@
 #	unit visual: infantry
 #	unit visual: archer
 #	unit visual: hazmat
+#	reward cars back
 
 #	first tuto on harvest
 #	first tuto after first harvest: "I should buy more unit in the mothership"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://actors/Unit/Unit.gd" type="Script" id=1]
 [ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=2]
@@ -6,56 +6,36 @@
 [ext_resource path="res://addons/imjp94.yafsm/src/states/State.gd" type="Script" id=4]
 [ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=5]
 [ext_resource path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" type="Script" id=6]
-[ext_resource path="res://assets/Units/robot.png" type="Texture" id=7]
+[ext_resource path="res://assets/Alpha/tripod.png" type="Texture" id=7]
 
-[sub_resource type="AtlasTexture" id=47]
-flags = 4
+[sub_resource type="AtlasTexture" id=57]
 atlas = ExtResource( 7 )
-region = Rect2( 0, 384, 64, 64 )
+region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=48]
-flags = 4
+[sub_resource type="AtlasTexture" id=58]
 atlas = ExtResource( 7 )
-region = Rect2( 64, 384, 64, 64 )
+region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=49]
-flags = 4
+[sub_resource type="AtlasTexture" id=59]
 atlas = ExtResource( 7 )
-region = Rect2( 128, 384, 64, 64 )
+region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=50]
-flags = 4
+[sub_resource type="AtlasTexture" id=60]
 atlas = ExtResource( 7 )
-region = Rect2( 192, 384, 64, 64 )
+region = Rect2( 128, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=51]
-flags = 4
+[sub_resource type="AtlasTexture" id=61]
 atlas = ExtResource( 7 )
-region = Rect2( 256, 384, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=52]
-flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 320, 384, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=53]
-flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 384, 384, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=54]
-flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 320, 192, 64, 64 )
+region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=55]
 animations = [ {
-"frames": [ SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ) ],
+"frames": [ SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ) ],
 "loop": true,
 "name": "Walk",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 54 ) ],
+"frames": [ SubResource( 61 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -369,7 +349,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 2, 2 ), Vector2( 3, 3 ), Vector2( 2, 2 ) ]
+"values": [ Vector2( 3, 3 ), Vector2( 3, 3 ), Vector2( 3, 3 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -401,7 +381,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2, 2 ) ]
+"values": [ Vector2( 3, 3 ) ]
 }
 
 [node name="Unit" type="KinematicBody2D"]
@@ -413,12 +393,12 @@ vision_coliisionshape2d_np = NodePath("VisionArea2D/CollisionShape2D")
 np_attack_animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 2, 2 )
+scale = Vector2( 3, 3 )
 frames = SubResource( 55 )
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 32, -32, 49, 65, -47, 65, -25, -56, 26, -56 )
+polygon = PoolVector2Array( 15, 30, -9, 30, -8, -29, 15, -29 )
 
 [node name="StateMachinePlayer" type="Node" parent="."]
 script = ExtResource( 2 )

@@ -144,7 +144,7 @@ anchor_bottom = 0.0
 unit_slot_clickable = false
 
 [node name="SpeedBar" type="MarginContainer" parent="ForegroundUI"]
-margin_left = 1690.0
+margin_left = 1800.0
 margin_right = 1920.0
 margin_bottom = 94.0
 size_flags_horizontal = 8
@@ -153,14 +153,14 @@ custom_constants/margin_top = 44
 
 [node name="SpeedBar" type="PanelContainer" parent="ForegroundUI/SpeedBar"]
 margin_top = 44.0
-margin_right = 230.0
+margin_right = 120.0
 margin_bottom = 94.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
 custom_styles/panel = SubResource( 3 )
 
 [node name="MaginContainer" type="MarginContainer" parent="ForegroundUI/SpeedBar/SpeedBar"]
-margin_right = 230.0
+margin_right = 120.0
 margin_bottom = 50.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
@@ -170,23 +170,16 @@ custom_constants/margin_bottom = 10
 [node name="HBox" type="HBoxContainer" parent="ForegroundUI/SpeedBar/SpeedBar/MaginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 220.0
+margin_right = 110.0
 margin_bottom = 40.0
 custom_constants/separation = 10
 
-[node name="Button" type="Button" parent="ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox"]
+[node name="PauseButton" type="Button" parent="ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox"]
 margin_right = 100.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
 custom_fonts/font = ExtResource( 11 )
-text = "Play"
-
-[node name="Button2" type="Button" parent="ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox"]
-margin_left = 110.0
-margin_right = 210.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 100, 30 )
-custom_fonts/font = ExtResource( 11 )
+toggle_mode = true
 text = "Pause"
 
 [node name="CountryPanelMargin" type="MarginContainer" parent="ForegroundUI"]
@@ -357,6 +350,7 @@ polygon = PoolVector2Array( -279, -211.8, -279, -210.2, -257.5, -199, -253.9, -1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MothershipArea2D"]
 anims/Hover = SubResource( 4 )
 
+[connection signal="toggled" from="ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox/PauseButton" to="." method="_on_PauseButton_toggled"]
 [connection signal="pressed" from="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/HarvestButton" to="ForegroundUI/CountryPanelMargin/CountryPanel" method="_on_HarvestButton_pressed"]
 [connection signal="input_event" from="MothershipArea2D" to="MothershipArea2D" method="_on_MothershipArea2D_input_event"]
 [connection signal="mouse_clicked" from="MothershipArea2D" to="." method="_on_MothershipArea2D_mouse_clicked"]

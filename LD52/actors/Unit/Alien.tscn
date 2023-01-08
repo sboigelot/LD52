@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://actors/Unit/Unit.gd" type="Script" id=1]
 [ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=2]
@@ -6,36 +6,36 @@
 [ext_resource path="res://addons/imjp94.yafsm/src/states/State.gd" type="Script" id=4]
 [ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=5]
 [ext_resource path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" type="Script" id=6]
-[ext_resource path="res://assets/Units/alien_6.png" type="Texture" id=7]
+[ext_resource path="res://assets/Alpha/Alien.png" type="Texture" id=7]
 
-[sub_resource type="AtlasTexture" id=33]
-flags = 4
+[sub_resource type="AtlasTexture" id=48]
 atlas = ExtResource( 7 )
-region = Rect2( 0, 48, 32, 48 )
+region = Rect2( 96, 0, 32, 31 )
 
-[sub_resource type="AtlasTexture" id=34]
-flags = 4
+[sub_resource type="AtlasTexture" id=49]
 atlas = ExtResource( 7 )
-region = Rect2( 32, 48, 32, 48 )
+region = Rect2( 128, 0, 32, 31 )
 
-[sub_resource type="AtlasTexture" id=35]
-flags = 4
+[sub_resource type="AtlasTexture" id=50]
 atlas = ExtResource( 7 )
-region = Rect2( 64, 48, 32, 48 )
+region = Rect2( 160, 0, 32, 31 )
 
-[sub_resource type="AtlasTexture" id=36]
-flags = 4
+[sub_resource type="AtlasTexture" id=51]
 atlas = ExtResource( 7 )
-region = Rect2( 32, 96, 32, 48 )
+region = Rect2( 192, 0, 32, 31 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 7 )
+region = Rect2( 32, 0, 32, 31 )
 
 [sub_resource type="SpriteFrames" id=37]
 animations = [ {
-"frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
+"frames": [ SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ) ],
 "loop": true,
 "name": "Walk",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 36 ) ],
+"frames": [ SubResource( 52 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -61,6 +61,13 @@ __meta__ = {
 "graph_offset": Vector2( 8, 20 )
 }
 name = "Entry"
+
+[sub_resource type="Resource" id=47]
+script = ExtResource( 4 )
+__meta__ = {
+"graph_offset": Vector2( 662, 20 )
+}
+name = "MoveToAttackRange"
 
 [sub_resource type="Resource" id=27]
 script = ExtResource( 4 )
@@ -175,13 +182,6 @@ transitions = {
 "Exit": SubResource( 43 )
 }
 }
-
-[sub_resource type="Resource" id=47]
-script = ExtResource( 4 )
-__meta__ = {
-"graph_offset": Vector2( 662, 20 )
-}
-name = "MoveToAttackRange"
 
 [sub_resource type="Resource" id=19]
 script = ExtResource( 6 )
@@ -349,7 +349,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 2, 2 ), Vector2( 3, 3 ), Vector2( 2, 2 ) ]
+"values": [ Vector2( 3, 3 ), Vector2( 3, 3 ), Vector2( 3, 3 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -381,7 +381,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2, 2 ) ]
+"values": [ Vector2( 3, 3 ) ]
 }
 
 [node name="Unit" type="KinematicBody2D"]
@@ -394,13 +394,13 @@ np_attack_animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -16 )
-scale = Vector2( 2, 2 )
+scale = Vector2( 3, 3 )
 frames = SubResource( 37 )
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
-polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+polygon = PoolVector2Array( 27, -41, 17, 28, -13, 28, -24, -42, -13, -60, 15, -60 )
 
 [node name="StateMachinePlayer" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -411,6 +411,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea2D"]
+visible = false
 shape = SubResource( 38 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -163,6 +163,7 @@ align = 1
 [node name="DialogCanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MouseBoundSprite" parent="." instance=ExtResource( 4 )]
+scale = Vector2( 3, 3 )
 texture = ExtResource( 8 )
 
 [node name="Cattles" type="Node2D" parent="."]

@@ -114,3 +114,10 @@ func spawn_delivery(data:DeliveryData):
 func on_delivery_delivered(data:DeliveryData):
 	Game.data.on_delivery_arrived(data)
 	$ForegroundUI/MainHUD.update_unit_slots()
+
+
+func _on_PauseButton_toggled(button_pressed):
+	
+	$ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox/PauseButton.text = "play" if button_pressed else "pause"
+	
+	Game.data.day_paused = button_pressed

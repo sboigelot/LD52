@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://data/GameData.gd" type="Script" id=1]
 [ext_resource path="res://data/WorldData.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://items/Mines.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/items/mines.png" type="Texture" id=22]
 [ext_resource path="res://assets/items/bomb.png" type="Texture" id=23]
+[ext_resource path="res://actors/Cattle/Archer.tscn" type="PackedScene" id=24]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 7 )
@@ -63,8 +64,31 @@ auto_boost = true
 auto_boost_threshold = 1.0
 sigth_range = 300.0
 move_threshold = 20.0
-attack_damage = 0
+attack_damage = 1
 attack_range = 60.0
+attack_is_melee = true
+range_attack_projectle_speed = 200.0
+suffer_knockback_on_attacks = false
+take_damage_sfx_name = "hit"
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 7 )
+max_health = 7
+health = 7.0
+health_regen_per_second = 0.0
+max_stamina = 0.0
+stamina_regen_per_second = 0.2
+stamina = 0.0
+boost_stamina_cost_per_second = 1.0
+boost_speed_multiplier = 1.5
+speed = 60
+can_move = true
+auto_boost = false
+auto_boost_threshold = 0.0
+sigth_range = 400.0
+move_threshold = 20.0
+attack_damage = 2
+attack_range = 70.0
 attack_is_melee = true
 range_attack_projectle_speed = 200.0
 suffer_knockback_on_attacks = false
@@ -81,7 +105,7 @@ script = ExtResource( 2 )
 script = ExtResource( 3 )
 display_name = "Belgium"
 initial_population = 10
-remaining_population = 5
+remaining_population = 10
 max_cattle_per_harvest = 5
 mission_time = 60.0
 cattle_scene = ExtResource( 9 )
@@ -130,20 +154,11 @@ probability = 1
 
 [node name="Security" type="Node" parent="WorldData/Belgium"]
 
-[node name="SecurityData" type="Node" parent="WorldData/Belgium/Security"]
-script = ExtResource( 17 )
-security_scene = ExtResource( 18 )
-amount = 2
-
-[node name="SecurityData2" type="Node" parent="WorldData/Belgium/Security"]
-script = ExtResource( 17 )
-spawn_time = 20.0
-security_scene = ExtResource( 18 )
-
 [node name="Turkey" type="Node" parent="WorldData"]
 script = ExtResource( 3 )
 display_name = "Turkey"
 initial_population = 30
+remaining_population = 30
 max_cattle_per_harvest = 15
 security_level = 1
 mission_time = 60.0
@@ -199,6 +214,7 @@ security_scene = ExtResource( 18 )
 script = ExtResource( 3 )
 display_name = "Greece"
 initial_population = 10
+remaining_population = 10
 max_cattle_per_harvest = 10
 security_level = 1
 mission_time = 60.0
@@ -249,6 +265,7 @@ amount = 2
 script = ExtResource( 3 )
 display_name = "United Kingdoms"
 initial_population = 45
+remaining_population = 45
 max_cattle_per_harvest = 15
 security_level = 2
 mission_time = 60.0
@@ -290,10 +307,21 @@ probability = 3
 
 [node name="Security" type="Node" parent="WorldData/UK"]
 
+[node name="SecurityData" type="Node" parent="WorldData/UK/Security"]
+script = ExtResource( 17 )
+security_scene = ExtResource( 18 )
+amount = 2
+
+[node name="SecurityData2" type="Node" parent="WorldData/UK/Security"]
+script = ExtResource( 17 )
+spawn_time = 20.0
+security_scene = ExtResource( 24 )
+
 [node name="USA" type="Node" parent="WorldData"]
 script = ExtResource( 3 )
 display_name = "United States"
 initial_population = 60
+remaining_population = 60
 max_cattle_per_harvest = 30
 security_level = 3
 mission_time = 60.0
@@ -353,7 +381,7 @@ script = ExtResource( 5 )
 unit_name = "Hound"
 unit_scene = ExtResource( 15 )
 button_texture = ExtResource( 13 )
-amount_in_barrack = 1
+amount_in_barrack = 5
 default_unit_data = SubResource( 2 )
 
 [node name="Tripod" type="Node" parent="ArmyData/UnitTypes"]
@@ -361,6 +389,8 @@ script = ExtResource( 5 )
 unit_name = "Tripod"
 unit_scene = ExtResource( 16 )
 button_texture = ExtResource( 14 )
+amount_in_barrack = 5
+default_unit_data = SubResource( 3 )
 
 [node name="ItemTypes" type="Node" parent="ArmyData"]
 

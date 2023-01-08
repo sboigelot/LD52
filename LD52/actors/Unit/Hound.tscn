@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://actors/Unit/Unit.gd" type="Script" id=1]
 [ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=2]
@@ -6,36 +6,36 @@
 [ext_resource path="res://addons/imjp94.yafsm/src/states/State.gd" type="Script" id=4]
 [ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=5]
 [ext_resource path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" type="Script" id=6]
-[ext_resource path="res://assets/Units/hound.png" type="Texture" id=7]
+[ext_resource path="res://assets/Alpha/Hound.png" type="Texture" id=7]
 
-[sub_resource type="AtlasTexture" id=47]
-flags = 4
+[sub_resource type="AtlasTexture" id=52]
 atlas = ExtResource( 7 )
-region = Rect2( 0, 256, 32, 32 )
+region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=48]
-flags = 4
+[sub_resource type="AtlasTexture" id=53]
 atlas = ExtResource( 7 )
-region = Rect2( 32, 256, 32, 32 )
+region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=49]
-flags = 4
+[sub_resource type="AtlasTexture" id=54]
 atlas = ExtResource( 7 )
-region = Rect2( 64, 256, 32, 32 )
+region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=50]
-flags = 4
+[sub_resource type="AtlasTexture" id=55]
 atlas = ExtResource( 7 )
-region = Rect2( 96, 224, 32, 32 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=37]
 animations = [ {
-"frames": [ SubResource( 47 ), SubResource( 48 ), SubResource( 49 ) ],
+"frames": [ SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ) ],
 "loop": true,
 "name": "Walk",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 50 ) ],
+"frames": [ SubResource( 56 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -398,7 +398,7 @@ frames = SubResource( 37 )
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+polygon = PoolVector2Array( 9, 27, -7, 28, -8, -2, -6, -20, 5, -16, 11, -7 )
 
 [node name="StateMachinePlayer" type="Node" parent="."]
 script = ExtResource( 2 )
