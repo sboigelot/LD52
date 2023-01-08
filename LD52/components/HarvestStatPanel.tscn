@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/ld52/ld52_def_small.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/HarvestStatPanel.gd" type="Script" id=2]
+[ext_resource path="res://fonts/ld52/ld52_def_xsmall.tres" type="DynamicFont" id=3]
+[ext_resource path="res://fonts/ld52/ld52_def_xxsmall.tres" type="DynamicFont" id=4]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.494118, 0.12549, 0.133333, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+
+[node name="HarvestStatPanel" type="MarginContainer"]
+margin_right = 430.0
+margin_bottom = 64.0
+script = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 438.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 430, 64 )
+mouse_filter = 2
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 436.0
+margin_bottom = 62.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 434.0
+margin_bottom = 60.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StatLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_top = 15.0
+margin_right = 160.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 160, 0 )
+custom_fonts/font = ExtResource( 1 )
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 164.0
+margin_top = 16.0
+margin_right = 364.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 200, 28 )
+rect_pivot_offset = Vector2( 108.5, 14 )
+size_flags_horizontal = 0
+size_flags_vertical = 4
+custom_styles/fg = SubResource( 5 )
+max_value = 0.0
+percent_visible = false
+
+[node name="CostLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 368.0
+margin_top = 15.0
+margin_right = 385.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+align = 2
+
+[node name="IncrementLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 389.0
+margin_top = 19.0
+margin_right = 434.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 45, 6 )
+custom_fonts/font = ExtResource( 3 )
+
+[node name="InfoLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 44.0
+margin_right = 434.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 45, 6 )
+custom_fonts/font = ExtResource( 4 )
+valign = 1

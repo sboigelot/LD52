@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/HarvestLevel.gd" type="Script" id=1]
 [ext_resource path="res://assets/worldmap/hilltree.png" type="Texture" id=2]
@@ -14,6 +14,61 @@
 
 [sub_resource type="StyleBoxEmpty" id=9]
 
+[sub_resource type="Animation" id=10]
+resource_name = "Popup"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("SecurityLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.9, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SecurityLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7, 1.3, 1.9, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SecurityLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SecurityLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="HarvestLevel" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,6 +78,7 @@ cattles_np = NodePath("Cattles")
 units_np = NodePath("Units")
 harvest_completed_panel_np = NodePath("ForegroundUI/HarvestCompletedPanel")
 harvest_completed_count_label_np = NodePath("ForegroundUI/HarvestCompletedPanel/MarginContainer/VBoxContainer/HarvestCompletedCountLabel")
+dialog_canvas_layer_np = NodePath("DialogCanvasLayer")
 
 [node name="UI" type="PanelContainer" parent="."]
 anchor_right = 1.0
@@ -104,6 +160,8 @@ custom_fonts/font = ExtResource( 11 )
 text = "60"
 align = 1
 
+[node name="DialogCanvasLayer" type="CanvasLayer" parent="."]
+
 [node name="MouseBoundSprite" parent="." instance=ExtResource( 4 )]
 texture = ExtResource( 8 )
 
@@ -155,6 +213,19 @@ margin_bottom = 140.0
 custom_fonts/font = ExtResource( 11 )
 text = "5"
 align = 1
+
+[node name="SecurityLabel" type="Label" parent="ForegroundUI"]
+visible = false
+margin_top = 511.0
+margin_right = 1920.0
+margin_bottom = 569.0
+custom_fonts/font = ExtResource( 11 )
+text = "A new Cattle Security Force joined the battle!"
+align = 1
+
+[node name="SecurityAnimationPlayer" type="AnimationPlayer" parent="ForegroundUI"]
+anims/Popup = SubResource( 10 )
+anims/RESET = SubResource( 11 )
 
 [node name="Juice" parent="." instance=ExtResource( 9 )]
 position = Vector2( 860, 617 )

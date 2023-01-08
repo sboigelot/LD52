@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Mothership.gd" type="Script" id=1]
 [ext_resource path="res://components/MainHUD.tscn" type="PackedScene" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://fonts/ld52/ld52_def_xsmall.tres" type="DynamicFont" id=8]
 [ext_resource path="res://assets/Units/AlienIcon.tres" type="Texture" id=9]
 [ext_resource path="res://icon.png" type="Texture" id=10]
+[ext_resource path="res://assets/items/mines.png" type="Texture" id=11]
+[ext_resource path="res://assets/items/bomb.png" type="Texture" id=12]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -98,15 +100,15 @@ custom_fonts/font = ExtResource( 8 )
 text = "Back"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
-margin_left = 470.0
+margin_left = 391.0
 margin_top = 289.0
-margin_right = 1450.0
+margin_right = 1528.0
 margin_bottom = 790.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
 [node name="Label" type="Label" parent="UI/VBoxContainer"]
-margin_right = 980.0
+margin_right = 1137.0
 margin_bottom = 119.0
 custom_fonts/font = ExtResource( 6 )
 text = "2 days to be delivery time
@@ -116,56 +118,102 @@ valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/VBoxContainer"]
 margin_top = 123.0
-margin_right = 980.0
+margin_right = 1137.0
 margin_bottom = 467.0
 alignment = 1
 
 [node name="BarrackPanel" type="PanelContainer" parent="UI/VBoxContainer/HBoxContainer"]
-margin_top = 64.0
-margin_right = 261.0
-margin_bottom = 280.0
+margin_top = 28.0
+margin_right = 418.0
+margin_bottom = 316.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/VBoxContainer/HBoxContainer/BarrackPanel"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 254.0
-margin_bottom = 209.0
+margin_right = 411.0
+margin_bottom = 281.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer"]
-margin_right = 247.0
-margin_bottom = 202.0
+margin_right = 404.0
+margin_bottom = 274.0
 
 [node name="Label" type="Label" parent="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer"]
-margin_right = 247.0
+margin_right = 404.0
 margin_bottom = 58.0
 custom_fonts/font = ExtResource( 6 )
 text = "Unit Shop"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="GridContainer" parent="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer"]
 margin_top = 62.0
-margin_right = 247.0
-margin_bottom = 202.0
+margin_right = 404.0
+margin_bottom = 274.0
+size_flags_horizontal = 3
+columns = 2
 
-[node name="BuyUnitShopItem" parent="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
-margin_right = 247.0
+[node name="AlienBuyButton" parent="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
+margin_right = 200.0
+rect_min_size = Vector2( 200, 0 )
 texture = ExtResource( 9 )
 amount = 1
-cost = 1
+cost = 2
 unit_name = "Alien"
 
-[node name="BuyUnitShopItem2" parent="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
+[node name="AlienBuyButtonx5" parent="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
+margin_left = 204.0
+margin_right = 404.0
+rect_min_size = Vector2( 200, 0 )
+texture = ExtResource( 9 )
+amount = 5
+cost = 8
+unit_name = "Alien"
+
+[node name="HoundBuyButton" parent="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
 margin_top = 72.0
-margin_right = 247.0
+margin_right = 200.0
 margin_bottom = 140.0
+rect_min_size = Vector2( 200, 0 )
 texture = ExtResource( 10 )
-cost = 2
-unit_name = "Alien2"
+amount = 1
+cost = 4
+unit_name = "Hound"
+
+[node name="HoundBuyButtonx5" parent="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
+margin_left = 204.0
+margin_top = 72.0
+margin_right = 404.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 200, 0 )
+texture = ExtResource( 10 )
+amount = 5
+cost = 16
+unit_name = "Hound"
+
+[node name="TripodBuyButton" parent="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
+margin_top = 144.0
+margin_right = 200.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 200, 0 )
+texture = ExtResource( 10 )
+amount = 1
+cost = 10
+unit_name = "Tripod"
+
+[node name="TripodBuyButtonx5" parent="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
+margin_left = 204.0
+margin_top = 144.0
+margin_right = 404.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 200, 0 )
+texture = ExtResource( 10 )
+amount = 5
+cost = 40
+unit_name = "Tripod"
 
 [node name="ForgePanel" type="PanelContainer" parent="UI/VBoxContainer/HBoxContainer"]
-margin_left = 265.0
-margin_right = 709.0
+margin_left = 422.0
+margin_right = 866.0
 margin_bottom = 344.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -209,10 +257,10 @@ margin_bottom = 268.0
 bonus_type = 3
 
 [node name="ItemShopPanel" type="PanelContainer" parent="UI/VBoxContainer/HBoxContainer"]
-margin_left = 713.0
-margin_top = 134.0
-margin_right = 980.0
-margin_bottom = 210.0
+margin_left = 870.0
+margin_top = 64.0
+margin_right = 1137.0
+margin_bottom = 280.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
@@ -220,11 +268,11 @@ size_flags_vertical = 4
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 260.0
-margin_bottom = 69.0
+margin_bottom = 209.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/VBoxContainer/HBoxContainer/ItemShopPanel/MarginContainer"]
 margin_right = 253.0
-margin_bottom = 62.0
+margin_bottom = 202.0
 
 [node name="Label" type="Label" parent="UI/VBoxContainer/HBoxContainer/ItemShopPanel/MarginContainer/VBoxContainer"]
 margin_right = 253.0
@@ -235,28 +283,27 @@ text = "Item Shop"
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/VBoxContainer/HBoxContainer/ItemShopPanel/MarginContainer/VBoxContainer"]
 margin_top = 62.0
 margin_right = 253.0
-margin_bottom = 62.0
+margin_bottom = 202.0
 
 [node name="BuyUnitShopItem" parent="UI/VBoxContainer/HBoxContainer/ItemShopPanel/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
-visible = false
 margin_right = 253.0
+texture = ExtResource( 12 )
+amount = 5
+cost = 15
+item_name = "Bomb"
 
 [node name="BuyUnitShopItem2" parent="UI/VBoxContainer/HBoxContainer/ItemShopPanel/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
-visible = false
 margin_top = 72.0
 margin_right = 253.0
 margin_bottom = 140.0
-
-[node name="BuyUnitShopItem3" parent="UI/VBoxContainer/HBoxContainer/ItemShopPanel/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
-visible = false
-margin_top = 144.0
-margin_right = 253.0
-margin_bottom = 212.0
+texture = ExtResource( 11 )
+amount = 5
+cost = 20
 
 [node name="BackButton" type="Button" parent="UI/VBoxContainer"]
-margin_left = 440.0
+margin_left = 518.0
 margin_top = 471.0
-margin_right = 540.0
+margin_right = 618.0
 margin_bottom = 501.0
 rect_min_size = Vector2( 100, 30 )
 size_flags_horizontal = 4

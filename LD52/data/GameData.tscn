@@ -1,18 +1,78 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://data/GameData.gd" type="Script" id=1]
 [ext_resource path="res://data/WorldData.gd" type="Script" id=2]
 [ext_resource path="res://data/CountryData.gd" type="Script" id=3]
 [ext_resource path="res://data/ArmyData.gd" type="Script" id=4]
 [ext_resource path="res://data/UnitTypeData.gd" type="Script" id=5]
-[ext_resource path="res://actors/Unit/Unit.tscn" type="PackedScene" id=6]
-[ext_resource path="res://icon.png" type="Texture" id=7]
+[ext_resource path="res://actors/Unit/Alien.tscn" type="PackedScene" id=6]
+[ext_resource path="res://data/ActorData.gd" type="Script" id=7]
 [ext_resource path="res://assets/Units/AlienIcon.tres" type="Texture" id=8]
 [ext_resource path="res://actors/Cattle/Cattle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://data/DeliveryData.gd" type="Script" id=10]
+[ext_resource path="res://data/BonusCardData.gd" type="Script" id=11]
+[ext_resource path="res://assets/Juice/juicebox.png" type="Texture" id=12]
+[ext_resource path="res://assets/Units/HoundIcon.tres" type="Texture" id=13]
+[ext_resource path="res://assets/Units/TripodIcon.tres" type="Texture" id=14]
+[ext_resource path="res://actors/Unit/Hound.tscn" type="PackedScene" id=15]
+[ext_resource path="res://actors/Unit/Tripod.tscn" type="PackedScene" id=16]
+[ext_resource path="res://data/SecurityData.gd" type="Script" id=17]
+[ext_resource path="res://actors/Cattle/Infrantry.tscn" type="PackedScene" id=18]
+[ext_resource path="res://data/ItemTypeData.gd" type="Script" id=19]
+[ext_resource path="res://items/Bomb.tscn" type="PackedScene" id=20]
+[ext_resource path="res://items/Mines.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/items/mines.png" type="Texture" id=22]
+[ext_resource path="res://assets/items/bomb.png" type="Texture" id=23]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 7 )
+max_health = 2
+health = 2.0
+health_regen_per_second = 0.0
+max_stamina = 0.0
+stamina_regen_per_second = 0.2
+stamina = 0.0
+boost_stamina_cost_per_second = 1.0
+boost_speed_multiplier = 1.5
+speed = 60
+can_move = true
+auto_boost = false
+auto_boost_threshold = 0.0
+sigth_range = 200.0
+move_threshold = 20.0
+attack_damage = 1
+attack_range = 60.0
+attack_is_melee = true
+range_attack_projectle_speed = 200.0
+suffer_knockback_on_attacks = false
+take_damage_sfx_name = "hit"
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 7 )
+max_health = 4
+health = 4.0
+health_regen_per_second = 0.0
+max_stamina = 1.0
+stamina_regen_per_second = 0.1
+stamina = 1.0
+boost_stamina_cost_per_second = 1.0
+boost_speed_multiplier = 1.5
+speed = 75
+can_move = true
+auto_boost = true
+auto_boost_threshold = 1.0
+sigth_range = 300.0
+move_threshold = 20.0
+attack_damage = 0
+attack_range = 60.0
+attack_is_melee = true
+range_attack_projectle_speed = 200.0
+suffer_knockback_on_attacks = false
+take_damage_sfx_name = "hit"
 
 [node name="GameData" type="Node"]
 script = ExtResource( 1 )
+cattle_juice = 15
 
 [node name="WorldData" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -21,67 +81,301 @@ script = ExtResource( 2 )
 script = ExtResource( 3 )
 display_name = "Belgium"
 initial_population = 10
-remaining_population = 10
+remaining_population = 5
 max_cattle_per_harvest = 5
 mission_time = 60.0
 cattle_scene = ExtResource( 9 )
+
+[node name="Bonus" type="Node" parent="WorldData/Belgium"]
+
+[node name="BonusCardData" type="Node" parent="WorldData/Belgium/Bonus"]
+script = ExtResource( 11 )
+display_name = "Alien"
+texture = ExtResource( 8 )
+unit_name = "Alien"
+amount = 1
+probability = 3
+
+[node name="BonusCardData2" type="Node" parent="WorldData/Belgium/Bonus"]
+script = ExtResource( 11 )
+display_name = "Alien"
+texture = ExtResource( 8 )
+unit_name = "Alien"
+amount = 3
+probability = 1
+
+[node name="BonusCardData3" type="Node" parent="WorldData/Belgium/Bonus"]
+script = ExtResource( 11 )
+display_name = "Hound"
+texture = ExtResource( 13 )
+unit_name = "Hound"
+amount = 1
+probability = 1
+
+[node name="BonusCardData4" type="Node" parent="WorldData/Belgium/Bonus"]
+script = ExtResource( 11 )
+display_name = "Cattle Juice"
+texture = ExtResource( 12 )
+is_juice = true
+amount = 3
+probability = 3
+
+[node name="BonusCardData5" type="Node" parent="WorldData/Belgium/Bonus"]
+script = ExtResource( 11 )
+display_name = "Bomb"
+texture = ExtResource( 23 )
+item_name = "Bomb"
+amount = 5
+probability = 1
+
+[node name="Security" type="Node" parent="WorldData/Belgium"]
+
+[node name="SecurityData" type="Node" parent="WorldData/Belgium/Security"]
+script = ExtResource( 17 )
+security_scene = ExtResource( 18 )
+amount = 2
+
+[node name="SecurityData2" type="Node" parent="WorldData/Belgium/Security"]
+script = ExtResource( 17 )
+spawn_time = 20.0
+security_scene = ExtResource( 18 )
 
 [node name="Turkey" type="Node" parent="WorldData"]
 script = ExtResource( 3 )
 display_name = "Turkey"
 initial_population = 30
-remaining_population = 30
 max_cattle_per_harvest = 15
 security_level = 1
 mission_time = 60.0
 cattle_scene = ExtResource( 9 )
+
+[node name="Bonus" type="Node" parent="WorldData/Turkey"]
+
+[node name="BonusCardData" type="Node" parent="WorldData/Turkey/Bonus"]
+script = ExtResource( 11 )
+display_name = "Alien"
+texture = ExtResource( 8 )
+unit_name = "Alien"
+amount = 1
+probability = 3
+
+[node name="BonusCardData2" type="Node" parent="WorldData/Turkey/Bonus"]
+script = ExtResource( 11 )
+display_name = "Alien"
+texture = ExtResource( 8 )
+unit_name = "Alien"
+amount = 3
+probability = 1
+
+[node name="BonusCardData3" type="Node" parent="WorldData/Turkey/Bonus"]
+script = ExtResource( 11 )
+display_name = "Hound"
+texture = ExtResource( 13 )
+unit_name = "Hound"
+amount = 1
+probability = 1
+
+[node name="BonusCardData4" type="Node" parent="WorldData/Turkey/Bonus"]
+script = ExtResource( 11 )
+display_name = "Cattle Juice"
+texture = ExtResource( 12 )
+is_juice = true
+amount = 3
+probability = 3
+
+[node name="Security" type="Node" parent="WorldData/Turkey"]
+
+[node name="SecurityData" type="Node" parent="WorldData/Turkey/Security"]
+script = ExtResource( 17 )
+security_scene = ExtResource( 18 )
+amount = 2
+
+[node name="SecurityData2" type="Node" parent="WorldData/Turkey/Security"]
+script = ExtResource( 17 )
+spawn_time = 20.0
+security_scene = ExtResource( 18 )
 
 [node name="Greece" type="Node" parent="WorldData"]
 script = ExtResource( 3 )
 display_name = "Greece"
 initial_population = 10
-remaining_population = 10
 max_cattle_per_harvest = 10
 security_level = 1
 mission_time = 60.0
 cattle_scene = ExtResource( 9 )
 
+[node name="Bonus" type="Node" parent="WorldData/Greece"]
+
+[node name="BonusCardData" type="Node" parent="WorldData/Greece/Bonus"]
+script = ExtResource( 11 )
+display_name = "Alien"
+texture = ExtResource( 8 )
+unit_name = "Alien"
+amount = 1
+probability = 3
+
+[node name="BonusCardData2" type="Node" parent="WorldData/Greece/Bonus"]
+script = ExtResource( 11 )
+display_name = "Alien"
+texture = ExtResource( 8 )
+unit_name = "Alien"
+amount = 3
+probability = 1
+
+[node name="BonusCardData3" type="Node" parent="WorldData/Greece/Bonus"]
+script = ExtResource( 11 )
+display_name = "Hound"
+texture = ExtResource( 13 )
+unit_name = "Hound"
+amount = 1
+probability = 1
+
+[node name="BonusCardData4" type="Node" parent="WorldData/Greece/Bonus"]
+script = ExtResource( 11 )
+display_name = "Cattle Juice"
+texture = ExtResource( 12 )
+is_juice = true
+amount = 3
+probability = 3
+
+[node name="Security" type="Node" parent="WorldData/Greece"]
+
+[node name="SecurityData" type="Node" parent="WorldData/Greece/Security"]
+script = ExtResource( 17 )
+security_scene = ExtResource( 18 )
+amount = 2
+
 [node name="UK" type="Node" parent="WorldData"]
 script = ExtResource( 3 )
 display_name = "United Kingdoms"
 initial_population = 45
-remaining_population = 45
 max_cattle_per_harvest = 15
 security_level = 2
 mission_time = 60.0
 cattle_scene = ExtResource( 9 )
 
+[node name="Bonus" type="Node" parent="WorldData/UK"]
+
+[node name="BonusCardData" type="Node" parent="WorldData/UK/Bonus"]
+script = ExtResource( 11 )
+display_name = "Alien"
+texture = ExtResource( 8 )
+unit_name = "Alien"
+amount = 1
+probability = 3
+
+[node name="BonusCardData2" type="Node" parent="WorldData/UK/Bonus"]
+script = ExtResource( 11 )
+display_name = "Alien"
+texture = ExtResource( 8 )
+unit_name = "Alien"
+amount = 3
+probability = 1
+
+[node name="BonusCardData3" type="Node" parent="WorldData/UK/Bonus"]
+script = ExtResource( 11 )
+display_name = "Hound"
+texture = ExtResource( 13 )
+unit_name = "Hound"
+amount = 1
+probability = 1
+
+[node name="BonusCardData4" type="Node" parent="WorldData/UK/Bonus"]
+script = ExtResource( 11 )
+display_name = "Cattle Juice"
+texture = ExtResource( 12 )
+is_juice = true
+amount = 3
+probability = 3
+
+[node name="Security" type="Node" parent="WorldData/UK"]
+
 [node name="USA" type="Node" parent="WorldData"]
 script = ExtResource( 3 )
 display_name = "United States"
 initial_population = 60
-remaining_population = 60
 max_cattle_per_harvest = 30
 security_level = 3
 mission_time = 60.0
 cattle_scene = ExtResource( 9 )
 
+[node name="Bonus" type="Node" parent="WorldData/USA"]
+
+[node name="BonusCardData" type="Node" parent="WorldData/USA/Bonus"]
+script = ExtResource( 11 )
+display_name = "Alien"
+texture = ExtResource( 8 )
+unit_name = "Alien"
+amount = 1
+probability = 3
+
+[node name="BonusCardData2" type="Node" parent="WorldData/USA/Bonus"]
+script = ExtResource( 11 )
+display_name = "Alien"
+texture = ExtResource( 8 )
+unit_name = "Alien"
+amount = 3
+probability = 1
+
+[node name="BonusCardData3" type="Node" parent="WorldData/USA/Bonus"]
+script = ExtResource( 11 )
+display_name = "Hound"
+texture = ExtResource( 13 )
+unit_name = "Hound"
+amount = 1
+probability = 1
+
+[node name="BonusCardData4" type="Node" parent="WorldData/USA/Bonus"]
+script = ExtResource( 11 )
+display_name = "Cattle Juice"
+texture = ExtResource( 12 )
+is_juice = true
+amount = 3
+probability = 3
+
+[node name="Security" type="Node" parent="WorldData/USA"]
+
 [node name="ArmyData" type="Node" parent="."]
 script = ExtResource( 4 )
 
-[node name="Alien" type="Node" parent="ArmyData"]
+[node name="UnitTypes" type="Node" parent="ArmyData"]
+
+[node name="Alien" type="Node" parent="ArmyData/UnitTypes"]
 script = ExtResource( 5 )
 unit_name = "Alien"
 unit_scene = ExtResource( 6 )
 button_texture = ExtResource( 8 )
 amount_in_barrack = 3
+default_unit_data = SubResource( 1 )
 
-[node name="Alien2" type="Node" parent="ArmyData"]
+[node name="Hound" type="Node" parent="ArmyData/UnitTypes"]
 script = ExtResource( 5 )
-unit_name = "Alien2"
-unit_scene = ExtResource( 6 )
-button_texture = ExtResource( 7 )
-amount_in_barrack = 2
+unit_name = "Hound"
+unit_scene = ExtResource( 15 )
+button_texture = ExtResource( 13 )
+amount_in_barrack = 1
+default_unit_data = SubResource( 2 )
+
+[node name="Tripod" type="Node" parent="ArmyData/UnitTypes"]
+script = ExtResource( 5 )
+unit_name = "Tripod"
+unit_scene = ExtResource( 16 )
+button_texture = ExtResource( 14 )
+
+[node name="ItemTypes" type="Node" parent="ArmyData"]
+
+[node name="Bomb" type="Node" parent="ArmyData/ItemTypes"]
+script = ExtResource( 19 )
+item_name = "Bomb"
+item_scene = ExtResource( 20 )
+button_texture = ExtResource( 23 )
+amount_in_barrack = 1
+
+[node name="Mines" type="Node" parent="ArmyData/ItemTypes"]
+script = ExtResource( 19 )
+item_name = "Mines"
+item_scene = ExtResource( 21 )
+button_texture = ExtResource( 22 )
 
 [node name="Deliveries" type="Node" parent="."]
 

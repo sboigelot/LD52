@@ -12,9 +12,6 @@ func _on_StateMachinePlayer_transited(from, to):
 	time_in_state = 0.0
 	
 func _on_StateMachinePlayer_updated(state, delta):
-	if paused:
-		return
-		
 	time_in_state += delta
 		
 	match state:
@@ -35,7 +32,7 @@ func _on_StateMachinePlayer_updated(state, delta):
 			var distance_to_destination = global_position.distance_to(destination)
 			if distance_to_destination >= data.move_threshold:
 				var direction = global_position.direction_to(destination)
-				move(direction)
+				move(direction, delta)
 				flip_and_animate(direction)
 			else:
 				fsm.set_trigger("destination_reached")
@@ -53,7 +50,7 @@ func _on_StateMachinePlayer_updated(state, delta):
 				fsm.set_trigger("cattle_in_range")
 			else:
 				var direction = global_position.direction_to(cattle_target.global_position)
-				move(direction)
+				move_or_auto_boost(direction, delta)
 				flip_and_animate(direction)
 
 		"Hunt/AttackCattle":
@@ -65,20 +62,17 @@ func _on_StateMachinePlayer_updated(state, delta):
 			attack_animation_player.play("Attack")
 
 func attack_cattle():
-	if paused:
-		return
-		
 	if not cattle_target_in_attack_range_or_alive():
 		attack_animation_player.stop()
 		fsm.set_trigger("cattle_lost")
 		return
 	
-	cattle_target.take_damage(1.0)
+	cattle_target.take_damage(data.attack_damage)
 	if cattle_target.data.health <= 0:
 		attack_animation_player.stop()
 	
 func end_attack():
-	pass
+	attack_animation_player.play("RESET")
 
 func check_for_new_cattle_nearby():
 	if (not cattle_target_in_range_or_alive() and 

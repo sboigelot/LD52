@@ -212,6 +212,7 @@ init_pop_label_np = NodePath("MaginContainer/VBox/GridContainer/InitialPopCountL
 remain_pop_label_np = NodePath("MaginContainer/VBox/GridContainer/RemainingPopulationCountLabel")
 secu_lvl_label_np = NodePath("MaginContainer/VBox/GridContainer/SecurityLevelCountLabel")
 panic_lvl_label_np = NodePath("MaginContainer/VBox/GridContainer/PanicLevelCountLabel")
+harvest_button_np = NodePath("MaginContainer/VBox/HarvestButton")
 
 [node name="MaginContainer" type="MarginContainer" parent="ForegroundUI/CountryPanelMargin/CountryPanel"]
 margin_left = 7.0

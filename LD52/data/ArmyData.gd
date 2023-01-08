@@ -8,4 +8,7 @@ export var bonus_speed: int
 export var bonus_sight: int
 
 func get_unit_types():
-	return get_children()
+	return $UnitTypes.get_children()
+
+func get_item_types():
+	return $ItemTypes.get_children()

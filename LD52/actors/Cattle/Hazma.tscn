@@ -1,0 +1,463 @@
+[gd_scene load_steps=56 format=2]
+
+[ext_resource path="res://assets/Cattle/cow.png" type="Texture" id=1]
+[ext_resource path="res://actors/Cattle/Infantry.gd" type="Script" id=2]
+[ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=3]
+[ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=4]
+[ext_resource path="res://addons/imjp94.yafsm/src/states/State.gd" type="Script" id=5]
+[ext_resource path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" type="Script" id=6]
+[ext_resource path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" type="Script" id=7]
+[ext_resource path="res://data/ActorData.gd" type="Script" id=8]
+[ext_resource path="res://actors/Juice/Juice.tscn" type="PackedScene" id=9]
+[ext_resource path="res://actors/Cattle/Projectile.tscn" type="PackedScene" id=10]
+
+[sub_resource type="Resource" id=76]
+script = ExtResource( 8 )
+max_health = 5
+health = 5.0
+health_regen_per_second = 0.0
+max_stamina = 0.0
+stamina_regen_per_second = 0.2
+stamina = 0.0
+boost_stamina_cost_per_second = 1.0
+boost_speed_multiplier = 1.5
+speed = 55
+can_move = true
+auto_boost = false
+auto_boost_threshold = 0.0
+sigth_range = 800.0
+move_threshold = 20.0
+attack_damage = 2
+attack_range = 450.0
+attack_is_melee = false
+range_attack_projectile_scene = ExtResource( 10 )
+range_attack_projectle_speed = 600.0
+suffer_knockback_on_attacks = false
+take_damage_sfx_name = "hit"
+
+[sub_resource type="Resource" id=40]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 208, 20 )
+}
+name = "Entry"
+
+[sub_resource type="Resource" id=49]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 752.5, 140 )
+}
+name = "AttackAlien"
+
+[sub_resource type="Resource" id=46]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 168, -20 )
+}
+name = "Entry"
+
+[sub_resource type="Resource" id=48]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 722, -20 )
+}
+name = "MoveToAttackRange"
+
+[sub_resource type="Resource" id=60]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 327, 0 )
+}
+name = "ChooseDestination"
+
+[sub_resource type="Resource" id=62]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 148, 0 )
+}
+name = "Entry"
+
+[sub_resource type="Resource" id=63]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 666.688, 136.771 )
+}
+name = "Exit"
+
+[sub_resource type="Resource" id=61]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 327.5, 140 )
+}
+name = "WalkToDestination"
+
+[sub_resource type="Resource" id=67]
+script = ExtResource( 7 )
+name = "alien_aquired"
+
+[sub_resource type="Resource" id=68]
+script = ExtResource( 6 )
+from = "ChooseDestination"
+to = "Exit"
+conditions = {
+"alien_aquired": SubResource( 67 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=65]
+script = ExtResource( 7 )
+name = "destination_picked"
+
+[sub_resource type="Resource" id=66]
+script = ExtResource( 6 )
+from = "ChooseDestination"
+to = "WalkToDestination"
+conditions = {
+"destination_picked": SubResource( 65 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=64]
+script = ExtResource( 6 )
+from = "Entry"
+to = "ChooseDestination"
+conditions = {
+}
+priority = 0
+
+[sub_resource type="Resource" id=71]
+script = ExtResource( 7 )
+name = "destination_reached"
+
+[sub_resource type="Resource" id=72]
+script = ExtResource( 6 )
+from = "WalkToDestination"
+to = "ChooseDestination"
+conditions = {
+"destination_reached": SubResource( 71 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=69]
+script = ExtResource( 7 )
+name = "alien_aquired"
+
+[sub_resource type="Resource" id=70]
+script = ExtResource( 6 )
+from = "WalkToDestination"
+to = "Exit"
+conditions = {
+"alien_aquired": SubResource( 69 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=73]
+script = ExtResource( 4 )
+__meta__ = {
+"graph_offset": Vector2( 376, -20 )
+}
+name = "WanderAndSearchForAlien"
+states = {
+"ChooseDestination": SubResource( 60 ),
+"Entry": SubResource( 62 ),
+"Exit": SubResource( 63 ),
+"WalkToDestination": SubResource( 61 )
+}
+transitions = {
+"ChooseDestination": {
+"Exit": SubResource( 68 ),
+"WalkToDestination": SubResource( 66 )
+},
+"Entry": {
+"ChooseDestination": SubResource( 64 )
+},
+"WalkToDestination": {
+"ChooseDestination": SubResource( 72 ),
+"Exit": SubResource( 70 )
+}
+}
+
+[sub_resource type="Resource" id=57]
+script = ExtResource( 7 )
+name = "alien_lost"
+
+[sub_resource type="Resource" id=58]
+script = ExtResource( 6 )
+from = "AttackAlien"
+to = "WanderAndSearchForAlien"
+conditions = {
+"alien_lost": SubResource( 57 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=50]
+script = ExtResource( 6 )
+from = "Entry"
+to = "WanderAndSearchForAlien"
+conditions = {
+}
+priority = 0
+
+[sub_resource type="Resource" id=53]
+script = ExtResource( 7 )
+name = "alien_in_range"
+
+[sub_resource type="Resource" id=54]
+script = ExtResource( 6 )
+from = "MoveToAttackRange"
+to = "AttackAlien"
+conditions = {
+"alien_in_range": SubResource( 53 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=55]
+script = ExtResource( 7 )
+name = "alien_lost"
+
+[sub_resource type="Resource" id=56]
+script = ExtResource( 6 )
+from = "MoveToAttackRange"
+to = "WanderAndSearchForAlien"
+conditions = {
+"alien_lost": SubResource( 55 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=51]
+script = ExtResource( 7 )
+name = "alien_aquired"
+
+[sub_resource type="Resource" id=52]
+script = ExtResource( 6 )
+from = "WanderAndSearchForAlien"
+to = "MoveToAttackRange"
+conditions = {
+"alien_aquired": SubResource( 51 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=59]
+script = ExtResource( 4 )
+__meta__ = {
+"graph_offset": Vector2( 528, 20 )
+}
+name = "Hunt"
+states = {
+"AttackAlien": SubResource( 49 ),
+"Entry": SubResource( 46 ),
+"MoveToAttackRange": SubResource( 48 ),
+"WanderAndSearchForAlien": SubResource( 73 )
+}
+transitions = {
+"AttackAlien": {
+"WanderAndSearchForAlien": SubResource( 58 )
+},
+"Entry": {
+"WanderAndSearchForAlien": SubResource( 50 )
+},
+"MoveToAttackRange": {
+"AttackAlien": SubResource( 54 ),
+"WanderAndSearchForAlien": SubResource( 56 )
+},
+"WanderAndSearchForAlien": {
+"MoveToAttackRange": SubResource( 52 )
+}
+}
+
+[sub_resource type="Resource" id=38]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 368, 20 )
+}
+name = "Idle"
+
+[sub_resource type="Resource" id=41]
+script = ExtResource( 6 )
+from = "Entry"
+to = "Idle"
+conditions = {
+}
+priority = 0
+
+[sub_resource type="Resource" id=44]
+script = ExtResource( 7 )
+name = "hunt_over"
+
+[sub_resource type="Resource" id=45]
+script = ExtResource( 6 )
+from = "Hunt"
+to = "Idle"
+conditions = {
+"hunt_over": SubResource( 44 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=42]
+script = ExtResource( 7 )
+name = "idle_over"
+
+[sub_resource type="Resource" id=43]
+script = ExtResource( 6 )
+from = "Idle"
+to = "Hunt"
+conditions = {
+"idle_over": SubResource( 42 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=36]
+script = ExtResource( 4 )
+name = ""
+states = {
+"Entry": SubResource( 40 ),
+"Hunt": SubResource( 59 ),
+"Idle": SubResource( 38 )
+}
+transitions = {
+"Entry": {
+"Idle": SubResource( 41 )
+},
+"Flee": {
+},
+"Hunt": {
+"Idle": SubResource( 45 )
+},
+"Idle": {
+"Hunt": SubResource( 43 )
+},
+"Wander": {
+}
+}
+
+[sub_resource type="CircleShape2D" id=30]
+radius = 300.0
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=29]
+animations = [ {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 28 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=74]
+resource_name = "Attack"
+length = 2.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9, 2.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 3, 3 ), Vector2( 2, 2 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.9, 2.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_alien"
+}, {
+"args": [  ],
+"method": "end_attack"
+} ]
+}
+
+[sub_resource type="Animation" id=75]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+
+[node name="Hazma" type="KinematicBody2D"]
+collision_layer = 2
+script = ExtResource( 2 )
+np_animated_sprite = NodePath("AnimatedSprite")
+fsm_np = NodePath("StateMachinePlayer")
+vision_coliisionshape2d_np = NodePath("VisionArea2D/CollisionShape2D")
+data = SubResource( 76 )
+juice_scene = ExtResource( 9 )
+is_security = true
+np_attack_animation_player = NodePath("AnimationPlayer")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+
+[node name="StateMachinePlayer" type="Node" parent="."]
+script = ExtResource( 3 )
+state_machine = SubResource( 36 )
+
+[node name="VisionArea2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea2D"]
+visible = false
+shape = SubResource( 30 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 0.827451, 0, 1, 1 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 29 )
+animation = "Walk"
+playing = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Attack = SubResource( 74 )
+anims/RESET = SubResource( 75 )
+
+[connection signal="transited" from="StateMachinePlayer" to="." method="_on_StateMachinePlayer_transited"]
+[connection signal="updated" from="StateMachinePlayer" to="." method="_on_StateMachinePlayer_updated"]
+[connection signal="body_entered" from="VisionArea2D" to="." method="_on_VisionArea2D_body_entered"]
+[connection signal="body_exited" from="VisionArea2D" to="." method="_on_VisionArea2D_body_exited"]

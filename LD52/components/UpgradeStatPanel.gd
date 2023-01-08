@@ -28,6 +28,8 @@ func _ready():
 	update_ui()
 
 func update_ui():
+	if Engine.is_editor_hint():
+		return
 	
 	var skill_level = get_skill_level()
 	

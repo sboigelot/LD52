@@ -82,3 +82,22 @@ func add_delivery(unit_name, item_name, amount):
 	if item_name != "":
 		for i in amount:
 			selected_delivery.item_names.append(item_name)
+
+func on_delivery_arrived(data:DeliveryData):
+	add_to_army(data.unit_names, data.item_names)
+	
+func add_to_army(unit_names, item_names, amount = 1):
+	var army = Game.data.get_army()
+	for unit_name in unit_names:
+		for unit_type in army.get_unit_types():
+			if unit_type.unit_name == unit_name:
+				unit_type.amount_in_barrack += amount
+				break
+	
+	for item_name in item_names:
+		for item_type in army.get_item_types():
+			if item_type.item_name == item_name:
+				item_type.amount_in_barrack += amount
+				break
+	
+	

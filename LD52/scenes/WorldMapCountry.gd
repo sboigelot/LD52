@@ -25,7 +25,20 @@ export(NodePath) var polygon2d_np
 onready var polygon2d = get_node(polygon2d_np) as Polygon2D
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
+		
 	polygon2d.color = default_color
+
+func _process(delta):
+	if Engine.is_editor_hint():
+		return
+		
+	if data == null:
+		return
+		
+	if data.remaining_population == 0:
+		polygon2d.color = defeated_color
 
 func _on_Area2D_mouse_entered():
 	polygon2d.color = mouse_over_color

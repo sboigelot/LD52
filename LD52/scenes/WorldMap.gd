@@ -13,6 +13,7 @@ onready var dayshadow = get_node(dayshadow_np) as Node2D
 
 func _ready():
 	var country_datas = Game.data.get_world().get_countries()
+	
 	var country_map = {}
 	for country in country_datas:
 		country_map[country.display_name] = country
@@ -32,6 +33,9 @@ func _ready():
 	show_dialog("Intro01", true)
 	
 	spawn_deliveries()
+	
+	if Game.data.get_current_cattle_sum() == 0:
+		show_dialog("victory", false)
 	
 func show_dialog(dialog_name, once_only:bool):
 	if once_only:
@@ -108,12 +112,5 @@ func spawn_delivery(data:DeliveryData):
 	$Deliveries.add_child(delivery)
 	
 func on_delivery_delivered(data:DeliveryData):
-	
-	var army = Game.data.get_army().get_children()
-	for unit_name in data.unit_names:
-		for unit_type in army:
-			if unit_type.unit_name == unit_name:
-				unit_type.amount_in_barrack += 1
-				break
+	Game.data.on_delivery_arrived(data)
 	$ForegroundUI/MainHUD.update_unit_slots()
-	#todo items

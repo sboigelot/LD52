@@ -1,0 +1,442 @@
+[gd_scene load_steps=55 format=2]
+
+[ext_resource path="res://actors/Unit/Unit.gd" type="Script" id=1]
+[ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=2]
+[ext_resource path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" type="Script" id=3]
+[ext_resource path="res://addons/imjp94.yafsm/src/states/State.gd" type="Script" id=4]
+[ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=5]
+[ext_resource path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" type="Script" id=6]
+[ext_resource path="res://assets/Units/robot.png" type="Texture" id=7]
+
+[sub_resource type="AtlasTexture" id=47]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 0, 384, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=48]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 64, 384, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=49]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 128, 384, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=50]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 192, 384, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=51]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 256, 384, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=52]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 320, 384, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=53]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 384, 384, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=54]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 320, 192, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=55]
+animations = [ {
+"frames": [ SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 54 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 4 )
+__meta__ = {
+"graph_offset": Vector2( 128, 0 )
+}
+name = "Entry"
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 4 )
+__meta__ = {
+"graph_offset": Vector2( 690, 260 )
+}
+name = "AttackCattle"
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 4 )
+__meta__ = {
+"graph_offset": Vector2( 8, 20 )
+}
+name = "Entry"
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 4 )
+__meta__ = {
+"graph_offset": Vector2( 662, 20 )
+}
+name = "MoveToAttackRange"
+
+[sub_resource type="Resource" id=27]
+script = ExtResource( 4 )
+__meta__ = {
+"graph_offset": Vector2( 407, 120 )
+}
+name = "ChooseDestination"
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 4 )
+__meta__ = {
+"graph_offset": Vector2( 104, 120 )
+}
+name = "Entry"
+
+[sub_resource type="Resource" id=39]
+script = ExtResource( 4 )
+__meta__ = {
+"graph_offset": Vector2( 768, 180 )
+}
+name = "Exit"
+
+[sub_resource type="Resource" id=28]
+script = ExtResource( 4 )
+__meta__ = {
+"graph_offset": Vector2( 407.5, 300 )
+}
+name = "WalkToDestination"
+
+[sub_resource type="Resource" id=40]
+script = ExtResource( 6 )
+name = "cattle_aquired"
+
+[sub_resource type="Resource" id=41]
+script = ExtResource( 3 )
+from = "ChooseDestination"
+to = "Exit"
+conditions = {
+"cattle_aquired": SubResource( 40 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=29]
+script = ExtResource( 6 )
+name = "destination_picked"
+
+[sub_resource type="Resource" id=30]
+script = ExtResource( 3 )
+from = "ChooseDestination"
+to = "WalkToDestination"
+conditions = {
+"destination_picked": SubResource( 29 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 3 )
+from = "Entry"
+to = "ChooseDestination"
+conditions = {
+}
+priority = 0
+
+[sub_resource type="Resource" id=31]
+script = ExtResource( 6 )
+name = "destination_reached"
+
+[sub_resource type="Resource" id=32]
+script = ExtResource( 3 )
+from = "WalkToDestination"
+to = "ChooseDestination"
+conditions = {
+"destination_reached": SubResource( 31 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=42]
+script = ExtResource( 6 )
+name = "cattle_aquired"
+
+[sub_resource type="Resource" id=43]
+script = ExtResource( 3 )
+from = "WalkToDestination"
+to = "Exit"
+conditions = {
+"cattle_aquired": SubResource( 42 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 237, 20 )
+}
+name = "WanderAndSearchForCattle"
+states = {
+"ChooseDestination": SubResource( 27 ),
+"Entry": SubResource( 11 ),
+"Exit": SubResource( 39 ),
+"WalkToDestination": SubResource( 28 )
+}
+transitions = {
+"ChooseDestination": {
+"Exit": SubResource( 41 ),
+"WalkToDestination": SubResource( 30 )
+},
+"Entry": {
+"ChooseDestination": SubResource( 12 )
+},
+"WalkToDestination": {
+"ChooseDestination": SubResource( 32 ),
+"Exit": SubResource( 43 )
+}
+}
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 6 )
+name = "cattle_lost"
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 3 )
+from = "AttackCattle"
+to = "WanderAndSearchForCattle"
+conditions = {
+"cattle_lost": SubResource( 19 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 3 )
+from = "Entry"
+to = "WanderAndSearchForCattle"
+conditions = {
+}
+priority = 0
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 6 )
+name = "cattle_in_range"
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 3 )
+from = "MoveToAttackRange"
+to = "AttackCattle"
+conditions = {
+"cattle_in_range": SubResource( 15 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 6 )
+name = "cattle_lost"
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 3 )
+from = "MoveToAttackRange"
+to = "WanderAndSearchForCattle"
+conditions = {
+"cattle_lost": SubResource( 17 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 6 )
+name = "cattle_aquired"
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 3 )
+from = "WanderAndSearchForCattle"
+to = "MoveToAttackRange"
+conditions = {
+"cattle_aquired": SubResource( 21 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 5 )
+__meta__ = {
+"graph_offset": Vector2( 488, 0 )
+}
+name = "Hunt"
+states = {
+"AttackCattle": SubResource( 9 ),
+"Entry": SubResource( 7 ),
+"MoveToAttackRange": SubResource( 8 ),
+"WanderAndSearchForCattle": SubResource( 13 )
+}
+transitions = {
+"AttackCattle": {
+"WanderAndSearchForCattle": SubResource( 20 )
+},
+"Entry": {
+"WanderAndSearchForCattle": SubResource( 14 )
+},
+"MoveToAttackRange": {
+"AttackCattle": SubResource( 16 ),
+"WanderAndSearchForCattle": SubResource( 18 )
+},
+"WanderAndSearchForCattle": {
+"MoveToAttackRange": SubResource( 22 )
+}
+}
+
+[sub_resource type="Resource" id=44]
+script = ExtResource( 4 )
+__meta__ = {
+"graph_offset": Vector2( 268, 0 )
+}
+name = "Idle"
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 3 )
+from = "Entry"
+to = "Idle"
+conditions = {
+}
+priority = 0
+
+[sub_resource type="Resource" id=25]
+script = ExtResource( 6 )
+name = "hunt_over"
+
+[sub_resource type="Resource" id=26]
+script = ExtResource( 3 )
+from = "Hunt"
+to = "Idle"
+conditions = {
+"hunt_over": SubResource( 25 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=24]
+script = ExtResource( 6 )
+name = "idle_over"
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 3 )
+from = "Idle"
+to = "Hunt"
+conditions = {
+"idle_over": SubResource( 24 )
+}
+priority = 0
+
+[sub_resource type="Resource" id=56]
+script = ExtResource( 5 )
+name = ""
+states = {
+"Entry": SubResource( 1 ),
+"Hunt": SubResource( 23 ),
+"Idle": SubResource( 44 )
+}
+transitions = {
+"Entry": {
+"Idle": SubResource( 4 )
+},
+"Hunt": {
+"Idle": SubResource( 26 )
+},
+"Idle": {
+"Hunt": SubResource( 5 )
+}
+}
+
+[sub_resource type="CircleShape2D" id=38]
+radius = 300.0
+
+[sub_resource type="Animation" id=45]
+resource_name = "Attack"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 3, 3 ), Vector2( 2, 2 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_cattle"
+}, {
+"args": [  ],
+"method": "end_attack"
+} ]
+}
+
+[sub_resource type="Animation" id=46]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+
+[node name="Unit" type="KinematicBody2D"]
+collision_layer = 4
+script = ExtResource( 1 )
+np_animated_sprite = NodePath("AnimatedSprite")
+fsm_np = NodePath("StateMachinePlayer")
+vision_coliisionshape2d_np = NodePath("VisionArea2D/CollisionShape2D")
+np_attack_animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
+frames = SubResource( 55 )
+playing = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 32, -32, 49, 65, -47, 65, -25, -56, 26, -56 )
+
+[node name="StateMachinePlayer" type="Node" parent="."]
+script = ExtResource( 2 )
+state_machine = SubResource( 56 )
+
+[node name="VisionArea2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea2D"]
+visible = false
+shape = SubResource( 38 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Attack = SubResource( 45 )
+anims/RESET = SubResource( 46 )
+
+[connection signal="transited" from="StateMachinePlayer" to="." method="_on_StateMachinePlayer_transited"]
+[connection signal="updated" from="StateMachinePlayer" to="." method="_on_StateMachinePlayer_updated"]
+[connection signal="body_entered" from="VisionArea2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="VisionArea2D" to="." method="_on_Area2D_body_exited"]

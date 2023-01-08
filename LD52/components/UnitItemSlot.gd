@@ -8,6 +8,7 @@ signal pressed(unit_slot)
 export var amount: int setget set_amount
 
 var unit_type
+var item_type
 export(Texture) var texture setget set_texture
 
 func set_texture(value):
