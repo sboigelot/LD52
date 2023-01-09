@@ -22,6 +22,7 @@ script = ExtResource( 1 )
 stat_panel_pop_np = NodePath("UI/VBoxContainer/HBoxContainer/StatPanel/MarginContainer/VBoxContainer/StatPanel/PopStatPanel")
 stat_panel_panic_np = NodePath("UI/VBoxContainer/HBoxContainer/StatPanel/MarginContainer/VBoxContainer/StatPanel/PanicStatPanel")
 stat_panel_juice_np = NodePath("UI/VBoxContainer/HBoxContainer/StatPanel/MarginContainer/VBoxContainer/StatPanel/JuiceStatPanel")
+dialog_canvas_layer_np = NodePath("DialogCanvasLayer")
 
 [node name="UI" type="PanelContainer" parent="."]
 anchor_right = 1.0
@@ -235,6 +236,8 @@ rect_min_size = Vector2( 100, 30 )
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 6 )
 text = "Continue Harvest"
+
+[node name="DialogCanvasLayer" type="CanvasLayer" parent="."]
 
 [connection signal="pressed" from="UI/ButtonBar/ButtonBar/MaginContainer/HBox/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="animation_completed" from="UI/VBoxContainer/HBoxContainer/StatPanel/MarginContainer/VBoxContainer/StatPanel/PopStatPanel" to="." method="_on_PopStatPanel_animation_completed"]

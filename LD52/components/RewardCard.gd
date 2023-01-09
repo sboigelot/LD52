@@ -30,6 +30,8 @@ func set_display_name(v):
 	display_name = v
 	
 func _on_PickButton_pressed():
+	if modulate == Color.transparent:
+		return
 	$BackTextureRect.visible = false
 	$PickButton.visible = false
 	emit_signal("picked", self)

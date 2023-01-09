@@ -11,15 +11,18 @@ onready var stat_panel_panic = get_node(stat_panel_panic_np) as HarvestStatPanel
 export(NodePath) var stat_panel_juice_np
 onready var stat_panel_juice = get_node(stat_panel_juice_np) as HarvestStatPanel
 
-var anim_time = 2.5
+export(NodePath) var dialog_canvas_layer_np
+onready var dialog_canvas_layer = get_node(dialog_canvas_layer_np) as CanvasLayer
+
+var anim_time = 2
 	
 func _ready():
 	#allow debug
 	if Game.data.selected_country == null:
 		Game.data.selected_country = Game.data.get_world().get_countries()[0]
 		selected_country = Game.data.selected_country as CountryData
-		selected_country.start_harvest_panic_level = 1
-		selected_country.panic_level = 2
+		selected_country.start_harvest_panic_level = 5
+		selected_country.panic_level = selected_country.start_harvest_panic_level + 1
 		selected_country.start_harvest_population = 10
 		selected_country.remaining_population = 5
 		selected_country.start_harvest_cattle_juice = Game.data.cattle_juice - 5
@@ -51,8 +54,11 @@ func _ready():
 	
 	stat_panel_pop.anim_value_to(selected_country.remaining_population, anim_time)
 	
-	if selected_country.remaining_population == 0:
-		for country in Game.data.get_world().get_children():
+#	if selected_country.remaining_population == 0:
+#		raise_world_panic()
+		
+func raise_world_panic():
+	for country in Game.data.get_world().get_children():
 			country.panic_level = min(country.panic_level + 1, country.max_panic_level)
 
 func randomize_cards():
@@ -101,6 +107,24 @@ func _on_JuiceStatPanel_animation_completed():
 	stat_panel_panic.modulate = Color.white
 	stat_panel_panic.anim_value_to(selected_country.panic_level, anim_time)
 
-
 func _on_PanicStatPanel_animation_completed():
+	if selected_country.start_harvest_panic_level != selected_country.panic_level:
+		if selected_country.panic_level >= selected_country.max_panic_level:
+			raise_world_panic()
+			show_dialog("WorldPanic")
+			return
+
+func show_dialog(dialog_name):
+	Game.data.day_paused = true
+	var dialog = Dialogic.start(dialog_name)
+#	dialog.connect("dialogic_signal", self, "on_dialogic_signal")
+	dialog.connect("timeline_end", self, "on_dialogic_timeline_end")
+	dialog.connect("letter_displayed", self, "on_dialogic_letter_displayed")
+	dialog_canvas_layer.add_child(dialog)
+
+func on_dialogic_letter_displayed(letter):
+	Game.voice_gen(letter)
+	
+func on_dialogic_timeline_end(timeline):
+	Game.data.day_paused = false
 	$UI/VBoxContainer/CardRewardPanel.modulate = Color.white

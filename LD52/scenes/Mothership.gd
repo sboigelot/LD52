@@ -33,7 +33,7 @@ func on_dialogic_letter_displayed(letter):
 	Game.voice_gen(letter)
 	
 func on_dialogic_timeline_end(timeline):
-	Game.data.day_paused = false	
+	Game.data.day_paused = false
 	
 func _on_BackButton_pressed():
 	SfxManager.play("buttonpress")
