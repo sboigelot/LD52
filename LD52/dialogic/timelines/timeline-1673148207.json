@@ -31,7 +31,7 @@
 			"question": "I am here to collect your end of week tax of [weektax] cattle juice."
 		},
 		{
-			"choice": "Pay",
+			"choice": "Pay the tax of [weektax] cattle juice",
 			"condition": "",
 			"definition": "",
 			"event_id": "dialogic_011",
@@ -43,6 +43,12 @@
 		},
 		{
 			"event_id": "dialogic_013"
+		},
+		{
+			"character": "character-1673048624.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Next week, the tax will be raise to [nextweektax]. Be ready."
 		},
 		{
 			"event_id": "dialogic_022",

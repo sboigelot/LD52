@@ -1,6 +1,6 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=59 format=2]
 
-[ext_resource path="res://assets/Cattle/cow.png" type="Texture" id=1]
+[ext_resource path="res://assets/Alpha/infantry.png" type="Texture" id=1]
 [ext_resource path="res://actors/Cattle/Infantry.gd" type="Script" id=2]
 [ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=3]
 [ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=4]
@@ -9,8 +9,10 @@
 [ext_resource path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" type="Script" id=7]
 [ext_resource path="res://data/ActorData.gd" type="Script" id=8]
 [ext_resource path="res://actors/Juice/Juice.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/square.png" type="Texture" id=10]
 
 [sub_resource type="Resource" id=76]
+resource_local_to_scene = true
 script = ExtResource( 8 )
 max_health = 3
 health = 3.0
@@ -31,7 +33,8 @@ attack_range = 60.0
 attack_is_melee = true
 range_attack_projectle_speed = 200.0
 suffer_knockback_on_attacks = false
-take_damage_sfx_name = "hit"
+take_damage_sfx_name = ""
+attack_sfx_name = "punch"
 
 [sub_resource type="Resource" id=40]
 script = ExtResource( 5 )
@@ -331,47 +334,58 @@ transitions = {
 [sub_resource type="CircleShape2D" id=30]
 radius = 300.0
 
-[sub_resource type="AtlasTexture" id=24]
-flags = 4
+[sub_resource type="AtlasTexture" id=77]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 32, 32, 32 )
+region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=25]
-flags = 4
+[sub_resource type="AtlasTexture" id=78]
 atlas = ExtResource( 1 )
-region = Rect2( 32, 32, 32, 32 )
+region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=26]
-flags = 4
+[sub_resource type="AtlasTexture" id=79]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 32, 32, 32 )
+region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=27]
-flags = 4
+[sub_resource type="AtlasTexture" id=80]
 atlas = ExtResource( 1 )
-region = Rect2( 96, 32, 32, 32 )
+region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=28]
-flags = 4
+[sub_resource type="AtlasTexture" id=81]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=29]
 animations = [ {
-"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
+"frames": [ SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ) ],
 "loop": true,
 "name": "Walk",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 28 ) ],
+"frames": [ SubResource( 81 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
+[sub_resource type="Gradient" id=82]
+offsets = PoolRealArray( 0.0111524, 1 )
+colors = PoolColorArray( 0.647059, 0.188235, 0.188235, 1, 0.458824, 0.141176, 0.219608, 0.494118 )
+
+[sub_resource type="GradientTexture" id=85]
+gradient = SubResource( 82 )
+
+[sub_resource type="ParticlesMaterial" id=84]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.08
+scale_random = 0.04
+color_ramp = SubResource( 85 )
+
 [sub_resource type="Animation" id=74]
 resource_name = "Attack"
-length = 0.7
+length = 0.6
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:scale")
@@ -380,10 +394,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.7 ),
+"times": PoolRealArray( 0, 0.3, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 2, 2 ), Vector2( 3, 3 ), Vector2( 2, 2 ) ]
+"values": [ Vector2( 3, 3 ), Vector2( 4, 4 ), Vector2( 3, 3 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -392,7 +406,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.4, 0.7 ),
+"times": PoolRealArray( 0.3, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -415,13 +429,14 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2, 2 ) ]
+"values": [ Vector2( 3, 3 ) ]
 }
 
 [node name="Infantry" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
 np_animated_sprite = NodePath("AnimatedSprite")
+np_boost_particule = NodePath("Particles2D")
 fsm_np = NodePath("StateMachinePlayer")
 vision_coliisionshape2d_np = NodePath("VisionArea2D/CollisionShape2D")
 data = SubResource( 76 )
@@ -430,7 +445,7 @@ is_security = true
 np_attack_animation_player = NodePath("AnimationPlayer")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+polygon = PoolVector2Array( 19, 44, -17, 44, -17, -40, 20, -40 )
 
 [node name="StateMachinePlayer" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -445,11 +460,21 @@ visible = false
 shape = SubResource( 30 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 0.788235, 0, 0, 1 )
-scale = Vector2( 2, 2 )
+scale = Vector2( 3, 3 )
 frames = SubResource( 29 )
 animation = "Walk"
+frame = 3
 playing = true
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0, 41 )
+emitting = false
+amount = 50
+lifetime = 2.0
+randomness = 0.1
+local_coords = false
+process_material = SubResource( 84 )
+texture = ExtResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 74 )

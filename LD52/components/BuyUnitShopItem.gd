@@ -1,6 +1,7 @@
 tool
 extends MarginContainer
 
+signal purchase_done
 
 export(Texture) var texture setget set_texture
 
@@ -45,3 +46,4 @@ func _on_BuyButton_pressed():
 	
 	Game.data.cattle_juice -= cost
 	Game.data.add_delivery(unit_name, item_name, amount)
+	emit_signal("purchase_done")

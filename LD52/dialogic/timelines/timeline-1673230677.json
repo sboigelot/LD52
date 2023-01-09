@@ -1,0 +1,69 @@
+{
+	"events": [
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1673048679.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1673048679.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "This country has a high security level. The cattle will try to resist its transition to juice/"
+		},
+		{
+			"character": "character-1673048679.json",
+			"event_id": "dialogic_010",
+			"options": [
+
+			],
+			"portrait": "",
+			"question": "Am I ready to start the harvest?"
+		},
+		{
+			"choice": "Yes",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"emit_signal": "confirm_harvest",
+			"event_id": "dialogic_040"
+		},
+		{
+			"choice": "No",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 1
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1673230677.json",
+		"name": "CountrySecurity"
+	}
+}

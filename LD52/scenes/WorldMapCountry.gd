@@ -12,6 +12,9 @@ export var defeated_color:Color = Color.red
 export var mouse_over_color:Color = Color.lightblue
 export var mouse_click_color:Color = Color.aqua
 
+export var anihilated_label_np: NodePath
+onready var anihilated_label = get_node(anihilated_label_np)
+
 var data: CountryData
 
 func set_polygon(values:PoolVector2Array):
@@ -29,6 +32,7 @@ func _ready():
 		return
 		
 	polygon2d.color = default_color
+	anihilated_label.visible = false
 
 func _process(delta):
 	if Engine.is_editor_hint():
@@ -39,6 +43,7 @@ func _process(delta):
 		
 	if data.remaining_population == 0:
 		polygon2d.color = defeated_color
+		anihilated_label.visible = true		
 
 func _on_Area2D_mouse_entered():
 	polygon2d.color = mouse_over_color

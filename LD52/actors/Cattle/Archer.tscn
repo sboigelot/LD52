@@ -1,6 +1,6 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=60 format=2]
 
-[ext_resource path="res://assets/Cattle/cow.png" type="Texture" id=1]
+[ext_resource path="res://assets/Alpha/archer.png" type="Texture" id=1]
 [ext_resource path="res://actors/Cattle/Infantry.gd" type="Script" id=2]
 [ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=3]
 [ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=4]
@@ -10,8 +10,10 @@
 [ext_resource path="res://data/ActorData.gd" type="Script" id=8]
 [ext_resource path="res://actors/Juice/Juice.tscn" type="PackedScene" id=9]
 [ext_resource path="res://actors/Cattle/Projectile.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/square.png" type="Texture" id=11]
 
 [sub_resource type="Resource" id=76]
+resource_local_to_scene = true
 script = ExtResource( 8 )
 max_health = 2
 health = 2.0
@@ -28,12 +30,13 @@ auto_boost_threshold = 0.0
 sigth_range = 600.0
 move_threshold = 20.0
 attack_damage = 1
-attack_range = 300.0
+attack_range = 400.0
 attack_is_melee = false
 range_attack_projectile_scene = ExtResource( 10 )
 range_attack_projectle_speed = 500.0
 suffer_knockback_on_attacks = false
-take_damage_sfx_name = "hit"
+take_damage_sfx_name = ""
+attack_sfx_name = "bow"
 
 [sub_resource type="Resource" id=40]
 script = ExtResource( 5 )
@@ -333,39 +336,50 @@ transitions = {
 [sub_resource type="CircleShape2D" id=30]
 radius = 300.0
 
-[sub_resource type="AtlasTexture" id=24]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 32, 32, 32 )
+[sub_resource type="Gradient" id=86]
+offsets = PoolRealArray( 0.0111524, 1 )
+colors = PoolColorArray( 0.458824, 0.654902, 0.262745, 1, 0.145098, 0.337255, 0.180392, 0.568627 )
 
-[sub_resource type="AtlasTexture" id=25]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 32, 32, 32, 32 )
+[sub_resource type="GradientTexture" id=87]
+gradient = SubResource( 86 )
 
-[sub_resource type="AtlasTexture" id=26]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 64, 32, 32, 32 )
+[sub_resource type="ParticlesMaterial" id=85]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.08
+scale_random = 0.04
+color_ramp = SubResource( 87 )
 
-[sub_resource type="AtlasTexture" id=27]
-flags = 4
+[sub_resource type="AtlasTexture" id=77]
 atlas = ExtResource( 1 )
-region = Rect2( 96, 32, 32, 32 )
+region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=28]
-flags = 4
+[sub_resource type="AtlasTexture" id=78]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=79]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=80]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=81]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=29]
 animations = [ {
-"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
+"frames": [ SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ) ],
 "loop": true,
 "name": "Walk",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 28 ) ],
+"frames": [ SubResource( 81 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -382,10 +396,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.9, 2.6 ),
+"times": PoolRealArray( 0, 0.9, 2.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 2, 2 ), Vector2( 3, 3 ), Vector2( 2, 2 ) ]
+"values": [ Vector2( 3, 3 ), Vector2( 4, 4 ), Vector2( 3, 3 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -394,7 +408,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.9, 2.6 ),
+"times": PoolRealArray( 0.9, 2.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -417,13 +431,14 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2, 2 ) ]
+"values": [ Vector2( 3, 3 ) ]
 }
 
 [node name="Archer" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
 np_animated_sprite = NodePath("AnimatedSprite")
+np_boost_particule = NodePath("Particles2D")
 fsm_np = NodePath("StateMachinePlayer")
 vision_coliisionshape2d_np = NodePath("VisionArea2D/CollisionShape2D")
 data = SubResource( 76 )
@@ -432,7 +447,7 @@ is_security = true
 np_attack_animation_player = NodePath("AnimationPlayer")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32, 31, -32 )
+polygon = PoolVector2Array( 20, -28, 15, 45, -14, 45, -19, -13, -32, -24, -11, -43 )
 
 [node name="StateMachinePlayer" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -446,9 +461,18 @@ collision_mask = 4
 visible = false
 shape = SubResource( 30 )
 
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0, 41 )
+emitting = false
+amount = 50
+lifetime = 2.0
+randomness = 0.1
+local_coords = false
+process_material = SubResource( 85 )
+texture = ExtResource( 11 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 0.356863, 0.788235, 0, 1 )
-scale = Vector2( 2, 2 )
+scale = Vector2( 3, 3 )
 frames = SubResource( 29 )
 animation = "Walk"
 playing = true

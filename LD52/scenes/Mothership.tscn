@@ -22,6 +22,7 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+dialog_canvas_layer_np = NodePath("DialogCanvasLayer")
 
 [node name="UI" type="PanelContainer" parent="."]
 anchor_right = 1.0
@@ -112,7 +113,7 @@ size_flags_vertical = 6
 margin_right = 1137.0
 margin_bottom = 119.0
 custom_fonts/font = ExtResource( 6 )
-text = "2 days to be delivery time
+text = "2 days delivery time
 on item and unit purchases"
 align = 1
 valign = 1
@@ -311,9 +312,19 @@ size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 8 )
 text = "Back"
 
+[node name="DialogCanvasLayer" type="CanvasLayer" parent="."]
+
 [connection signal="pressed" from="UI/ButtonBar/ButtonBar/MaginContainer/HBox/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="purchase_done" from="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer/VBoxContainer/AlienBuyButton" to="." method="_on_purchase_done"]
+[connection signal="purchase_done" from="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer/VBoxContainer/AlienBuyButtonx5" to="." method="_on_purchase_done"]
+[connection signal="purchase_done" from="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer/VBoxContainer/HoundBuyButton" to="." method="_on_purchase_done"]
+[connection signal="purchase_done" from="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer/VBoxContainer/HoundBuyButtonx5" to="." method="_on_purchase_done"]
+[connection signal="purchase_done" from="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer/VBoxContainer/TripodBuyButton" to="." method="_on_purchase_done"]
+[connection signal="purchase_done" from="UI/VBoxContainer/HBoxContainer/BarrackPanel/MarginContainer/VBoxContainer/VBoxContainer/TripodBuyButtonx5" to="." method="_on_purchase_done"]
 [connection signal="skill_purchased" from="UI/VBoxContainer/HBoxContainer/ForgePanel/MarginContainer/VBoxContainer/SkillPanel/UpgradeStatPanel" to="." method="_on_UpgradeStatPanel_skill_purchased"]
 [connection signal="skill_purchased" from="UI/VBoxContainer/HBoxContainer/ForgePanel/MarginContainer/VBoxContainer/SkillPanel/UpgradeStatPanel2" to="." method="_on_UpgradeStatPanel_skill_purchased"]
 [connection signal="skill_purchased" from="UI/VBoxContainer/HBoxContainer/ForgePanel/MarginContainer/VBoxContainer/SkillPanel/UpgradeStatPanel3" to="." method="_on_UpgradeStatPanel_skill_purchased"]
 [connection signal="skill_purchased" from="UI/VBoxContainer/HBoxContainer/ForgePanel/MarginContainer/VBoxContainer/SkillPanel/UpgradeStatPanel4" to="." method="_on_UpgradeStatPanel_skill_purchased"]
+[connection signal="purchase_done" from="UI/VBoxContainer/HBoxContainer/ItemShopPanel/MarginContainer/VBoxContainer/VBoxContainer/BuyUnitShopItem" to="." method="_on_purchase_done"]
+[connection signal="purchase_done" from="UI/VBoxContainer/HBoxContainer/ItemShopPanel/MarginContainer/VBoxContainer/VBoxContainer/BuyUnitShopItem2" to="." method="_on_purchase_done"]
 [connection signal="pressed" from="UI/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]

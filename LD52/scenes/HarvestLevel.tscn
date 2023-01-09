@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/HarvestLevel.gd" type="Script" id=1]
 [ext_resource path="res://assets/worldmap/hilltree.png" type="Texture" id=2]
@@ -13,6 +13,9 @@
 [sub_resource type="StyleBoxEmpty" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0, 0, 0, 0.556863 )
 
 [sub_resource type="Animation" id=10]
 resource_name = "Popup"
@@ -58,6 +61,61 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("SecurityLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Popup"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("NoUnitLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.9, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("NoUnitLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7, 1.3, 1.9, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 0.298039 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 0.298039 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 0.298039 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("NoUnitLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("NoUnitLabel:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -180,20 +238,20 @@ size_flags_vertical = 3
 custom_styles/panel = SubResource( 8 )
 
 [node name="HarvestCompletedPanel" type="PanelContainer" parent="ForegroundUI"]
-margin_left = 639.0
-margin_top = 463.0
-margin_right = 1280.0
-margin_bottom = 617.0
+visible = false
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 14 )
+
+[node name="MarginContainer" type="MarginContainer" parent="ForegroundUI/HarvestCompletedPanel"]
+margin_left = 646.0
+margin_top = 470.0
+margin_right = 1273.0
+margin_bottom = 610.0
 mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="ForegroundUI/HarvestCompletedPanel"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 634.0
-margin_bottom = 147.0
-mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ForegroundUI/HarvestCompletedPanel/MarginContainer"]
 margin_right = 627.0
@@ -217,16 +275,31 @@ align = 1
 
 [node name="SecurityLabel" type="Label" parent="ForegroundUI"]
 visible = false
-margin_top = 511.0
+margin_top = 480.0
 margin_right = 1920.0
-margin_bottom = 569.0
+margin_bottom = 599.0
 custom_fonts/font = ExtResource( 11 )
-text = "A new Cattle Security Force joined the battle!"
+text = "A new Cattle Security Force
+joined the battle!"
 align = 1
 
 [node name="SecurityAnimationPlayer" type="AnimationPlayer" parent="ForegroundUI"]
 anims/Popup = SubResource( 10 )
 anims/RESET = SubResource( 11 )
+
+[node name="NoUnitLabel" type="Label" parent="ForegroundUI"]
+visible = false
+margin_top = 460.0
+margin_right = 1920.0
+margin_bottom = 619.0
+custom_fonts/font = ExtResource( 12 )
+text = "No unit left
+Harvest will end in !"
+align = 1
+
+[node name="NoUnitAnimationPlayer" type="AnimationPlayer" parent="ForegroundUI"]
+anims/Popup = SubResource( 12 )
+anims/RESET = SubResource( 13 )
 
 [node name="Juice" parent="." instance=ExtResource( 9 )]
 position = Vector2( 860, 617 )

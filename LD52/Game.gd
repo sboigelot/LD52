@@ -35,3 +35,10 @@ func transition_to_scene(scene_path):
 	ScreenTransition.set_transition_color(colors[color_index])
 	ScreenTransition.set_transition_texture(textures[texture_index])
 	ScreenTransition.transition_to_scene(scene_path)
+
+func _input(_event):
+	if Input.is_action_just_released("toggle_fullscreen"):
+		OS.window_fullscreen = !OS.window_fullscreen
+
+func voice_gen(text):
+	$VoiceGeneratorAudioStreamPlayer.read(text)

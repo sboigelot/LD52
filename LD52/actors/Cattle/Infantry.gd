@@ -64,7 +64,10 @@ func attack_alien():
 		attack_animation_player.stop()
 		fsm.set_trigger("alien_lost")
 		return
-		
+
+	if data.attack_sfx_name != "":
+		SfxManager.play(data.attack_sfx_name)
+
 	if data.attack_is_melee:
 		attack_alien_melee()
 	else:

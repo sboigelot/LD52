@@ -1,0 +1,35 @@
+{
+	"events": [
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1673048679.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": true,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1673048679.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "[wave amp=50 freq=2]Oooooww![/wave]\nI spent a lot of cattle juice! I should be careful and keep enough of it to be able to pay my weekly tax."
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1673230214.json",
+		"name": "BigSpender"
+	}
+}

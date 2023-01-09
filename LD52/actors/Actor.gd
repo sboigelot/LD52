@@ -140,7 +140,8 @@ func take_damage(damage):
 	if data.invincible:
 		return
 	
-#	SfxManager.play(data.take_damage_sfx_name)
+#	if data.take_damage_sfx_name != "":
+#		SfxManager.play(data.take_damage_sfx_name)
 	data.health -= damage
 	if data.health <= 0:
 		die()

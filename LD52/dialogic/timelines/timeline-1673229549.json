@@ -1,0 +1,35 @@
+{
+	"events": [
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1673048679.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1673048679.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Ok here I go! My first Harvest outside of the simulator!\nEverything will be O.K. I should just remember to call my armies from the bottom of my control panel.\nHarvest as much cattle as possible and collect their juices.\nThe harvest will end after 60 seconds or if I don't have any army left in the country"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1673229549.json",
+		"name": "FirstHarvest"
+	}
+}

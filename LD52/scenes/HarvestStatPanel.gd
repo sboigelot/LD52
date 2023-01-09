@@ -3,6 +3,8 @@ extends MarginContainer
 
 class_name HarvestStatPanel
 
+signal animation_completed
+
 export var stat_name: String setget set_stat_name
 func set_stat_name(value):
 	
@@ -22,8 +24,8 @@ func set_max_value(v):
 
 export var value: int setget set_value
 func set_value(v):
-	if $MarginContainer/VBoxContainer/HBoxContainer/CostLabel != null:
-		$MarginContainer/VBoxContainer/HBoxContainer/CostLabel.text = "%d" % v
+	if $MarginContainer/VBoxContainer/HBoxContainer/ProgressBar/CostLabel != null:
+		$MarginContainer/VBoxContainer/HBoxContainer/ProgressBar/CostLabel.text = "%d" % v
 	
 	if $MarginContainer/VBoxContainer/HBoxContainer/ProgressBar != null:
 		$MarginContainer/VBoxContainer/HBoxContainer/ProgressBar.value = v
@@ -40,9 +42,9 @@ func set_increment_text(v):
 export var info_hint: String setget set_info_hint
 func set_info_hint(value):
 	
-	if $MarginContainer/VBoxContainer/InfoLabel != null:
-		$MarginContainer/VBoxContainer/InfoLabel.text = value
-		$MarginContainer/VBoxContainer/InfoLabel.visible = value != ""
+	if $MarginContainer/VBoxContainer/Margin/InfoLabel != null:
+		$MarginContainer/VBoxContainer/Margin/InfoLabel.text = value
+		$MarginContainer/VBoxContainer/Margin/InfoLabel.visible = value != ""
 		
 	info_hint = value
 
@@ -60,3 +62,5 @@ func anim_value_to(to:int, delay:float):
 			self.value -= 1
 			self.increment_text = "-%d" % (i+1)
 		yield(get_tree().create_timer(delay / abs(increment)), "timeout")
+	
+	emit_signal("animation_completed")

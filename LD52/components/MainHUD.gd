@@ -80,3 +80,5 @@ func update_ui():
 
 	var tax_label = $TopBar/MaginContainer/HBox/TaxPanelContainer/MarginContainer/HBoxContainer/TaxCountLabel
 	tax_label.text = "%05d" % Game.data.get_week_tax()
+
+

@@ -14,6 +14,7 @@ export var day: int = 1
 export var time_of_day: float = 0.0
 export var day_paused:bool = false
 export var missed_taxes_once: bool = false
+export var skip_all_tutorial: bool = false
 
 var seen_dialogs: Array
 
@@ -85,6 +86,7 @@ func add_delivery(unit_name, item_name, amount):
 
 func on_delivery_arrived(data:DeliveryData):
 	add_to_army(data.unit_names, data.item_names)
+	data.queue_free()
 	
 func add_to_army(unit_names, item_names, amount = 1):
 	var army = Game.data.get_army()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://assets/Alpha/SpriteFrameYves.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://actors/Cattle/Cattle.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/Alpha/SpriteFramesVar2.tres" type="SpriteFrames" id=11]
 [ext_resource path="res://assets/Alpha/SpriteFrameFresch01.tres" type="SpriteFrames" id=12]
 [ext_resource path="res://assets/Alpha/SpriteFramesVar3.tres" type="SpriteFrames" id=13]
+[ext_resource path="res://assets/square.png" type="Texture" id=14]
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 5 )
@@ -223,10 +224,27 @@ transitions = {
 [sub_resource type="CircleShape2D" id=30]
 radius = 300.0
 
+[sub_resource type="Gradient" id=38]
+offsets = PoolRealArray( 0.0111524, 1 )
+colors = PoolColorArray( 0.726563, 0.726563, 0.726563, 0.443137, 0.560784, 0.337255, 0.231373, 0 )
+
+[sub_resource type="GradientTexture" id=41]
+gradient = SubResource( 38 )
+
+[sub_resource type="ParticlesMaterial" id=40]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.08
+scale_random = 0.04
+color_ramp = SubResource( 41 )
+
 [node name="CattleGeoffrey" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
 np_animated_sprite = NodePath("AnimatedSprite")
+np_boost_particule = NodePath("Particles2D")
 fsm_np = NodePath("StateMachinePlayer")
 vision_coliisionshape2d_np = NodePath("VisionArea2D/CollisionShape2D")
 juice_scene = ExtResource( 9 )
@@ -250,11 +268,22 @@ collision_mask = 4
 visible = false
 shape = SubResource( 30 )
 
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0, 34 )
+emitting = false
+amount = 50
+lifetime = 2.0
+randomness = 0.1
+local_coords = false
+process_material = SubResource( 40 )
+texture = ExtResource( 14 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = ExtResource( 8 )
 scale = Vector2( 3, 3 )
 frames = ExtResource( 1 )
 animation = "Walk"
+frame = 1
 playing = true
 
 [connection signal="transited" from="StateMachinePlayer" to="." method="_on_StateMachinePlayer_transited"]

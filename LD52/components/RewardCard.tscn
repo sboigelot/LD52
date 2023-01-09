@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/Juice/juicebox.png" type="Texture" id=1]
-[ext_resource path="res://assets/worldmap/hilltree.png" type="Texture" id=2]
+[ext_resource path="res://assets/Cards/card_back.png" type="Texture" id=2]
 [ext_resource path="res://fonts/ld52/ld52_def_large.tres" type="DynamicFont" id=3]
 [ext_resource path="res://components/RewardCard.gd" type="Script" id=4]
 [ext_resource path="res://fonts/ld52/ld52_def_normal.tres" type="DynamicFont" id=5]
@@ -24,7 +24,7 @@ border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color( 0.541176, 0, 0.6, 1 )
+border_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 draw_center = false

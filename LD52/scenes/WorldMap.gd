@@ -26,6 +26,7 @@ func _ready():
 		else:
 			printerr("Country %s not found in data" % country.display_name)
 	
+	Game.data.connect("end_of_day", self, "on_end_of_day")
 	Game.data.connect("end_of_week", self, "on_end_of_week")
 
 	$MothershipArea2D/AnimationPlayer.play("Hover")
@@ -34,24 +35,39 @@ func _ready():
 	
 	spawn_deliveries()
 	
-	if Game.data.get_current_cattle_sum() == 0:
+	var cattle_sum = Game.data.get_current_cattle_sum()
+	if cattle_sum == 0:
 		show_dialog("victory", false)
+	elif cattle_sum < Game.data.get_initial_cattle_sum(): 
+		show_dialog("FirstBackInWorld", true)
+		
+func _on_QuitButton_pressed():
+	show_dialog("QuitGame", false)
 	
-func show_dialog(dialog_name, once_only:bool):
-	if once_only:
+func show_dialog(dialog_name, is_tutorial:bool)->bool:
+	if Game.data.skip_all_tutorial and is_tutorial:
+		return false
+		
+	if is_tutorial:
 		if Game.data.seen_dialogs.has(dialog_name):
-			return
+			return false
 		Game.data.seen_dialogs.append(dialog_name)
 	
 	Game.data.day_paused = true
 	var dialog = Dialogic.start(dialog_name)
 	dialog.connect("dialogic_signal", self, "on_dialogic_signal")
 	dialog.connect("timeline_end", self, "on_dialogic_timeline_end")
+	dialog.connect("letter_displayed", self, "on_dialogic_letter_displayed")
 	dialog_canvas_layer.add_child(dialog)
+	return true
+
+func on_end_of_day():
+	Dialogic.set_variable("days", Game.data.day)
 
 func on_end_of_week():
 	var weektax = Game.data.get_last_week_tax()
 	Dialogic.set_variable("weektax", weektax)
+	Dialogic.set_variable("nextweektax", Game.data.get_week_tax())
 	
 	if Game.data.cattle_juice >= weektax:
 		show_dialog("EndWeekTaxOk", false)
@@ -72,8 +88,21 @@ func on_dialogic_signal(signal_param):
 		"game_over":
 			Game.transition_to_scene("res://scenes/MainMenu.tscn")
 			
+		"skip_all":
+			Game.data.skip_all_tutorial = true
+			
+		"confirm_harvest":
+			Game.transition_to_scene("res://scenes/HarvestLevel.tscn")
+			
+		"quit_game":
+			Game.transition_to_scene("res://scenes/MainMenu.tscn")
+			
+	
 func on_dialogic_timeline_end(timeline):
 	Game.data.day_paused = false	
+	
+func on_dialogic_letter_displayed(letter):
+	Game.voice_gen(letter)
 
 func blink_country(display_name, color, times, delay):
 	for country in countries.get_children():
@@ -92,6 +121,7 @@ func _process(delta):
 	update_day_shadow()
 
 func _on_MothershipArea2D_mouse_clicked(country):
+	SfxManager.play("buttonpress")
 	Game.transition_to_scene("res://scenes/Mothership.tscn")
 	
 func update_day_shadow():
@@ -115,9 +145,7 @@ func on_delivery_delivered(data:DeliveryData):
 	Game.data.on_delivery_arrived(data)
 	$ForegroundUI/MainHUD.update_unit_slots()
 
-
 func _on_PauseButton_toggled(button_pressed):
-	
-	$ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox/PauseButton.text = "play" if button_pressed else "pause"
-	
+	SfxManager.play("buttonpress")
+	$ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox/PauseButton.text = "unpause" if button_pressed else "pause"
 	Game.data.day_paused = button_pressed

@@ -9,6 +9,10 @@ export var destination:Vector2 = Vector2(1300, 0)
 export var time_since_picked_up: float
 var move_threshold:float = 20.0
 
+func _ready():
+	$Label.visible = false
+	$AnimationPlayer.play("JuiceAnim")
+
 func _process(delta):
 	if picked:
 		time_since_picked_up +=  delta
@@ -21,6 +25,8 @@ func _process(delta):
 		return
 	
 	picked = true
+	$Label.visible = false
+	$AnimationPlayer.stop()
 	
 func move_to_destination(delta):
 	if global_position.distance_to(destination) < move_threshold:
@@ -36,3 +42,5 @@ func reach_destination():
 	Game.data.cattle_juice += 1
 	queue_free()
 			
+func show_juice_label():
+	$Label.visible = true

@@ -28,4 +28,5 @@ export var range_attack_projectile_scene: PackedScene
 export var range_attack_projectle_speed:float = 200
 
 export var suffer_knockback_on_attacks: bool = false
-export var take_damage_sfx_name: String = "hit"
+export var take_damage_sfx_name: String = ""
+export var attack_sfx_name: String = ""

@@ -1,13 +1,58 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://actors/Juice/Juice.gd" type="Script" id=1]
 [ext_resource path="res://assets/Juice/juicebox.png" type="Texture" id=2]
+[ext_resource path="res://fonts/ld52/ld52_def_xsmall.tres" type="DynamicFont" id=3]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 2.6738, 0, 0, Vector2( 0.255, 0.472727 ), 1.59645, 1.59645, 0, 0, Vector2( 1, 1 ), 1.4, 0.0, 0, 0 ]
 
+[sub_resource type="Animation" id=2]
+resource_name = "JuiceAnim"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 3.0, 0.0, -3.0, 0.0, 3.0, 0.0, -3.0, 0.0, 3.0, 0.0, -3.0, 0.0, 3.0, 0.0, -3.0, 0.0, -3.0, 0.0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "show_juice_label"
+} ]
+}
+
 [node name="Juice" type="Sprite"]
 pause_mode = 2
+rotation = -0.0523599
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
 speed_curve = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+visible = false
+margin_left = -52.5394
+margin_top = 43.1927
+margin_right = 53.4606
+margin_bottom = 65.1927
+custom_fonts/font = ExtResource( 3 )
+text = "Collect me!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+anims/JuiceAnim = SubResource( 2 )

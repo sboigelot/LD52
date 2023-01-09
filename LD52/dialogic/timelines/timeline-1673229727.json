@@ -1,0 +1,35 @@
+{
+	"events": [
+		{
+			"animation": "1-fade_in.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1673048679.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1673048679.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I did it! It was not too difficult!\nBut I will need more soldiers and a better army.\nI should visit the mothership to see what I can purchase."
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1673229727.json",
+		"name": "FirstBackInWorld"
+	}
+}

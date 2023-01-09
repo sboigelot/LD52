@@ -8,7 +8,7 @@ var cattle_target : Cattle
 export(NodePath) var np_attack_animation_player
 onready var attack_animation_player = get_node_or_null(np_attack_animation_player) as AnimationPlayer
 
-func _on_StateMachinePlayer_transited(from, to):
+func _on_StateMachinePlayer_transited(_from, _to):
 	time_in_state = 0.0
 	
 func _on_StateMachinePlayer_updated(state, delta):
@@ -67,6 +67,9 @@ func attack_cattle():
 		fsm.set_trigger("cattle_lost")
 		return
 	
+	if data.attack_sfx_name != "":
+		SfxManager.play(data.attack_sfx_name)
+		
 	cattle_target.take_damage(data.attack_damage)
 	if cattle_target.data.health <= 0:
 		attack_animation_player.stop()

@@ -68,6 +68,8 @@ func _ready() :
 	material.set_shader_param("scale", scale)
 	
 func compute_impact_pos(body):
+	if body == null:
+		return
 	var size = get_rect().size * scale
 	var sprite_top_left = global_position - size / 2;
 	var body_pos_relative_top_left = body.global_position - sprite_top_left

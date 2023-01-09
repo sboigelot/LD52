@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/WorldMap.gd" type="Script" id=1]
 [ext_resource path="res://components/WorldMapCountry.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://components/MainHUD.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/worldmap/dayshadow.png" type="Texture" id=8]
 [ext_resource path="res://actors/Deliveriy/Delivery.tscn" type="PackedScene" id=9]
+[ext_resource path="res://fonts/ld52/ld52_def_large.tres" type="DynamicFont" id=10]
 [ext_resource path="res://fonts/ld52/ld52_def_xsmall.tres" type="DynamicFont" id=11]
 [ext_resource path="res://assets/mothership/mothership3.png" type="Texture" id=12]
 [ext_resource path="res://scenes/MothershipArea2D.gd" type="Script" id=13]
@@ -16,6 +17,18 @@
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.86, 0.301, 0.301, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 0.32, 0.32, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.372549, 0.372549, 0.372549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.713726, 0.247059, 0.247059, 1 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "Hover"
@@ -89,6 +102,7 @@ default_color = Color( 1, 1, 1, 0 )
 defeated_color = Color( 1, 0, 0, 0.458824 )
 mouse_over_color = Color( 0.678431, 0.847059, 0.901961, 0.411765 )
 mouse_click_color = Color( 0, 1, 1, 0.596078 )
+anihilated_label_np = NodePath("../../ForegroundUI/AnihilatedCountriesLabels/Belgium")
 
 [node name="Turkey" parent="Countries" instance=ExtResource( 2 )]
 display_name = "Turkey"
@@ -97,6 +111,7 @@ default_color = Color( 1, 1, 1, 0 )
 defeated_color = Color( 1, 0, 0, 0.458824 )
 mouse_over_color = Color( 0.678431, 0.847059, 0.901961, 0.411765 )
 mouse_click_color = Color( 0, 1, 1, 0.596078 )
+anihilated_label_np = NodePath("../../ForegroundUI/AnihilatedCountriesLabels/Turkey")
 
 [node name="Greece" parent="Countries" instance=ExtResource( 2 )]
 display_name = "Greece"
@@ -105,6 +120,7 @@ default_color = Color( 1, 1, 1, 0 )
 defeated_color = Color( 1, 0, 0, 0.458824 )
 mouse_over_color = Color( 0.678431, 0.847059, 0.901961, 0.411765 )
 mouse_click_color = Color( 0, 1, 1, 0.596078 )
+anihilated_label_np = NodePath("../../ForegroundUI/AnihilatedCountriesLabels/Greece")
 
 [node name="UK" parent="Countries" instance=ExtResource( 2 )]
 display_name = "United Kingdoms"
@@ -113,6 +129,7 @@ default_color = Color( 1, 1, 1, 0 )
 defeated_color = Color( 1, 0, 0, 0.458824 )
 mouse_over_color = Color( 0.678431, 0.847059, 0.901961, 0.411765 )
 mouse_click_color = Color( 0, 1, 1, 0.596078 )
+anihilated_label_np = NodePath("../../ForegroundUI/AnihilatedCountriesLabels/UK")
 
 [node name="USA" parent="Countries" instance=ExtResource( 2 )]
 display_name = "United States"
@@ -121,6 +138,7 @@ default_color = Color( 1, 1, 1, 0 )
 defeated_color = Color( 1, 0, 0, 0.458824 )
 mouse_over_color = Color( 0.678431, 0.847059, 0.901961, 0.411765 )
 mouse_click_color = Color( 0, 1, 1, 0.596078 )
+anihilated_label_np = NodePath("../../ForegroundUI/AnihilatedCountriesLabels/USA")
 
 [node name="Deliveries" type="Node2D" parent="."]
 
@@ -144,7 +162,7 @@ anchor_bottom = 0.0
 unit_slot_clickable = false
 
 [node name="SpeedBar" type="MarginContainer" parent="ForegroundUI"]
-margin_left = 1800.0
+margin_left = 1678.0
 margin_right = 1920.0
 margin_bottom = 94.0
 size_flags_horizontal = 8
@@ -153,14 +171,14 @@ custom_constants/margin_top = 44
 
 [node name="SpeedBar" type="PanelContainer" parent="ForegroundUI/SpeedBar"]
 margin_top = 44.0
-margin_right = 120.0
+margin_right = 242.0
 margin_bottom = 94.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
 custom_styles/panel = SubResource( 3 )
 
 [node name="MaginContainer" type="MarginContainer" parent="ForegroundUI/SpeedBar/SpeedBar"]
-margin_right = 120.0
+margin_right = 242.0
 margin_bottom = 50.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
@@ -170,7 +188,7 @@ custom_constants/margin_bottom = 10
 [node name="HBox" type="HBoxContainer" parent="ForegroundUI/SpeedBar/SpeedBar/MaginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 110.0
+margin_right = 232.0
 margin_bottom = 40.0
 custom_constants/separation = 10
 
@@ -182,9 +200,16 @@ custom_fonts/font = ExtResource( 11 )
 toggle_mode = true
 text = "Pause"
 
+[node name="QuitButton" type="Button" parent="ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox"]
+margin_left = 110.0
+margin_right = 222.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 11 )
+text = "Quit Game"
+
 [node name="CountryPanelMargin" type="MarginContainer" parent="ForegroundUI"]
 margin_left = 1482.0
-margin_top = 726.0
+margin_top = 770.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 8
@@ -196,7 +221,7 @@ custom_constants/margin_bottom = 20
 [node name="CountryPanel" type="PanelContainer" parent="ForegroundUI/CountryPanelMargin"]
 unique_name_in_owner = true
 margin_right = 434.0
-margin_bottom = 334.0
+margin_bottom = 290.0
 size_flags_horizontal = 10
 size_flags_vertical = 10
 script = ExtResource( 6 )
@@ -204,14 +229,17 @@ country_name_label_np = NodePath("MaginContainer/VBox/VBoxContainer/CountryNameL
 init_pop_label_np = NodePath("MaginContainer/VBox/GridContainer/InitialPopCountLabel")
 remain_pop_label_np = NodePath("MaginContainer/VBox/GridContainer/RemainingPopulationCountLabel")
 secu_lvl_label_np = NodePath("MaginContainer/VBox/GridContainer/SecurityLevelCountLabel")
+secu_lvl_hbox_np = NodePath("MaginContainer/VBox/GridContainer/SecurityLevelHBox")
 panic_lvl_label_np = NodePath("MaginContainer/VBox/GridContainer/PanicLevelCountLabel")
+panic_lvl_hbox_np = NodePath("MaginContainer/VBox/GridContainer/PanicLevelHBox")
 harvest_button_np = NodePath("MaginContainer/VBox/HarvestButton")
+world_view_np = NodePath("../../..")
 
 [node name="MaginContainer" type="MarginContainer" parent="ForegroundUI/CountryPanelMargin/CountryPanel"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 427.0
-margin_bottom = 327.0
+margin_bottom = 283.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -221,13 +249,13 @@ custom_constants/margin_bottom = 10
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 410.0
-margin_bottom = 310.0
+margin_bottom = 266.0
 rect_min_size = Vector2( 400, 0 )
-custom_constants/separation = 40
+custom_constants/separation = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox"]
 margin_right = 400.0
-margin_bottom = 43.0
+margin_bottom = 45.0
 
 [node name="CountryNameLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/VBoxContainer"]
 margin_right = 400.0
@@ -239,16 +267,18 @@ align = 1
 [node name="ColorRect" type="ColorRect" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/VBoxContainer"]
 margin_top = 43.0
 margin_right = 400.0
-margin_bottom = 43.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 0, 2 )
 
 [node name="GridContainer" type="GridContainer" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox"]
-margin_top = 83.0
+margin_top = 65.0
 margin_right = 400.0
-margin_bottom = 215.0
+margin_bottom = 197.0
+custom_constants/hseparation = 20
 columns = 2
 
 [node name="InitialPopLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
-margin_right = 267.0
+margin_right = 223.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -256,26 +286,25 @@ custom_fonts/font = ExtResource( 5 )
 text = "Initial Population"
 
 [node name="InitialPopCountLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
-margin_left = 271.0
+margin_left = 243.0
 margin_right = 400.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 5 )
 text = "10 Mil"
-align = 1
 
 [node name="RemainingPopulationLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
 margin_top = 34.0
-margin_right = 267.0
+margin_right = 223.0
 margin_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 5 )
-text = "Remaing Population"
+text = "Population Left"
 
 [node name="RemainingPopulationCountLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
-margin_left = 271.0
+margin_left = 243.0
 margin_top = 34.0
 margin_right = 400.0
 margin_bottom = 64.0
@@ -283,11 +312,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 5 )
 text = "10 Mil"
-align = 1
 
 [node name="PanicLevelLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
 margin_top = 68.0
-margin_right = 267.0
+margin_right = 223.0
 margin_bottom = 98.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -295,19 +323,68 @@ custom_fonts/font = ExtResource( 5 )
 text = "Panic Level"
 
 [node name="PanicLevelCountLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+visible = false
 margin_left = 271.0
 margin_top = 68.0
-margin_right = 400.0
+margin_right = 459.0
 margin_bottom = 98.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 5 )
 text = "0"
-align = 1
+
+[node name="PanicLevelHBox" type="HBoxContainer" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_left = 243.0
+margin_top = 73.0
+margin_right = 383.0
+margin_bottom = 93.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer/PanicLevelHBox"]
+margin_right = 20.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_vertical = 4
+
+[node name="ColorRect2" type="ColorRect" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer/PanicLevelHBox"]
+margin_left = 24.0
+margin_right = 44.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_vertical = 4
+
+[node name="ColorRect3" type="ColorRect" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer/PanicLevelHBox"]
+margin_left = 48.0
+margin_right = 68.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_vertical = 4
+
+[node name="ColorRect4" type="ColorRect" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer/PanicLevelHBox"]
+margin_left = 72.0
+margin_right = 92.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_vertical = 4
+
+[node name="ColorRect5" type="ColorRect" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer/PanicLevelHBox"]
+margin_left = 96.0
+margin_right = 116.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_vertical = 4
+
+[node name="ColorRect6" type="ColorRect" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer/PanicLevelHBox"]
+margin_left = 120.0
+margin_right = 140.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_vertical = 4
 
 [node name="SecurityLevelLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
 margin_top = 102.0
-margin_right = 267.0
+margin_right = 223.0
 margin_bottom = 132.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -315,6 +392,7 @@ custom_fonts/font = ExtResource( 5 )
 text = "Security Level"
 
 [node name="SecurityLevelCountLabel" type="Label" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+visible = false
 margin_left = 271.0
 margin_top = 102.0
 margin_right = 400.0
@@ -323,14 +401,118 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 5 )
 text = "0"
-align = 1
+
+[node name="SecurityLevelHBox" type="HBoxContainer" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer"]
+margin_left = 243.0
+margin_top = 107.0
+margin_right = 383.0
+margin_bottom = 127.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer/SecurityLevelHBox"]
+margin_right = 20.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_vertical = 4
+
+[node name="ColorRect2" type="ColorRect" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer/SecurityLevelHBox"]
+margin_left = 24.0
+margin_right = 44.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_vertical = 4
+
+[node name="ColorRect3" type="ColorRect" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer/SecurityLevelHBox"]
+margin_left = 48.0
+margin_right = 68.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_vertical = 4
+
+[node name="ColorRect4" type="ColorRect" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer/SecurityLevelHBox"]
+margin_left = 72.0
+margin_right = 92.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_vertical = 4
+
+[node name="ColorRect5" type="ColorRect" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer/SecurityLevelHBox"]
+margin_left = 96.0
+margin_right = 116.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_vertical = 4
+
+[node name="ColorRect6" type="ColorRect" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/GridContainer/SecurityLevelHBox"]
+margin_left = 120.0
+margin_right = 140.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_vertical = 4
 
 [node name="HarvestButton" type="Button" parent="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox"]
-margin_top = 255.0
+margin_top = 217.0
 margin_right = 400.0
-margin_bottom = 300.0
+margin_bottom = 256.0
 custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
 text = "Harvest Cattle"
+
+[node name="AnihilatedCountriesLabels" type="Node2D" parent="ForegroundUI"]
+
+[node name="Belgium" type="Label" parent="ForegroundUI/AnihilatedCountriesLabels"]
+margin_left = 1049.0
+margin_top = 233.0
+margin_right = 1341.0
+margin_bottom = 291.0
+rect_rotation = -28.4011
+rect_pivot_offset = Vector2( 146, 29 )
+custom_fonts/font = ExtResource( 10 )
+text = "Annihilated!"
+
+[node name="Turkey" type="Label" parent="ForegroundUI/AnihilatedCountriesLabels"]
+margin_left = 596.0
+margin_top = 320.0
+margin_right = 888.0
+margin_bottom = 378.0
+rect_rotation = -19.5414
+rect_pivot_offset = Vector2( 146, 29 )
+custom_fonts/font = ExtResource( 10 )
+text = "Annihilated!"
+
+[node name="Greece" type="Label" parent="ForegroundUI/AnihilatedCountriesLabels"]
+margin_left = 1056.0
+margin_top = 579.0
+margin_right = 1348.0
+margin_bottom = 637.0
+rect_rotation = -24.2712
+rect_pivot_offset = Vector2( 146, 29 )
+custom_fonts/font = ExtResource( 10 )
+text = "Annihilated!"
+
+[node name="UK" type="Label" parent="ForegroundUI/AnihilatedCountriesLabels"]
+margin_left = 1496.0
+margin_top = 356.0
+margin_right = 1788.0
+margin_bottom = 414.0
+rect_rotation = 36.865
+rect_pivot_offset = Vector2( 146, 29 )
+custom_fonts/font = ExtResource( 10 )
+text = "Annihilated!"
+
+[node name="USA" type="Label" parent="ForegroundUI/AnihilatedCountriesLabels"]
+margin_left = 259.0
+margin_top = 484.0
+margin_right = 551.0
+margin_bottom = 542.0
+rect_rotation = 63.5536
+rect_pivot_offset = Vector2( 146, 29 )
+custom_fonts/font = ExtResource( 10 )
+text = "Annihilated!"
 
 [node name="MothershipArea2D" type="Area2D" parent="."]
 script = ExtResource( 13 )
@@ -351,6 +533,7 @@ polygon = PoolVector2Array( -279, -211.8, -279, -210.2, -257.5, -199, -253.9, -1
 anims/Hover = SubResource( 4 )
 
 [connection signal="toggled" from="ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox/PauseButton" to="." method="_on_PauseButton_toggled"]
+[connection signal="pressed" from="ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="pressed" from="ForegroundUI/CountryPanelMargin/CountryPanel/MaginContainer/VBox/HarvestButton" to="ForegroundUI/CountryPanelMargin/CountryPanel" method="_on_HarvestButton_pressed"]
 [connection signal="input_event" from="MothershipArea2D" to="MothershipArea2D" method="_on_MothershipArea2D_input_event"]
 [connection signal="mouse_clicked" from="MothershipArea2D" to="." method="_on_MothershipArea2D_mouse_clicked"]

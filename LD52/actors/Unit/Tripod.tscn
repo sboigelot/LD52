@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://actors/Unit/Unit.gd" type="Script" id=1]
 [ext_resource path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" type="Script" id=2]
@@ -7,6 +7,23 @@
 [ext_resource path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" type="Script" id=5]
 [ext_resource path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" type="Script" id=6]
 [ext_resource path="res://assets/Alpha/tripod.png" type="Texture" id=7]
+[ext_resource path="res://assets/square.png" type="Texture" id=8]
+
+[sub_resource type="Gradient" id=62]
+offsets = PoolRealArray( 0.0111524, 1 )
+colors = PoolColorArray( 0.705027, 0.2888, 0.76, 1, 0.47552, 0.2112, 0.48, 0.333333 )
+
+[sub_resource type="GradientTexture" id=63]
+gradient = SubResource( 62 )
+
+[sub_resource type="ParticlesMaterial" id=64]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.12
+scale_random = 0.04
+color_ramp = SubResource( 63 )
 
 [sub_resource type="AtlasTexture" id=57]
 atlas = ExtResource( 7 )
@@ -349,7 +366,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 3, 3 ), Vector2( 3, 3 ), Vector2( 3, 3 ) ]
+"values": [ Vector2( 3, 3 ), Vector2( 4, 4 ), Vector2( 3, 3 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -388,9 +405,20 @@ tracks/0/keys = {
 collision_layer = 4
 script = ExtResource( 1 )
 np_animated_sprite = NodePath("AnimatedSprite")
+np_boost_particule = NodePath("Particles2D")
 fsm_np = NodePath("StateMachinePlayer")
 vision_coliisionshape2d_np = NodePath("VisionArea2D/CollisionShape2D")
 np_attack_animation_player = NodePath("AnimationPlayer")
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0, 44 )
+emitting = false
+amount = 50
+lifetime = 2.0
+randomness = 0.1
+local_coords = false
+process_material = SubResource( 64 )
+texture = ExtResource( 8 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )
@@ -398,7 +426,8 @@ frames = SubResource( 55 )
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 15, 30, -9, 30, -8, -29, 15, -29 )
+visible = false
+polygon = PoolVector2Array( 16, 43, -9, 44, -13, -3, -8, -44, 20, -44, 26, 3 )
 
 [node name="StateMachinePlayer" type="Node" parent="."]
 script = ExtResource( 2 )

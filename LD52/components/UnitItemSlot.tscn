@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fonts/ld52/ld52_def_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://components/UnitItemSlot.gd" type="Script" id=3]
+[ext_resource path="res://fonts/ld52/ld52_def_xxsmall.tres" type="DynamicFont" id=4]
+[ext_resource path="res://fonts/ld52/ld52_def_xsmall.tres" type="DynamicFont" id=5]
 
 [node name="UnitItemSlot" type="MarginContainer"]
 margin_right = 80.0
@@ -13,6 +15,98 @@ amount = 2
 texture = ExtResource( 2 )
 
 [node name="Node2D" type="Node2D" parent="."]
+
+[node name="StatContainer" type="PanelContainer" parent="Node2D"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -17.0
+margin_top = -120.0
+margin_right = 97.0
+margin_bottom = -84.0
+rect_pivot_offset = Vector2( 7, 7 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node2D/StatContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 107.0
+margin_bottom = 109.0
+
+[node name="NameLabel" type="Label" parent="Node2D/StatContainer/VBoxContainer"]
+margin_right = 100.0
+margin_bottom = 22.0
+custom_fonts/font = ExtResource( 5 )
+text = "Unit Name"
+align = 1
+
+[node name="GridContainer" type="GridContainer" parent="Node2D/StatContainer/VBoxContainer"]
+margin_top = 26.0
+margin_right = 100.0
+margin_bottom = 102.0
+columns = 2
+
+[node name="HealthLabel" type="Label" parent="Node2D/StatContainer/VBoxContainer/GridContainer"]
+margin_right = 87.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+text = "Health"
+
+[node name="Health" type="Label" parent="Node2D/StatContainer/VBoxContainer/GridContainer"]
+margin_left = 91.0
+margin_right = 100.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 4 )
+text = "1"
+
+[node name="SpeedLabel" type="Label" parent="Node2D/StatContainer/VBoxContainer/GridContainer"]
+margin_top = 20.0
+margin_right = 87.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+text = "Speed"
+
+[node name="Speed" type="Label" parent="Node2D/StatContainer/VBoxContainer/GridContainer"]
+margin_left = 91.0
+margin_top = 20.0
+margin_right = 100.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 4 )
+text = "1"
+
+[node name="AttackLabel" type="Label" parent="Node2D/StatContainer/VBoxContainer/GridContainer"]
+margin_top = 40.0
+margin_right = 87.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+text = "Attack"
+
+[node name="Attack" type="Label" parent="Node2D/StatContainer/VBoxContainer/GridContainer"]
+margin_left = 91.0
+margin_top = 40.0
+margin_right = 100.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 4 )
+text = "1"
+
+[node name="SightLabel" type="Label" parent="Node2D/StatContainer/VBoxContainer/GridContainer"]
+margin_top = 60.0
+margin_right = 87.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+text = "Sight"
+
+[node name="Sight" type="Label" parent="Node2D/StatContainer/VBoxContainer/GridContainer"]
+margin_left = 91.0
+margin_top = 60.0
+margin_right = 100.0
+margin_bottom = 76.0
+custom_fonts/font = ExtResource( 4 )
+text = "1"
 
 [node name="Button" type="Button" parent="Node2D"]
 margin_top = -20.0
@@ -38,4 +132,6 @@ text = "x2"
 align = 2
 valign = 2
 
+[connection signal="mouse_entered" from="Node2D/Button" to="." method="_on_Button_mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Button" to="." method="_on_Button_mouse_exited"]
 [connection signal="pressed" from="Node2D/Button" to="." method="_on_Button_pressed"]

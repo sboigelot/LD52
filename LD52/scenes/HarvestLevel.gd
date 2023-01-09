@@ -30,7 +30,7 @@ var transition_started:bool = false
 
 var security_to_spawn: Array
 
-var no_unit_max_duation: float = 5.0
+var no_unit_max_duration: float = 10.0
 var no_unit_timer: float = 0.0
 
 func _ready():
@@ -50,6 +50,8 @@ func _ready():
 	spawn_cattles()
 	security_to_spawn = selected_country.get_security().duplicate()
 
+	show_dialog("FirstHarvest", true)
+	
 func spawn_cattles():	
 	var count = min(selected_country.max_cattle_per_harvest, selected_country.remaining_population)
 	
@@ -57,15 +59,15 @@ func spawn_cattles():
 	for i in count:
 		var cattle = selected_country.cattle_scene.instance()
 		cattle.position = Vector2(
-			(randi() % int(rect_size.x - spawn_margin)) + spawn_margin,
-			(randi() % int(rect_size.y - spawn_margin)) + spawn_margin
+			(randi() % int(rect_size.x - spawn_margin * 2)) + spawn_margin,
+			(randi() % int(rect_size.y - spawn_margin * 2)) + spawn_margin
 		)
 		cattle.data = ActorData.new()
 		
 		cattle.data.max_health = 5
 		cattle.data.health = 5
 		cattle.data.speed = 50
-		cattle.data.max_stamina = selected_country.panic_level * 0.5
+		cattle.data.max_stamina = (selected_country.panic_level + 1) * 0.5
 		cattle.data.stamina = cattle.data.max_stamina
 		cattle.data.stamina_regen_per_second = 0.1
 		cattle.data.auto_boost_threshold = 0.2
@@ -82,6 +84,7 @@ func spawn_security(scene):
 		(randi() % int(rect_size.x - spawn_margin)) + spawn_margin,
 		(randi() % int(rect_size.y - spawn_margin)) + spawn_margin
 	)
+	cattle.data.speed *= 1 + (float(selected_country.panic_level) / 10)
 #	cattle.connect("died", self, "on_cattle_died")
 	cattles.add_child(cattle)
 	
@@ -92,6 +95,9 @@ func spawn_security(scene):
 	show_dialog("CattleSecurity", true)
 
 func show_dialog(dialog_name, once_only:bool):
+	if Game.data.skip_all_tutorial:
+		return
+		
 	if once_only:
 		if Game.data.seen_dialogs.has(dialog_name):
 			return
@@ -101,8 +107,12 @@ func show_dialog(dialog_name, once_only:bool):
 	var dialog = Dialogic.start(dialog_name)
 #	dialog.connect("dialogic_signal", self, "on_dialogic_signal")
 	dialog.connect("timeline_end", self, "on_dialogic_timeline_end")
+	dialog.connect("letter_displayed", self, "on_dialogic_letter_displayed")
 	dialog_canvas_layer.add_child(dialog)
 
+func on_dialogic_letter_displayed(letter):
+	Game.voice_gen(letter)
+	
 func on_dialogic_timeline_end(timeline):
 	Game.data.day_paused = false	
 	
@@ -113,18 +123,21 @@ func on_cattle_died(cattle):
 	$UI/MainHUD.update_cattle_count()
 
 func _on_MainHUD_unit_slot_pressed(unit_slot):
+	SfxManager.play("back")
 	selected_unit_slot = unit_slot
 	mouse_bound_sprite.texture = unit_slot.texture
 	mouse_bound_sprite.visible = true
 
 func _input(event):
 	if (event is InputEventMouseButton and event.pressed):
-		if event.button_index == BUTTON_LEFT:
+		if event.button_index == BUTTON_LEFT and not harvest_completed_panel.visible:
 			if selected_unit_slot != null:
+				SfxManager.play("hover")
 				spawn_unit_or_item(selected_unit_slot)
 				selected_unit_slot = null
 				mouse_bound_sprite.visible = false
-		elif event.button_index == BUTTON_RIGHT:
+		elif event.button_index == BUTTON_RIGHT or harvest_completed_panel.visible:
+			SfxManager.play("confirm")
 			mouse_bound_sprite.visible = false
 			selected_unit_slot = null
 			$UI/MainHUD.update_unit_slots()
@@ -140,16 +153,7 @@ func spawn_unit_or_item(unit_slot):
 		
 		var unit = unit_scene.instance()
 		unit.position = get_global_mouse_position()
-		var data = unit_type.default_unit_data.duplicate() as ActorData
-		unit.data = data
-		
-		var army = Game.data.get_army() as ArmyData
-		data.max_health += army.bonus_health
-		data.health = unit.data.max_health
-		
-		data.attack_damage += army.bonus_attack
-		data.speed += (army.bonus_speed * 10)
-		data.sigth_range += (army.bonus_sight * 50)
+		unit.data = unit_type.spawn_data()
 		
 		units.add_child(unit)
 	
@@ -190,7 +194,8 @@ func _process(delta):
 		no_unit_timer = 0.0
 	else:
 		no_unit_timer += delta
-		if no_unit_timer >= no_unit_max_duation:
+		if no_unit_timer >= no_unit_max_duration:
+			$ForegroundUI/NoUnitAnimationPlayer.play("RESET")
 			end_of_harvest()
 			return
 		
@@ -205,13 +210,16 @@ func _process(delta):
 func update_ui():
 	var timer_label = $UI/MenuBar/MenuBar/PanelContainer/MaginContainer/HBox/TimeLeftCountLabel
 	if no_unit_timer > 0:
-		timer_label.text = "No unit left: %s" % str(round(min(no_unit_max_duation - no_unit_timer, mission_time_left)))
+		if not $ForegroundUI/NoUnitAnimationPlayer.is_playing():
+			$ForegroundUI/NoUnitAnimationPlayer.play("Popup")
+		timer_label.text = str(round(min(no_unit_max_duration - no_unit_timer, mission_time_left)))
+		$ForegroundUI/NoUnitLabel.text = "No unit left\nHarvest will end in %02d!" % round(min(no_unit_max_duration - no_unit_timer, mission_time_left))
 	else:
 		timer_label.text = str(round(mission_time_left))
 
 func end_of_harvest():
 	harvest_completed_panel.visible = true
 	
-	selected_country.panic_level += min(
+	selected_country.panic_level = min(
 	selected_country.max_panic_level, 
 	selected_country.panic_level + 1)

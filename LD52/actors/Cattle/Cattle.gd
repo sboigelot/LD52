@@ -11,7 +11,7 @@ export(Array, Color) var tshirt_colors = []
 
 var alien_nearby : Array
 
-var duration_without_direction_change = 0.0
+var duration_without_direction_change = 3.0
 var timer_without_direction_change = 0.0
 
 func _ready():
@@ -23,7 +23,7 @@ func _ready():
 	)
 	animated_sprite.frames = sprite_frames[randi() % sprite_frames.size()]
 
-func _on_StateMachinePlayer_transited(from, to):
+func _on_StateMachinePlayer_transited(_from, _to):
 	time_in_state = 0.0
 
 func _on_StateMachinePlayer_updated(state, delta):

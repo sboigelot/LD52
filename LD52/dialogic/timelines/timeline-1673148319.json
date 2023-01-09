@@ -31,7 +31,7 @@
 			"question": "I am here to collect your end of week tax of [weektax] cattle juice."
 		},
 		{
-			"choice": "not enough to pay",
+			"choice": "I don't have enough to pay...",
 			"condition": "",
 			"definition": "",
 			"event_id": "dialogic_011",
@@ -71,6 +71,12 @@
 			"event_id": "dialogic_001",
 			"portrait": "",
 			"text": "[wave amp=50 freq=2]This is outrageous!![/wave]\nBut as this is your first mistake, I will let you go with a warning.\nHowever, do not expect me to be so nice in the future."
+		},
+		{
+			"character": "character-1673048624.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Next week, the tax will be raise to [nextweektax]. Be ready this time."
 		},
 		{
 			"event_id": "dialogic_022",

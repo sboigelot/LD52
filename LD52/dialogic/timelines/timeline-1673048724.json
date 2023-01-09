@@ -61,7 +61,7 @@
 
 			],
 			"portrait": "",
-			"question": "You will proove your worth by harvesting this planet.."
+			"question": "You will prove your worth by harvesting this planet.."
 		},
 		{
 			"choice": "How should I proceed sir?",
@@ -84,10 +84,10 @@
 			"character": "character-1673048624.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Harvesting a country will allow us to produce cattle juice to feed our population back home.\nYou can use some of your cattle juice to breed a bigger army.\nHowever every day you will have to send me a large amount of juice."
+			"text": "Harvesting a country will allow us to produce cattle juice to feed our population back home.\nYou can use some of your cattle juice to breed a bigger army.\nHowever every week you will have to send me a large amount of juice."
 		},
 		{
-			"choice": "Yes sir! Rigth away! (skip tutorial)",
+			"choice": "Yes sir! Rigth away! (skip this tutorial)",
 			"condition": "",
 			"definition": "",
 			"event_id": "dialogic_011",
@@ -100,13 +100,28 @@
 			"text": "I will be monitoring you. Go on youngling, and do your best!"
 		},
 		{
+			"choice": "I know what to do! (skip all tutorial)",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"emit_signal": "skip_all",
+			"event_id": "dialogic_040"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 1
+		},
+		{
 			"event_id": "dialogic_013"
 		},
 		{
 			"character": "character-1673048624.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Remember, if you do not have enough juice at the end of the day, I will find a way to replace you."
+			"text": "Remember, if you do not have enough juice at the end of the week, I will find a way to replace you."
 		},
 		{
 			"event_id": "dialogic_022",

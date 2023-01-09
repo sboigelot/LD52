@@ -31,7 +31,7 @@
 			"question": "I am here to collect your end of week tax of [weektax] cattle juice."
 		},
 		{
-			"choice": "not enough to pay",
+			"choice": "I don't have enough to pay...",
 			"condition": "",
 			"definition": "",
 			"event_id": "dialogic_011",

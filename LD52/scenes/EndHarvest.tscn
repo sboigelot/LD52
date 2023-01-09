@@ -54,24 +54,24 @@ show_mother_ship_text = false
 unit_slot_clickable = false
 
 [node name="ButtonBar" type="MarginContainer" parent="UI"]
-margin_left = 1800.0
+margin_left = 1900.0
 margin_right = 1920.0
-margin_bottom = 94.0
+margin_bottom = 64.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
 custom_constants/margin_top = 44
 
 [node name="ButtonBar" type="PanelContainer" parent="UI/ButtonBar"]
 margin_top = 44.0
-margin_right = 120.0
-margin_bottom = 94.0
+margin_right = 20.0
+margin_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
 custom_styles/panel = SubResource( 2 )
 
 [node name="MaginContainer" type="MarginContainer" parent="UI/ButtonBar/ButtonBar"]
-margin_right = 120.0
-margin_bottom = 50.0
+margin_right = 20.0
+margin_bottom = 20.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -80,11 +80,12 @@ custom_constants/margin_bottom = 10
 [node name="HBox" type="HBoxContainer" parent="UI/ButtonBar/ButtonBar/MaginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 110.0
-margin_bottom = 40.0
+margin_right = 10.0
+margin_bottom = 10.0
 custom_constants/separation = 10
 
 [node name="BackButton" type="Button" parent="UI/ButtonBar/ButtonBar/MaginContainer/HBox"]
+visible = false
 margin_right = 100.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
@@ -92,11 +93,12 @@ custom_fonts/font = ExtResource( 8 )
 text = "Back"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
-margin_top = 183.0
+margin_top = 150.0
 margin_right = 1920.0
-margin_bottom = 897.0
+margin_bottom = 930.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
+custom_constants/separation = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/VBoxContainer"]
 margin_left = 723.0
@@ -120,6 +122,7 @@ margin_bottom = 312.0
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/VBoxContainer/HBoxContainer/StatPanel/MarginContainer"]
 margin_right = 460.0
 margin_bottom = 305.0
+rect_min_size = Vector2( 460, 305 )
 
 [node name="Label" type="Label" parent="UI/VBoxContainer/HBoxContainer/StatPanel/MarginContainer/VBoxContainer"]
 margin_right = 460.0
@@ -164,36 +167,36 @@ stat_name = "Panic"
 max_value = 1
 value = 1
 increment_text = "+0"
-info_hint = "A panicked Cattle will flee with more stamina"
+info_hint = "Panicked cattle runs away faster"
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/VBoxContainer"]
+[node name="CardRewardPanel" type="MarginContainer" parent="UI/VBoxContainer"]
 margin_left = 650.0
-margin_top = 323.0
+margin_top = 339.0
 margin_right = 1270.0
-margin_bottom = 680.0
+margin_bottom = 696.0
 size_flags_horizontal = 4
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/VBoxContainer/CardRewardPanel"]
 margin_right = 620.0
 margin_bottom = 357.0
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/VBoxContainer/MarginContainer/VBoxContainer"]
-margin_left = 191.0
-margin_right = 429.0
+[node name="PanelContainer" type="PanelContainer" parent="UI/VBoxContainer/CardRewardPanel/VBoxContainer"]
+margin_left = 150.0
+margin_right = 470.0
 margin_bottom = 53.0
 size_flags_horizontal = 4
 
-[node name="Label" type="Label" parent="UI/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer"]
+[node name="Label" type="Label" parent="UI/VBoxContainer/CardRewardPanel/VBoxContainer/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 231.0
+margin_right = 313.0
 margin_bottom = 46.0
 custom_fonts/font = ExtResource( 5 )
-text = "Pick a reward"
+text = "Pick a reward card"
 align = 1
 
-[node name="RewardCardGrid" type="GridContainer" parent="UI/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="RewardCardGrid" type="GridContainer" parent="UI/VBoxContainer/CardRewardPanel/VBoxContainer"]
 margin_top = 57.0
 margin_right = 620.0
 margin_bottom = 357.0
@@ -202,12 +205,12 @@ size_flags_vertical = 3
 custom_constants/hseparation = 10
 columns = 3
 
-[node name="RewardCard1" parent="UI/VBoxContainer/MarginContainer/VBoxContainer/RewardCardGrid" instance=ExtResource( 7 )]
+[node name="RewardCard1" parent="UI/VBoxContainer/CardRewardPanel/VBoxContainer/RewardCardGrid" instance=ExtResource( 7 )]
 unit_name = "Alien"
 texture = ExtResource( 9 )
 display_name = "Alien"
 
-[node name="RewardCard2" parent="UI/VBoxContainer/MarginContainer/VBoxContainer/RewardCardGrid" instance=ExtResource( 7 )]
+[node name="RewardCard2" parent="UI/VBoxContainer/CardRewardPanel/VBoxContainer/RewardCardGrid" instance=ExtResource( 7 )]
 margin_left = 210.0
 margin_right = 410.0
 unit_name = "Alien"
@@ -215,7 +218,7 @@ texture = ExtResource( 9 )
 amount = 3
 display_name = "Alien"
 
-[node name="RewardCard3" parent="UI/VBoxContainer/MarginContainer/VBoxContainer/RewardCardGrid" instance=ExtResource( 7 )]
+[node name="RewardCard3" parent="UI/VBoxContainer/CardRewardPanel/VBoxContainer/RewardCardGrid" instance=ExtResource( 7 )]
 margin_left = 420.0
 margin_right = 620.0
 cattle_juice = true
@@ -224,17 +227,20 @@ amount = 3
 display_name = "Cattle Juice"
 
 [node name="BackButton" type="Button" parent="UI/VBoxContainer"]
-margin_left = 910.0
-margin_top = 684.0
-margin_right = 1010.0
-margin_bottom = 714.0
+margin_left = 736.0
+margin_top = 716.0
+margin_right = 1184.0
+margin_bottom = 780.0
 rect_min_size = Vector2( 100, 30 )
 size_flags_horizontal = 4
-custom_fonts/font = ExtResource( 8 )
-text = "Back"
+custom_fonts/font = ExtResource( 6 )
+text = "Continue Harvest"
 
 [connection signal="pressed" from="UI/ButtonBar/ButtonBar/MaginContainer/HBox/BackButton" to="." method="_on_BackButton_pressed"]
-[connection signal="picked" from="UI/VBoxContainer/MarginContainer/VBoxContainer/RewardCardGrid/RewardCard1" to="." method="_on_RewardCard_picked"]
-[connection signal="picked" from="UI/VBoxContainer/MarginContainer/VBoxContainer/RewardCardGrid/RewardCard2" to="." method="_on_RewardCard_picked"]
-[connection signal="picked" from="UI/VBoxContainer/MarginContainer/VBoxContainer/RewardCardGrid/RewardCard3" to="." method="_on_RewardCard_picked"]
+[connection signal="animation_completed" from="UI/VBoxContainer/HBoxContainer/StatPanel/MarginContainer/VBoxContainer/StatPanel/PopStatPanel" to="." method="_on_PopStatPanel_animation_completed"]
+[connection signal="animation_completed" from="UI/VBoxContainer/HBoxContainer/StatPanel/MarginContainer/VBoxContainer/StatPanel/JuiceStatPanel" to="." method="_on_JuiceStatPanel_animation_completed"]
+[connection signal="animation_completed" from="UI/VBoxContainer/HBoxContainer/StatPanel/MarginContainer/VBoxContainer/StatPanel/PanicStatPanel" to="." method="_on_PanicStatPanel_animation_completed"]
+[connection signal="picked" from="UI/VBoxContainer/CardRewardPanel/VBoxContainer/RewardCardGrid/RewardCard1" to="." method="_on_RewardCard_picked"]
+[connection signal="picked" from="UI/VBoxContainer/CardRewardPanel/VBoxContainer/RewardCardGrid/RewardCard2" to="." method="_on_RewardCard_picked"]
+[connection signal="picked" from="UI/VBoxContainer/CardRewardPanel/VBoxContainer/RewardCardGrid/RewardCard3" to="." method="_on_RewardCard_picked"]
 [connection signal="pressed" from="UI/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]

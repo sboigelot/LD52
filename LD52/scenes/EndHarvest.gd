@@ -11,6 +11,8 @@ onready var stat_panel_panic = get_node(stat_panel_panic_np) as HarvestStatPanel
 export(NodePath) var stat_panel_juice_np
 onready var stat_panel_juice = get_node(stat_panel_juice_np) as HarvestStatPanel
 
+var anim_time = 2.5
+	
 func _ready():
 	#allow debug
 	if Game.data.selected_country == null:
@@ -24,6 +26,7 @@ func _ready():
 	
 	$UI/ButtonBar/ButtonBar/MaginContainer/HBox/BackButton.disabled = true
 	$UI/VBoxContainer/BackButton.disabled = true
+	$UI/VBoxContainer/BackButton.modulate = Color.transparent
 	
 	selected_country = Game.data.selected_country as CountryData
 	
@@ -40,18 +43,22 @@ func _ready():
 	stat_panel_juice.max_value = Game.data.cattle_juice
 	stat_panel_juice.value = selected_country.start_harvest_cattle_juice
 	
+	stat_panel_juice.modulate = Color.transparent
+	stat_panel_panic.modulate = Color.transparent
+	$UI/VBoxContainer/CardRewardPanel.modulate = Color.transparent
+	
 	yield(get_tree().create_timer(1.0),"timeout")
 	
-	var anim_time = 3.0
 	stat_panel_pop.anim_value_to(selected_country.remaining_population, anim_time)
-	stat_panel_panic.anim_value_to(selected_country.panic_level, anim_time)
-	stat_panel_juice.anim_value_to(Game.data.cattle_juice, anim_time)
+	
+	if selected_country.remaining_population == 0:
+		for country in Game.data.get_world().get_children():
+			country.panic_level = min(country.panic_level + 1, country.max_panic_level)
 
 func randomize_cards():
-	
 	var bonus_card_data = selected_country.get_bonus_cards()
 	
-	var card_grid = $UI/VBoxContainer/MarginContainer/VBoxContainer/RewardCardGrid
+	var card_grid = $UI/VBoxContainer/CardRewardPanel/VBoxContainer/RewardCardGrid
 	for card_node in card_grid.get_children():
 		var card_data = WeightedRandom.pickp(bonus_card_data, "probability")
 		set_card_data(card_node, card_data)
@@ -65,9 +72,11 @@ func set_card_data(card_node:RewardCard, card_data:BonusCardData):
 	card_node.texture = card_data.texture
 
 func _on_BackButton_pressed():
+	SfxManager.play("buttonpress")
 	Game.transition_to_scene("res://scenes/WorldMap.tscn")
 
 func _on_RewardCard_picked(card:RewardCard):
+	SfxManager.play("buttonpress")
 	var card_parent = card.get_parent()
 	for child in card_parent.get_children():
 		if child != card:
@@ -75,6 +84,7 @@ func _on_RewardCard_picked(card:RewardCard):
 
 	$UI/ButtonBar/ButtonBar/MaginContainer/HBox/BackButton.disabled = false
 	$UI/VBoxContainer/BackButton.disabled = false
+	$UI/VBoxContainer/BackButton.modulate = Color.white
 	
 	if card.unit_name != "" or card.item_name != "":
 		Game.data.add_to_army([card.unit_name], [card.item_name], card.amount)
@@ -82,3 +92,15 @@ func _on_RewardCard_picked(card:RewardCard):
 		
 	if card.cattle_juice:
 		Game.data.cattle_juice += card.amount
+
+func _on_PopStatPanel_animation_completed():
+	stat_panel_juice.modulate = Color.white
+	stat_panel_juice.anim_value_to(Game.data.cattle_juice, anim_time)
+
+func _on_JuiceStatPanel_animation_completed():
+	stat_panel_panic.modulate = Color.white
+	stat_panel_panic.anim_value_to(selected_country.panic_level, anim_time)
+
+
+func _on_PanicStatPanel_animation_completed():
+	$UI/VBoxContainer/CardRewardPanel.modulate = Color.white
