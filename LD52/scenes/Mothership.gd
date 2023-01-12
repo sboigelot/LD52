@@ -7,6 +7,7 @@ var init_juice
 
 func _ready():
 	init_juice = Game.data.cattle_juice
+	$UI/VBoxContainer/HBoxContainer/ItemShopPanel.visible = not Game.data.no_bomb_challenge
 	
 func _process(delta):
 	var tax = Game.data.get_week_tax()

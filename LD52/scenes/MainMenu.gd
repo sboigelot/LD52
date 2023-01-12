@@ -16,6 +16,12 @@ func _on_StartGameButton_pressed():
 	Game.new_game()
 	Game.transition_to_scene("res://scenes/WorldMap.tscn")
 
+func _on_NoBombButton_pressed():
+	SfxManager.play("buttonpress")
+	Game.new_game()
+	Game.data.no_bomb_challenge = true
+	Game.transition_to_scene("res://scenes/WorldMap.tscn")
+
 func _on_FullscreenButton_pressed():
 	OS.window_fullscreen = !OS.window_fullscreen
 	SfxManager.play("buttonpress")
@@ -49,14 +55,11 @@ func _on_MusicVolumeSlider_value_changed(value):
 func _on_SoundFxVolumeSlider_value_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), value)
 
-
 func _on_MasterVolumeSlider_drag_ended(_value_changed):
 	SfxManager.play("confirm")
 
-
 func _on_MusicVolumeSlider_drag_ended(_value_changed):
 	SfxManager.play("confirm")
-
 
 func _on_SoundFxVolumeSlider_drag_ended(_value_changed):
 	SfxManager.play("confirm")

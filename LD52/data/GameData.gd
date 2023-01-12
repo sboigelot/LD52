@@ -15,6 +15,7 @@ export var time_of_day: float = 0.0
 export var day_paused:bool = false
 export var missed_taxes_once: bool = false
 export var skip_all_tutorial: bool = false
+export var no_bomb_challenge: bool = false
 
 var seen_dialogs: Array
 

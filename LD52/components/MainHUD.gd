@@ -30,14 +30,15 @@ func update_unit_slots():
 		unit_item_slot.connect("pressed", self, "_on_UnitItemSlot_pressed")
 		unit_slot_placeholder.add_child(unit_item_slot)
 
-	var item_types = army.get_item_types()
-	for item_type in item_types:
-		var unit_item_slot = unit_slot_scene.instance() as UnitItemSlot
-		unit_item_slot.item_type = item_type
-		unit_item_slot.texture = item_type.button_texture
-		unit_item_slot.amount = item_type.amount_in_barrack
-		unit_item_slot.connect("pressed", self, "_on_UnitItemSlot_pressed")
-		unit_slot_placeholder.add_child(unit_item_slot)
+	if not Game.data.no_bomb_challenge:
+		var item_types = army.get_item_types()
+		for item_type in item_types:
+			var unit_item_slot = unit_slot_scene.instance() as UnitItemSlot
+			unit_item_slot.item_type = item_type
+			unit_item_slot.texture = item_type.button_texture
+			unit_item_slot.amount = item_type.amount_in_barrack
+			unit_item_slot.connect("pressed", self, "_on_UnitItemSlot_pressed")
+			unit_slot_placeholder.add_child(unit_item_slot)
 
 func update_cattle_count():
 	var initial_cattle_sum = Game.data.get_initial_cattle_sum()

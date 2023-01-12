@@ -40,8 +40,9 @@ func _ready():
 	#allow debug
 	if Game.data.selected_country == null:
 		Game.data.selected_country = Game.data.get_world().get_countries()[0]
-	
+
 	selected_country = Game.data.selected_country as CountryData
+	$UI/MainHUD.title = selected_country.display_name
 	mission_time_left = selected_country.mission_time
 	selected_country.start_harvest_panic_level = selected_country.panic_level
 	selected_country.start_harvest_population = selected_country.remaining_population

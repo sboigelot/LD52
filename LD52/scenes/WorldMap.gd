@@ -12,6 +12,8 @@ export(NodePath) var dayshadow_np
 onready var dayshadow = get_node(dayshadow_np) as Node2D
 
 func _ready():
+	$ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox/PauseButton.text = "Unpause" if Game.data.day_paused else "Pause"
+	
 	var country_datas = Game.data.get_world().get_countries()
 	
 	var country_map = {}
@@ -147,5 +149,5 @@ func on_delivery_delivered(data:DeliveryData):
 
 func _on_PauseButton_toggled(button_pressed):
 	SfxManager.play("buttonpress")
-	$ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox/PauseButton.text = "unpause" if button_pressed else "pause"
+	$ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox/PauseButton.text = "Unpause" if button_pressed else "Pause"
 	Game.data.day_paused = button_pressed

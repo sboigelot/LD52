@@ -82,10 +82,20 @@ size_flags_vertical = 4
 custom_fonts/font = ExtResource( 2 )
 text = "Start new game"
 
-[node name="FullscreenButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="NoBombButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 margin_top = 55.0
-margin_right = 406.0
+margin_right = 552.0
 margin_bottom = 100.0
+rect_pivot_offset = Vector2( 41.5, 10 )
+size_flags_horizontal = 0
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+text = "No Bomb Challenge (Post LD52)"
+
+[node name="FullscreenButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 110.0
+margin_right = 406.0
+margin_bottom = 155.0
 rect_pivot_offset = Vector2( 41.5, 10 )
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -93,9 +103,9 @@ custom_fonts/font = ExtResource( 2 )
 text = "Toggle Fullscreen (F11)"
 
 [node name="MusicControl" type="GridContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
-margin_top = 110.0
+margin_top = 165.0
 margin_right = 1720.0
-margin_bottom = 184.0
+margin_bottom = 239.0
 columns = 2
 
 [node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicControl"]
@@ -174,10 +184,8 @@ Thanks to StudioAlphaZeta and FreschGames for extra Cattle Sprites"
 fit_content_height = true
 
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/StartGameButton" to="." method="_on_StartGameButton_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/NoBombButton" to="." method="_on_NoBombButton_pressed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/FullscreenButton" to="." method="_on_FullscreenButton_pressed"]
-[connection signal="drag_ended" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicControl/MasterVolumeSlider" to="." method="_on_MasterVolumeSlider_drag_ended"]
 [connection signal="value_changed" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicControl/MasterVolumeSlider" to="." method="_on_MasterVolumeSlider_value_changed"]
-[connection signal="drag_ended" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicControl/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_drag_ended"]
 [connection signal="value_changed" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicControl/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_value_changed"]
-[connection signal="drag_ended" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicControl/SoundFxVolumeSlider" to="." method="_on_SoundFxVolumeSlider_drag_ended"]
 [connection signal="value_changed" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicControl/SoundFxVolumeSlider" to="." method="_on_SoundFxVolumeSlider_value_changed"]

@@ -21,10 +21,10 @@ func _ready():
 	if Game.data.selected_country == null:
 		Game.data.selected_country = Game.data.get_world().get_countries()[0]
 		selected_country = Game.data.selected_country as CountryData
-		selected_country.start_harvest_panic_level = 5
+		selected_country.start_harvest_panic_level = 4
 		selected_country.panic_level = selected_country.start_harvest_panic_level + 1
 		selected_country.start_harvest_population = 10
-		selected_country.remaining_population = 5
+		selected_country.remaining_population = 1
 		selected_country.start_harvest_cattle_juice = Game.data.cattle_juice - 5
 	
 	$UI/ButtonBar/ButtonBar/MaginContainer/HBox/BackButton.disabled = true
@@ -54,8 +54,6 @@ func _ready():
 	
 	stat_panel_pop.anim_value_to(selected_country.remaining_population, anim_time)
 	
-#	if selected_country.remaining_population == 0:
-#		raise_world_panic()
 		
 func raise_world_panic():
 	for country in Game.data.get_world().get_children():
@@ -64,6 +62,11 @@ func raise_world_panic():
 func randomize_cards():
 	var bonus_card_data = selected_country.get_bonus_cards()
 	
+	if Game.data.no_bomb_challenge:
+		for card_data in bonus_card_data.duplicate():
+			if card_data.item_name == "":
+				bonus_card_data.probability = 0
+		
 	var card_grid = $UI/VBoxContainer/CardRewardPanel/VBoxContainer/RewardCardGrid
 	for card_node in card_grid.get_children():
 		var card_data = WeightedRandom.pickp(bonus_card_data, "probability")
@@ -108,11 +111,18 @@ func _on_JuiceStatPanel_animation_completed():
 	stat_panel_panic.anim_value_to(selected_country.panic_level, anim_time)
 
 func _on_PanicStatPanel_animation_completed():
+	if selected_country.remaining_population == 0:
+		raise_world_panic()
+		show_dialog("CountryDead")
+		return
+		
 	if selected_country.start_harvest_panic_level != selected_country.panic_level:
 		if selected_country.panic_level >= selected_country.max_panic_level:
 			raise_world_panic()
 			show_dialog("WorldPanic")
 			return
+	
+	$UI/VBoxContainer/CardRewardPanel.modulate = Color.white
 
 func show_dialog(dialog_name):
 	Game.data.day_paused = true
