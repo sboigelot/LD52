@@ -445,6 +445,7 @@ shape = SubResource( 38 )
 anims/Attack = SubResource( 45 )
 anims/RESET = SubResource( 46 )
 
+[connection signal="took_damage" from="." to="." method="_on_Unit_took_damage"]
 [connection signal="transited" from="StateMachinePlayer" to="." method="_on_StateMachinePlayer_transited"]
 [connection signal="updated" from="StateMachinePlayer" to="." method="_on_StateMachinePlayer_updated"]
 [connection signal="body_entered" from="VisionArea2D" to="." method="_on_Area2D_body_entered"]

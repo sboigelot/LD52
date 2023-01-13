@@ -15,7 +15,10 @@ export var time_of_day: float = 0.0
 export var day_paused:bool = false
 export var missed_taxes_once: bool = false
 export var skip_all_tutorial: bool = false
+
 export var no_bomb_challenge: bool = false
+export var no_taxes_challenge: bool = false
+export var better_ai: bool = false
 
 var seen_dialogs: Array
 
@@ -40,9 +43,13 @@ func get_week():
 	return floor(day / 7) + 1
 	
 func get_week_tax():
+	if no_taxes_challenge:
+		return 0
 	return get_tax_for_week(get_week())
 	
 func get_last_week_tax():
+	if no_taxes_challenge:
+		return 0
 	return get_tax_for_week(get_week() - 1)
 	
 func get_tax_for_week(week):

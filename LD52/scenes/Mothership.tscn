@@ -291,7 +291,7 @@ margin_bottom = 202.0
 margin_right = 253.0
 texture = ExtResource( 12 )
 amount = 5
-cost = 15
+cost = 25
 item_name = "Bomb"
 
 [node name="BuyUnitShopItem2" parent="UI/VBoxContainer/HBoxContainer/ItemShopPanel/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
@@ -300,7 +300,7 @@ margin_right = 253.0
 margin_bottom = 140.0
 texture = ExtResource( 11 )
 amount = 5
-cost = 20
+cost = 40
 
 [node name="BackButton" type="Button" parent="UI/VBoxContainer"]
 margin_left = 518.0

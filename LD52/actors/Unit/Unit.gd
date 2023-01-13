@@ -77,12 +77,57 @@ func attack_cattle():
 func end_attack():
 	attack_animation_player.play("RESET")
 
+func _on_Unit_took_damage(actor):
+	if not Game.data.better_ai:
+		return
+	if cattle_target == null:
+		return
+		
+	if cattle_target.data.attack_damage > 0:
+		return
+		
+	attack_animation_player.stop()
+	attack_animation_player.play("RESET")
+	cattle_target = null
+	fsm.set_trigger("cattle_lost")
+	
 func check_for_new_cattle_nearby():
 	if (not cattle_target_in_range_or_alive() and 
 		cattle_nearby.size() > 0):
-		cattle_target = cattle_nearby[randi() % cattle_nearby.size()]
-		fsm.set_trigger("cattle_aquired")
+		if not Game.data.better_ai:
+			cattle_target = cattle_nearby[randi() % cattle_nearby.size()]
+		else:
+			cattle_target = closest_cattle_nearby(true)
+		
+		if cattle_target != null:
+			fsm.set_trigger("cattle_aquired")
 
+func closest_cattle_nearby(prioritize_hostile):
+	if cattle_nearby.size() == 0:
+		return null
+		
+	var closest_cattle = null
+	var min_distance = 100000
+	
+	var closest_military_cattle = null
+	var closest_military_min_distance = 100000
+
+	for cattle in cattle_nearby:
+		var distance = global_position.distance_to(cattle.global_position)
+		if distance < min_distance:
+			closest_cattle = distance
+			closest_cattle = cattle
+			
+		if cattle.data.attack_damage != 0:
+			if distance < closest_military_min_distance:
+				closest_military_min_distance = distance
+				closest_military_cattle = cattle
+
+	if prioritize_hostile and closest_military_cattle != null:
+		return closest_military_cattle
+		
+	return closest_cattle
+	
 func cattle_target_in_range_or_alive()->bool:
 	if (cattle_target == null or
 		not is_instance_valid(cattle_target)):
@@ -102,8 +147,18 @@ func cattle_target_in_attack_range_or_alive(margin:float = 1.0)->bool:
 func _on_Area2D_body_entered(body):
 	if body is Cattle:
 		cattle_nearby.append(body)
+		
+		if not Game.data.better_ai:
+			return
+			
+		if body.data.attack_damage > 0:
+			if cattle_target != null and cattle_target.data.attack_damage > 0:
+				return
+			cattle_target = null
+			fsm.set_trigger("cattle_lost")
 
 func _on_Area2D_body_exited(body):
 	if body is Cattle:
 		if cattle_nearby.has(body):
 			cattle_nearby.erase(body)
+

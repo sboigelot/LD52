@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/items/explosion_01_strip13.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 311.0
+radius = 264.008
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4

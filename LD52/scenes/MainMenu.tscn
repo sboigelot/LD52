@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/ld52/ld52_def_normal.tres" type="DynamicFont" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://fonts/ld52/ld52_def_xxlarge.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/portrais/player2.png" type="Texture" id=6]
 [ext_resource path="res://fonts/ld52/ld52_def_xsmall.tres" type="DynamicFont" id=7]
+[ext_resource path="res://fonts/ld52/ld52_def_small.tres" type="DynamicFont" id=8]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -15,6 +16,7 @@ script = ExtResource( 1 )
 np_ui_audio_master = NodePath("MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicControl/MasterVolumeSlider")
 np_ui_audio_music = NodePath("MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicControl/MusicVolumeSlider")
 np_ui_audio_soundfx = NodePath("MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicControl/SoundFxVolumeSlider")
+np_better_ai_button = NodePath("MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/BetterAICheckButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -36,8 +38,8 @@ expand = true
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_right = 1920.0
-margin_bottom = 560.0
-size_flags_vertical = 0
+margin_bottom = 1080.0
+size_flags_vertical = 3
 custom_constants/margin_right = 100
 custom_constants/margin_top = 100
 custom_constants/margin_left = 100
@@ -46,7 +48,8 @@ custom_constants/margin_left = 100
 margin_left = 100.0
 margin_top = 100.0
 margin_right = 1820.0
-margin_bottom = 560.0
+margin_bottom = 1080.0
+size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer"]
 margin_right = 1720.0
@@ -64,13 +67,14 @@ text = "A healthy meal for a healthy life"
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
 margin_top = 241.0
 margin_right = 1720.0
-margin_bottom = 460.0
+margin_bottom = 980.0
+size_flags_vertical = 3
 custom_constants/margin_top = 35
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer"]
 margin_top = 35.0
 margin_right = 1720.0
-margin_bottom = 219.0
+margin_bottom = 739.0
 custom_constants/separation = 10
 
 [node name="StartGameButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
@@ -82,20 +86,10 @@ size_flags_vertical = 4
 custom_fonts/font = ExtResource( 2 )
 text = "Start new game"
 
-[node name="NoBombButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
-margin_top = 55.0
-margin_right = 552.0
-margin_bottom = 100.0
-rect_pivot_offset = Vector2( 41.5, 10 )
-size_flags_horizontal = 0
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 2 )
-text = "No Bomb Challenge (Post LD52)"
-
 [node name="FullscreenButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
-margin_top = 110.0
+margin_top = 55.0
 margin_right = 406.0
-margin_bottom = 155.0
+margin_bottom = 100.0
 rect_pivot_offset = Vector2( 41.5, 10 )
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -103,9 +97,9 @@ custom_fonts/font = ExtResource( 2 )
 text = "Toggle Fullscreen (F11)"
 
 [node name="MusicControl" type="GridContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
-margin_top = 165.0
+margin_top = 110.0
 margin_right = 1720.0
-margin_bottom = 239.0
+margin_bottom = 184.0
 columns = 2
 
 [node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicControl"]
@@ -152,6 +146,62 @@ margin_bottom = 71.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_vertical = 4
 
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 194.0
+margin_right = 1720.0
+margin_bottom = 315.0
+size_flags_vertical = 3
+
+[node name="Label3" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 325.0
+margin_right = 1720.0
+margin_bottom = 364.0
+custom_fonts/font = ExtResource( 2 )
+text = "Post LD52 modifications:"
+
+[node name="BetterAICheckButton" type="CheckButton" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 374.0
+margin_right = 269.0
+margin_bottom = 414.0
+focus_mode = 0
+size_flags_horizontal = 0
+custom_colors/font_color_pressed = Color( 0, 1, 0, 1 )
+custom_fonts/font = ExtResource( 8 )
+text = "Better Alien AI"
+
+[node name="Label2" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 424.0
+margin_right = 1720.0
+margin_bottom = 463.0
+custom_fonts/font = ExtResource( 2 )
+text = "Post LD52 modes:"
+
+[node name="NoBombButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 473.0
+margin_right = 337.0
+margin_bottom = 518.0
+rect_pivot_offset = Vector2( 41.5, 10 )
+size_flags_horizontal = 0
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+text = "No Bomb Challenge"
+
+[node name="NoTaxesButton" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 528.0
+margin_right = 321.0
+margin_bottom = 573.0
+rect_pivot_offset = Vector2( 41.5, 10 )
+size_flags_horizontal = 0
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+text = "Play without taxes"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 583.0
+margin_right = 1720.0
+margin_bottom = 704.0
+size_flags_vertical = 3
+
 [node name="Sprite" type="Sprite" parent="MarginContainer"]
 position = Vector2( 1533, 703 )
 scale = Vector2( 0.75, 0.75 )
@@ -184,8 +234,9 @@ Thanks to StudioAlphaZeta and FreschGames for extra Cattle Sprites"
 fit_content_height = true
 
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/StartGameButton" to="." method="_on_StartGameButton_pressed"]
-[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/NoBombButton" to="." method="_on_NoBombButton_pressed"]
 [connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/FullscreenButton" to="." method="_on_FullscreenButton_pressed"]
 [connection signal="value_changed" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicControl/MasterVolumeSlider" to="." method="_on_MasterVolumeSlider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicControl/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicControl/SoundFxVolumeSlider" to="." method="_on_SoundFxVolumeSlider_value_changed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/NoBombButton" to="." method="_on_NoBombButton_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/NoTaxesButton" to="." method="_on_NoTaxesButton_pressed"]

@@ -13,6 +13,7 @@ onready var dayshadow = get_node(dayshadow_np) as Node2D
 
 func _ready():
 	$ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox/PauseButton.text = "Unpause" if Game.data.day_paused else "Pause"
+	$ForegroundUI/SpeedBar/SpeedBar/MaginContainer/HBox/PauseButton.pressed = Game.data.day_paused
 	
 	var country_datas = Game.data.get_world().get_countries()
 	

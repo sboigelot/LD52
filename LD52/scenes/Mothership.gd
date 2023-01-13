@@ -53,3 +53,4 @@ func update_ui():
 
 func _on_purchase_done():
 	SfxManager.play("confirm")
+	update_ui()

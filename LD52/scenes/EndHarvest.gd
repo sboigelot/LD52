@@ -64,8 +64,8 @@ func randomize_cards():
 	
 	if Game.data.no_bomb_challenge:
 		for card_data in bonus_card_data.duplicate():
-			if card_data.item_name == "":
-				bonus_card_data.probability = 0
+			if card_data.item_name != "":
+				bonus_card_data.erase(card_data)
 		
 	var card_grid = $UI/VBoxContainer/CardRewardPanel/VBoxContainer/RewardCardGrid
 	for card_node in card_grid.get_children():
